@@ -12,6 +12,20 @@
 
 body {
     margin: 0;
+    padding: 0;
     font-family: Lexend, sans-serif;
     background-color: var(--bg-light);
+}
+
+h1 {
+    font-size: 4em;
+}
+
+p {
+    padding: 0;
+    margin: 6px 0;
+}
+
+ul {
+    margin: 6px 0;
 }
