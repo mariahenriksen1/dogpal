@@ -1,0 +1,23 @@
+nav {
+    max-width: 1280px;
+    padding: 20px 20px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.black-bg {
+    background-color: var(--black);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}

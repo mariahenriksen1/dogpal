@@ -1,0 +1,17 @@
+:root {
+    --black: #19191A;
+    --white: #FFFFFF;
+    --gray: #3E3C39;
+    --bg-light: #F9F1E1;
+    --bg-dark: #EBE1CE;
+    --p-light: #F9C069;
+    --p-dark: #DF9629;
+    --s-light: #CF4829;
+    --s-dark: #BB4125;
+}
+
+body {
+    margin: 0;
+    font-family: Lexend, sans-serif;
+    background-color: var(--bg-light);
+}
