@@ -21,29 +21,28 @@ function CreateEvent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log(formData);
   };
 
   return (
-    <form className="container" onSubmit={handleSubmit}> {/* Wrap in a form element */}
-      <div className="image-container"> {/* Image upload section */}
+    <form className="container" onSubmit={handleSubmit}> 
+      <div className="image-container"> 
         <label htmlFor="coverImage" className="text">
           Click to upload cover image...
         </label>
         <input
           type="file"
-          id="coverImage" // Ensure the id matches the label's htmlFor
-          className="file-input" // Add a class for styling the file input if needed
+          id="coverImage" 
+          className="file-input"
         />
       </div>
 
-      <div className="form-group"> {/* Grouping form fields for better styling */}
+      <div className="form-group">
         <label htmlFor="title" className="text">Title</label>
         <input
           type="text"
           name="title"
-          id="title" // Add id for better accessibility
+          id="title"
           placeholder="Write title here..."
           className="input-field"
           value={formData.title}
@@ -55,7 +54,7 @@ function CreateEvent() {
         <label htmlFor="description" className="text">Description</label>
         <textarea
           name="description"
-          id="description" // Add id for better accessibility
+          id="description" 
           placeholder="Write description here..."
           className="input-field"
           value={formData.description}
@@ -68,7 +67,7 @@ function CreateEvent() {
         <input
           type="text"
           name="location"
-          id="location" // Add id for better accessibility
+          id="location"
           placeholder="Find Location"
           className="input-field"
           value={formData.location}
@@ -81,7 +80,7 @@ function CreateEvent() {
         <input
           type="datetime-local"
           name="time"
-          id="time" // Add id for better accessibility
+          id="time" 
           className="input-field"
           value={formData.time}
           onChange={handleChange}
@@ -93,7 +92,7 @@ function CreateEvent() {
         <input
           type="number"
           name="participantLimit"
-          id="participantLimit" // Add id for better accessibility
+          id="participantLimit" 
           placeholder="Enter limit..."
           className="input-field"
           value={formData.participantLimit}
@@ -106,7 +105,7 @@ function CreateEvent() {
         <input
           type="text"
           name="price"
-          id="price" // Add id for better accessibility
+          id="price"
           placeholder="Enter price"
           className="input-field"
           value={formData.price}
