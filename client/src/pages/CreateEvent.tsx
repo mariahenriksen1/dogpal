@@ -1,14 +1,41 @@
-import React from "react";
-import "../App.css"; 
+import React, { useState } from "react"; // Import useState for state management
+import "../App.css";
 
 function CreateEvent() {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    location: "",
+    time: "",
+    participantLimit: "",
+    price: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+  };
+
   return (
-    <div className="container"> {/* Main container for the event creation form */}
+    <form className="container" onSubmit={handleSubmit}> {/* Wrap in a form element */}
       <div className="image-container"> {/* Image upload section */}
         <label htmlFor="coverImage" className="text">
           Click to upload cover image...
         </label>
-        <input type="file" id="coverImage" style={{ display: "none" }} />
+        <input
+          type="file"
+          id="coverImage" // Ensure the id matches the label's htmlFor
+          className="file-input" // Add a class for styling the file input if needed
+        />
       </div>
 
       <div className="form-group"> {/* Grouping form fields for better styling */}
@@ -16,8 +43,11 @@ function CreateEvent() {
         <input
           type="text"
           name="title"
+          id="title" // Add id for better accessibility
           placeholder="Write title here..."
           className="input-field"
+          value={formData.title}
+          onChange={handleChange}
         />
       </div>
 
@@ -25,8 +55,11 @@ function CreateEvent() {
         <label htmlFor="description" className="text">Description</label>
         <textarea
           name="description"
+          id="description" // Add id for better accessibility
           placeholder="Write description here..."
           className="input-field"
+          value={formData.description}
+          onChange={handleChange}
         />
       </div>
 
@@ -35,17 +68,23 @@ function CreateEvent() {
         <input
           type="text"
           name="location"
+          id="location" // Add id for better accessibility
           placeholder="Find Location"
           className="input-field"
+          value={formData.location}
+          onChange={handleChange}
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="datetime-local" className="text">Time</label>
+        <label htmlFor="time" className="text">Time</label>
         <input
           type="datetime-local"
           name="time"
+          id="time" // Add id for better accessibility
           className="input-field"
+          value={formData.time}
+          onChange={handleChange}
         />
       </div>
 
@@ -54,8 +93,11 @@ function CreateEvent() {
         <input
           type="number"
           name="participantLimit"
+          id="participantLimit" // Add id for better accessibility
           placeholder="Enter limit..."
           className="input-field"
+          value={formData.participantLimit}
+          onChange={handleChange}
         />
       </div>
 
@@ -64,15 +106,18 @@ function CreateEvent() {
         <input
           type="text"
           name="price"
-          placeholder="Enter price (leave empty if free)"
+          id="price" // Add id for better accessibility
+          placeholder="Enter price"
           className="input-field"
+          value={formData.price}
+          onChange={handleChange}
         />
       </div>
 
       <button type="submit" className="createEventButton"> 
         Create event
       </button>
-    </div>
+    </form>
   );
 }
 
