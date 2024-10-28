@@ -1,0 +1,48 @@
+.image-container {
+    display: flex;
+    padding: 180px 0 60px 0; /* Padding values can be adjusted as needed */
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    background: #19191A; /* Background color */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    align-self: stretch;
+    padding: 20px;
+    background-color: #f5f2e8; /* Background color */
+    border-radius: 8px; /* Rounded corners */
+}
+
+.input-field {
+    width: 100%; /* Full width */
+    padding: 10px; /* Inner padding */
+    border: 1px solid #ccc; /* Border styling */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+.createEventButton {
+    padding: 10px 20px; /* Button padding */
+    background-color: #F9C069; /* Button background color */
+    color: #19191A; /* Button text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 16px; /* Font size */
+}
+
+.text {
+    color: #19191A; /* Text color */
+    font-family: "Lexend", sans-serif; /* Font family */
+    font-size: 14px; /* Font size */
+    font-style: normal; /* Normal font style */
+    font-weight: 400; /* Font weight */
+    line-height: 19px; /* Line height */
+    letter-spacing: -0.28px; /* Letter spacing */
+    text-align: left; /* Text alignment */
+}
