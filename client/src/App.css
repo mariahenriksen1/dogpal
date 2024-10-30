@@ -1,0 +1,59 @@
+nav {
+  max-width: 1280px;
+  padding: 20px 0;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav .links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+}
+nav a:hover {
+  color: var(--p-light);
+}
+
+.black-bg {
+  background-color: var(--black);
+  position: fixed;
+  width: 100%;
+}
+
+.icon-fill:hover svg > path {
+  fill: var(--p-light);
+}
+
+.icon-stroke:hover svg > path {
+  -webkit-text-stroke-color: var(--p-light);
+}
+
+header {
+  padding: 80px 0 0 0;
+  margin-bottom: 40px;
+  background-color: var(--black);
+  display: flex;
+  align-items: stretch;
+}
+
+section {
+  max-width: 1280px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.test {
+  height: 2000px;
+}
+
+.color-white {
+  color: var(--white);
+}
