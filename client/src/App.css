@@ -30,7 +30,7 @@ nav a {
 }
 
 .icon-stroke:hover svg > path {
-    -webkit-text-stroke-color: var(--p-light);
+    stroke: var(--p-light);
 }
 
 header {
