@@ -1,39 +1,41 @@
 import React, { useState } from "react";
 
-export const ProfileForm = () => {
-  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+export const DogProfileForm = () => {
+  const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
+    null
+  );
 
-  const handleProfilePictureChange = (
+  const handleDogProfilePictureChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfilePicture(reader.result as string);
+        setDogProfilePicture(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
 
   return (
-    <form className="profile-form form" action="/action_page.php">
+    <form className="dog-profile-form form" action="/action_page.php">
       <div className="form-content">
-        <h3>Profile info</h3>
+        <h3>Dog Profile info</h3>
         <div>
-          <label htmlFor="profile-picture">Profile Picture</label>
+          <label htmlFor="dog-profile-picture">Dog Profile Picture</label>
           <input
             type="file"
-            id="profile-picture"
-            name="profile-picture"
+            id="dog-profile-picture"
+            name="dog-profile-picture"
             accept="image/*"
-            onChange={handleProfilePictureChange}
+            onChange={handleDogProfilePictureChange}
           />
-          {profilePicture && (
+          {dogProfilePicture && (
             <img
-              src={profilePicture}
-              alt="Profile"
-              className="profile-picture-preview"
+              src={dogProfilePicture}
+              alt="Dog Profile"
+              className="dog-profile-picture-preview"
             />
           )}
         </div>
