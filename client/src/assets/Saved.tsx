@@ -10,7 +10,7 @@ function Saved() {
       >
         <path
           d="M1 3C1 1.89543 1.89543 1 3 1H13C14.1046 1 15 1.89543 15 3V19L8 15.5L1 19V3Z"
-          stroke="var(--white)"
+          stroke="var(--black)"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

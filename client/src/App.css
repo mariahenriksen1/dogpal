@@ -23,10 +23,15 @@ nav a {
     background-color: var(--black);
     position: fixed;
     width: 100%;
+    z-index: 1000;
 }
 
 .icon-fill:hover svg > path {
     fill: var(--p-light);
+}
+
+.icon-stroke svg > path {
+    stroke: var(--white);
 }
 
 .icon-stroke:hover svg > path {
@@ -58,6 +63,12 @@ section {
     flex-direction: column;
 }
 
+.flex-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .space-between {
     justify-content: space-between;
 }
@@ -70,6 +81,10 @@ section {
     align-items: center;
 }
 
+.align-baseline {
+    align-items: baseline;
+}
+
 .gap-10 {
     gap: 10px;
 }
@@ -78,9 +93,8 @@ section {
     gap: 20px;
 }
 
-.test {
-
-    height: 2000px;
+.gap-40 {
+    gap: 40px;
 }
 
 .color-white {
@@ -108,9 +122,44 @@ section {
 }
 
 .featured {
+    align-items: flex-end;
+}
+
+.featured-graphic {
+    position: relative;
+    max-height: 420px;
+    border-radius: 6px;
+    overflow: clip;
+}
+
+.featured h1 {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+.featured .overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba(100, 100, 100, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+}
+
+.featured img {
     max-width: 840px;
     width: 100%;
     max-height: 420px;
     aspect-ratio: 840 / 420;
+    object-fit: cover;
+}
+
+.event {
+    max-width: 400px;
+    flex-grow: 1;
+}
+
+.event img {
+    max-height: 200px;
     object-fit: cover;
 }
