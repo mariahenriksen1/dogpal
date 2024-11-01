@@ -1,6 +1,8 @@
-function Featured() {
+import { Link } from "react-router-dom";
+
+function FeaturedEvent() {
   return (
-    <>
+    <Link to="/test">
       <div className="featured flex-row gap-40">
         <div className="featured-graphic">
           <img src="/assets/event-1.png" alt="Highlight photo" />
@@ -18,8 +20,8 @@ function Featured() {
           </p>
         </div>
       </div>
-    </>
+    </Link>
   );
 }
 
-export default Featured;
+export default FeaturedEvent;

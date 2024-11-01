@@ -97,6 +97,8 @@ section {
     gap: 40px;
 }
 
+
+
 .color-white {
     color: var(--white);
 }
@@ -154,12 +156,13 @@ section {
     object-fit: cover;
 }
 
-.event {
+.event-preview {
     max-width: 400px;
     flex-grow: 1;
 }
 
-.event img {
+.event-preview img {
     max-height: 200px;
     object-fit: cover;
+    border-radius: 6px;
 }

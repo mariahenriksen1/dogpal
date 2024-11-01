@@ -1,15 +1,16 @@
-import EventView from "./EventView.tsx";
+import EventSmallTitle from "./EventSmallTitle.tsx";
+import { Link } from "react-router-dom";
 
 function Notification() {
   return (
-    <>
+    <section>
       <div className="notification flex-row space-between align-center">
         <p>
           <b>You’ve been invited to an event!</b>
         </p>
-        <EventView />
+        <Link to={"/test"}>{<EventSmallTitle />}</Link>
       </div>
-    </>
+    </section>
   );
 }
 
