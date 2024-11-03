@@ -19,46 +19,43 @@ export const DogProfileForm = () => {
   };
 
   return (
-    <form className="dog-profile-form form" action="/action_page.php">
-      <div className="form-content">
-        <h3>Dog Profile info</h3>
-        <div>
-          <label htmlFor="dog-profile-picture">Dog Profile Picture</label>
-          <input
-            type="file"
-            id="dog-profile-picture"
-            name="dog-profile-picture"
-            accept="image/*"
-            onChange={handleDogProfilePictureChange}
-          />
-          {dogProfilePicture && (
-            <img
-              src={dogProfilePicture}
-              alt="Dog Profile"
-              className="dog-profile-picture-preview"
+    <div className="div-for-dog-profiles">
+      <form className="dog-profile-form form" action="/action_page.php">
+        <div className="form-content">
+          <div className="profile-pic-div">
+            <label htmlFor="dog-profile-picture">Dog Profile Picture</label>
+            <input
+              type="file"
+              id="dog-profile-picture"
+              name="dog-profile-picture"
+              accept="image/*"
+              onChange={handleDogProfilePictureChange}
             />
-          )}
-        </div>
-        <div>
-          <label htmlFor="email">First name</label>
-          <input type="text" id="name" name="name" />
-        </div>
-        <div>
-          <label htmlFor="email">Last name</label>
-          <input type="email" id="email" name="email" />
-        </div>
-        <div className="row">
-          <div className="form-element">
-            <label htmlFor="address">Email</label>
-            <input type="text" id="address" name="address" />
+            {dogProfilePicture && (
+              <img
+                src={dogProfilePicture}
+                alt="Dog Profile"
+                className="dog-profile-picture-preview"
+              />
+            )}
           </div>
           <div>
-            <label htmlFor="city">Password</label>
-            <input type="text" id="city" name="city" />
-            <button disabled>Change password</button>
+            <label htmlFor="dogName">Dog name</label>
+            <input type="text" id="dogName" name="dogName" />
+          </div>
+          <div>
+            <label htmlFor="DoB">Date of birth</label>
+            <input type="email" id="email" name="email" />
+          </div>
+          <div className="row">
+            <div>
+              <label htmlFor="dogBreed">Dog breed</label>
+              <input type="text" id="dogBreed" name="dogBreed" />
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <div className="seperatorLine"></div>
+    </div>
   );
 };
