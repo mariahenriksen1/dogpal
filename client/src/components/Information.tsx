@@ -18,6 +18,7 @@ const Information: React.FC<InformationProps> = ({ icon, text, color }) => {
 
   return (
     <div>
+      {iconComponent}
       <p style={{ color: colorInformation }}>{text}</p>
     </div>
   );

@@ -12,14 +12,10 @@ function FeaturedEvent() {
             <div className="featured-information flex-row gap-20">
               <Information
                 icon="location"
-                text="Brøndby Hundeskov"
+                text="Oct 12, 12:00-15:00"
                 color="white"
               />
-              <Information
-                icon="location"
-                text="Brøndby Hundeskov"
-                color="white"
-              />
+              <Information icon="date" text="Brøndby Hundeskov" color="white" />
             </div>
           </div>
         </div>
@@ -27,6 +23,10 @@ function FeaturedEvent() {
           style={{ maxWidth: "400px" }}
           className="flex-column gap-10 align-baseline"
         >
+          <div className="featured-information flex-row gap-20">
+            <Information icon="money" text="Free" color="black" />
+            <Information icon="user" text="Mogens Mogensen" color="black" />
+          </div>
           <p>
             Alle hunde er velkomne uanset erfaring og niveau. Husk at medbringe
             godbidder, vand og masser af energi! Vi glæder os til en sjov og
