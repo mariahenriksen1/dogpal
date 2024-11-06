@@ -77,6 +77,10 @@ section {
     justify-content: center;
 }
 
+.justify-end {
+    justify-content: end;
+}
+
 .align-center {
     align-items: center;
 }
@@ -135,9 +139,8 @@ section {
 }
 
 .featured h1 {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
+    margin: 0;
+    padding: 0;
 }
 
 .featured .overlay {
@@ -145,6 +148,7 @@ section {
     height: 100%;
     width: 100%;
     bottom: 0;
+    padding: 20px 40px;
     background: linear-gradient(0deg, rgba(100, 100, 100, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
 }
 

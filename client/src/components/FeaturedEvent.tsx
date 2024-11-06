@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Information from "./Information.tsx";
 
 function FeaturedEvent() {
   return (
@@ -6,8 +7,21 @@ function FeaturedEvent() {
       <div className="featured flex-row gap-40">
         <div className="featured-graphic">
           <img src="/assets/event-1.png" alt="Highlight photo" />
-          <div className="overlay"></div>
-          <h1 className="color-white">Hundetræning i hundeskoven</h1>
+          <div className="overlay flex-column gap-20 justify-end">
+            <h1 className="color-white">Hundetræning i hundeskoven</h1>
+            <div className="featured-information flex-row gap-20">
+              <Information
+                icon="location"
+                text="Brøndby Hundeskov"
+                color="white"
+              />
+              <Information
+                icon="location"
+                text="Brøndby Hundeskov"
+                color="white"
+              />
+            </div>
+          </div>
         </div>
         <div
           style={{ maxWidth: "400px" }}
