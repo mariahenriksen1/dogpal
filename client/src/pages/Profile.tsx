@@ -42,6 +42,7 @@ function Profile() {
       <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
 
       <div className="spacerDiv"></div>
+      <div className="spacerDiv"></div>
     </div>
   );
 }
