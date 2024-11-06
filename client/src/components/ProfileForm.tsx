@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export const ProfileForm = () => {
-  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [ProfilePicture, setProfilePicture] = useState<string | null>(null);
 
   const handleProfilePictureChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -16,11 +16,15 @@ export const ProfileForm = () => {
     }
   };
 
+  const handleChangePasswordClick = () => {
+    // Handle the button click event here
+    console.log("Change password button clicked");
+  };
+
   return (
-    <form className="profile-form form" action="/action_page.php">
-      <div className="form-content">
-        <h3>Profile info</h3>
-        <div>
+    <div className="profile-form">
+      <div className="profile-picture-preview">
+        <div className="profile-picture">
           <label htmlFor="profile-picture">Profile Picture</label>
           <input
             type="file"
@@ -29,34 +33,56 @@ export const ProfileForm = () => {
             accept="image/*"
             onChange={handleProfilePictureChange}
           />
-          {profilePicture && (
+          {ProfilePicture && (
             <img
-              src={profilePicture}
+              src={ProfilePicture}
               alt="Profile"
               className="profile-picture-preview"
             />
           )}
         </div>
-        <div>
-          <label htmlFor="email">First name</label>
-          <input type="text" id="name" name="name" />
+      </div>
+
+      <div className="profile-form-inputs">
+        <div className="row">
+          <div className="input">
+            <div className="input-label">First name</div>
+            <div className="input-box">
+              <div className="input-value">Freja</div>
+            </div>
+          </div>
+          <div className="input">
+            <div className="input-label">Last name</div>
+            <div className="input-box">
+              <div className="input-value">Sunesen</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email">Last name</label>
-          <input type="email" id="email" name="email" />
+        <div className="weird">
+          <div className="input-label">E-mail</div>
+
+          <div className="input-box">
+            <div className="input-value">freja@sunesen.com</div>
+            <div className="icon-div">
+              <div className="icon" />
+            </div>
+          </div>
         </div>
         <div className="row">
-          <div className="form-element">
-            <label htmlFor="address">Email</label>
-            <input type="text" id="address" name="address" />
+          <div className="input">
+            <div className="input-label">Password</div>
+            <div className="input-box">
+              <div className="input-value">**********</div>
+              <div className="icon-div">
+                <div className="icon" />
+              </div>
+            </div>
           </div>
-          <div>
-            <label htmlFor="city">Password</label>
-            <input type="text" id="city" name="city" />
-            <button disabled>Change password</button>
-          </div>
+          <button className="button" onClick={handleChangePasswordClick}>
+            <span>Change password</span>
+          </button>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
