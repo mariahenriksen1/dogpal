@@ -41,24 +41,22 @@ export const DogProfileForm = () => {
 
   return (
     <div className="dog-profile-form">
-      <div className="profile-picture-preview">
-        <div className="profile-picture">
-          <label htmlFor="dog-profile-picture">Dog Profile Picture</label>
-          <input
-            type="file"
-            id="dog-profile-picture"
-            name="dog-profile-picture"
-            accept="image/*"
-            onChange={handleDogProfilePictureChange}
+      <div className="dog-profile-picture">
+        <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
+        <input
+          type="file"
+          id="dog-profile-picture-input"
+          name="dog-profile-picture-input"
+          accept="image/*"
+          onChange={handleDogProfilePictureChange}
+        />
+        {dogProfilePicture && (
+          <img
+            src={dogProfilePicture}
+            alt="Dog Profile Picture"
+            className="dog-profile-picture-preview"
           />
-          {dogProfilePicture && (
-            <img
-              src={dogProfilePicture}
-              alt="Dog Profile Picture"
-              className="dog-profile-picture-preview"
-            />
-          )}
-        </div>
+        )}
       </div>
 
       <div className="profile-form-inputs">
@@ -70,7 +68,7 @@ export const DogProfileForm = () => {
                 type="text"
                 name="dogName"
                 id="dogName"
-                className="input-field"
+                className={`input-field ${dogName ? "has-value" : ""}`}
                 value={dogName}
                 onChange={handleDogNameChange}
                 placeholder="Enter dog's name"
@@ -89,7 +87,7 @@ export const DogProfileForm = () => {
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className="input-field"
+                className={`input-field ${dateOfBirth ? "has-value" : ""}`}
                 value={dateOfBirth}
                 onChange={handleDateOfBirthChange}
               />
@@ -104,7 +102,7 @@ export const DogProfileForm = () => {
                 type="text"
                 name="breed"
                 id="breed"
-                className="input-field"
+                className={`input-field ${breed ? "has-value" : ""}`}
                 value={breed}
                 onChange={handleBreedChange}
                 placeholder="Enter breed"

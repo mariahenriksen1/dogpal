@@ -23,24 +23,22 @@ export const ProfileForm = () => {
 
   return (
     <div className="profile-form">
-      <div className="profile-picture-preview">
-        <div className="profile-picture">
-          <label htmlFor="profile-picture">Profile Picture</label>
-          <input
-            type="file"
-            id="profile-picture"
-            name="profile-picture"
-            accept="image/*"
-            onChange={handleProfilePictureChange}
+      <div className="profile-picture">
+        <label htmlFor="profile-picture-label">Profile Picture</label>
+        <input
+          type="file"
+          id="profile-picture-input"
+          name="profile-picture-input"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+        />
+        {ProfilePicture && (
+          <img
+            src={ProfilePicture}
+            alt="Profile Picture"
+            className="profile-picture-preview"
           />
-          {ProfilePicture && (
-            <img
-              src={ProfilePicture}
-              alt="Profile"
-              className="profile-picture-preview"
-            />
-          )}
-        </div>
+        )}
       </div>
 
       <div className="profile-form-inputs">
