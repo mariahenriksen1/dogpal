@@ -1,3 +1,32 @@
+.image-container {
+  display: flex;
+  padding: 180px 0 60px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: #19191a;
+  color: #ffffff;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: text-align;
+  gap: 20px;
+  padding: 40px;
+  background-color: #f5f2e8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  width: 100%; /* Ensures each form group is full-width */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 nav {
     max-width: 1280px;
     padding: 20px 0;
@@ -450,7 +479,6 @@ button {
 
 .addNewDogButton {
   cursor: pointer;
-
   display: flex;
   width: 248px;
   height: 48px;
@@ -471,3 +499,47 @@ button {
   word-wrap: break-word;
   vertical-align: middle; /* Ensure vertical alignment */
 }
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #19191a;
+  font-size: 16px;
+}
+
+.input-field::placeholder {
+  color: #777;
+}
+
+.createEventButton {
+  padding: 12px 24px;
+  background-color: #f9c069;
+  color: #19191a;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 20%;
+}
+
+.createEventButton:hover {
+  background-color: #e0b063;
+}
+
+.text {
+  color: #19191a;
+  font-family: "Lexend", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: -0.28px;
+  text-align: left;
+  display: block; /* Ensures the label behaves as a block element */
+  width: 100%;
+}
+  
