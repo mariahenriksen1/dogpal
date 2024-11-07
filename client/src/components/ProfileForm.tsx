@@ -23,7 +23,7 @@ export const ProfileForm = () => {
 
   return (
     <section>
-      <div className="flex-row gap-20">
+      <div className="flex-row">
         <div className="profile-picture">
           <label htmlFor="profile-picture-label">Profile Picture</label>
           <input
@@ -41,6 +41,7 @@ export const ProfileForm = () => {
             />
           )}
         </div>
+
         <div className="profile-form-inputs">
           <div className="row">
             <div className="input">

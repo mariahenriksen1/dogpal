@@ -22,6 +22,7 @@ function Profile() {
 
       <ProfileForm />
       <section className="seperatorLine"></section>
+
       <div className="h2TitleDiv">
         <h2 className="yourDogsTitle">Your dogs</h2>
       </div>
@@ -34,10 +35,9 @@ function Profile() {
 
       <section className="seperatorLine"></section>
 
-      <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
-
-      <div className="spacerDiv"></div>
-      <div className="spacerDiv"></div>
+      <section className="flex-column align-center">
+        <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
+      </section>
     </>
   );
 }

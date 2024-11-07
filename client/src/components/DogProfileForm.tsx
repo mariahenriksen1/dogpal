@@ -60,9 +60,9 @@ export const DogProfileForm = () => {
           )}
         </div>
         <div className="profile-form-inputs">
-          <div className="flex-row">
+          <div className="row">
             <div className="input">
-              <div className="input-label">Dog Name</div>
+              <label className="input-label">Dog Name</label>
               <input
                 type="text"
                 name="dogName"
@@ -73,9 +73,6 @@ export const DogProfileForm = () => {
                 placeholder="Enter dog's name"
               />
             </div>
-            <button className="button" onClick={handleDogNameClick}>
-              <span>Edit dog</span>
-            </button>
           </div>
           <div className="row">
             <div className="input">
