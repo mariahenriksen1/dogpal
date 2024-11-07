@@ -11,39 +11,39 @@ function Profile() {
   };
 
   return (
-    <div className="profile-div">
-      <div className="titleBar">
-        <div className="titleRow">
-          <div className="titleColumn">
-            <div className="titleDiv">
-              <h1 className="ProfileTitle">Profile</h1>
-            </div>
+    <>
+      <header>
+        <section>
+          <div className="flex-row space-between">
+            <h1 className="color-white">Profile</h1>
           </div>
+        </section>
+      </header>
+
+      <section>
+        <ProfileForm />
+
+        <div className="seperatorLine"></div>
+      </section>
+      <section>
+        <div className="h2TitleDiv">
+          <h2 className="yourDogsTitle">Your dogs</h2>
         </div>
-        <div className="spacerColumn"></div>
-      </div>
 
-      <ProfileForm />
+        <DogProfileForm />
 
-      <div className="seperatorLine"></div>
+        {dogProfiles.map((profile, index) => (
+          <DogProfileForm key={index} />
+        ))}
 
-      <div className="h2TitleDiv">
-        <h2 className="yourDogsTitle">Your dogs</h2>
-      </div>
+        <div className="seperatorLine"></div>
 
-      <DogProfileForm />
+        <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
 
-      {dogProfiles.map((profile, index) => (
-        <DogProfileForm key={index} />
-      ))}
-
-      <div className="seperatorLine"></div>
-
-      <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
-
-      <div className="spacerDiv"></div>
-      <div className="spacerDiv"></div>
-    </div>
+        <div className="spacerDiv"></div>
+        <div className="spacerDiv"></div>
+      </section>
+    </>
   );
 }
 
