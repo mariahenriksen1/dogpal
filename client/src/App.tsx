@@ -8,6 +8,15 @@ import Profile from "./pages/Profile";
 import CreateEvent from "./pages/CreateEvent";
 import NoPage from "./pages/NoPage";
 
+
+import './Backend/parseConfig.ts'; // This will initialize Parse
+
+
+
+
+
+
+
 function App() {
   return (
     <Router>

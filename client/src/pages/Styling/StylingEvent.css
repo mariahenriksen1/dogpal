@@ -1,0 +1,233 @@
+.titleBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    background-color: #19191A;
+    color: white;
+}
+
+.descriptionBar {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
+    gap: 20px;
+    align-items: center;
+    color: var(--Black, #19191A);
+}
+
+.dateTimeContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between EventDate and EventTime */
+}
+
+.titleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    padding: 20px;
+}
+
+.titleColumn {
+    flex: 1;
+}
+.spacerColumn {
+    flex: 1;
+}
+
+.priceAndSignUp {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.EventTitle {
+    color: #FFF;
+    font-family: Lexend;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 110%;
+    letter-spacing: -1.28px;
+}
+
+
+
+
+.eventPrice {
+    font-family: Lexend;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    line-height: 19px;
+    letter-spacing: -0.28px;
+}
+
+.buttonSignUp {
+    width: 248px;
+    height: 48px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    background: #F9C069;
+}
+
+.pictureEvent {
+    margin-top: 100px;
+    width: 100%;
+    max-width: 1280px;
+    max-height: 480px;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.EventMonth {
+    color: var(--S_darker, #BB4125);
+    font-family: Lexend;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 183.333% */
+    letter-spacing: -0.24px;
+}
+.EventMonth, .EventDay {
+    margin: 0;
+}
+.EventDate{
+    display: flex;
+    flex-direction: column; /* Stack month and date vertically */
+    align-items: center;
+    text-align: center;
+    color: var(--Black, #19191A);
+    leading-trim: both;
+    text-edge: cap;
+    font-family: Lexend;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 22px; /* 110% */
+    letter-spacing: -0.4px;
+}
+
+.EventTime {
+    color: var(--Black, #19191A);
+    font-family: Lexend;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.28px;
+    margin-top: 0;
+
+}
+
+
+    .EventLocation, .EventCreator {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Space between SVG and text */
+
+        color: var(--Black, #19191A);
+        font-family: Lexend;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 19px;
+        letter-spacing: -0.28px;
+    }
+
+    .LocationSVG, .UserSVG {
+        width: 26px;
+        height: 26px;
+    }
+
+    .description {
+        margin-left: 8%;
+        flex-direction: column;
+        margin-top: 20px;
+        width: 80%;
+        color: var(--Black, #19191A);
+font-family: Lexend;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+    }
+    commenttitle {
+        margin-top: 20px;
+        color: #000;
+/* Section title */
+font-family: Lexend;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 19px; /* 79.167% */
+letter-spacing: -0.48px;
+    }
+    
+    .comments {
+        margin-left: 8%;
+        margin-top: 20px;
+        display: flex;
+width: 860px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+    }
+.EventLocation {
+    color: var(--Black, #19191A);
+
+    /* Paragraph */
+    font-family: Lexend;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px; /* 135.714% */
+    letter-spacing: -0.28px;
+}
+
+
+
+.UserSVG {
+    width: 26px;
+    height: 26px;
+}
+
+.LocationSVG{
+    width: 26px;
+height: 26px;
+}
+
+.EventCreator {
+    color: var(--Black, #19191A);
+    /* Paragraph */
+    font-family: Lexend;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px; /* 135.714% */
+    letter-spacing: -0.28px;
+}
+
+
+.descriptionBar {
+    margin-left: 8%;
+    display: flex;
+    flex-direction: row; /* Set horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping if space is limited */
+    align-items: center;
+    gap: 20px;
+    color: var(--Black, #19191A);
+}
+
+
+
+.description {
+    margin-top: 20px;
+}
+
+.comments {
+    margin-top: 20px;
+}

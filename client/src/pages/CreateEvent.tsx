@@ -1,3 +1,5 @@
+
+import Parse from '../Backend/parseConfig'; // Ensure the correct path to your Parse config
 import React, { useState } from "react"; // Import useState for state management
 import "../App.css";
 import UserProfile from "../components/UserProfile.tsx";
@@ -133,4 +135,3 @@ function CreateEvent() {
   );
 }
 
-export default CreateEvent;
