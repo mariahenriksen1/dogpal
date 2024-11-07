@@ -1,17 +1,39 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
+import Logo from "../assets/Logo.tsx";
+import Chat from "../assets/Chat.tsx";
+import Profile from "../assets/Profile.tsx";
+import Saved from "../assets/Saved.tsx";
 
 const Layout: React.FC = () => {
   return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/event">Event</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/createEvent">Create Event</Link>
-      </nav>
-      <Outlet /> {/* Placeholder for nested routes */}
-    </div>
+    <>
+      <div className="black-bg">
+        <nav>
+          <Link to="/" className="icon-fill">
+            <Logo color="white" type={true} />
+          </Link>
+          <div className="links">
+            <Link to="/calendar">Calendar</Link>
+            <Link to="/createEvent">+ Create event</Link>
+          </div>
+          <div className="links">
+            <Link to="/saved" className="icon-stroke">
+              <Saved />
+            </Link>
+            <Link to="/chat" className="icon-stroke">
+              <Chat />
+            </Link>
+            <Link to="/profile" className="icon-stroke">
+              <Profile />
+            </Link>
+          </div>
+        </nav>
+      </div>
+      <Outlet />
+      {/* Placeholder for nested routes */}
+      <foooter style={{ height: "100px" }}></foooter>
+    </>
   );
 };
 
