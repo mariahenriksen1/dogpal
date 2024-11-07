@@ -1,16 +1,16 @@
-function Saved() {
+function ChevronRight() {
   return (
     <>
       <svg
-        width="16"
-        height="20"
-        viewBox="0 0 16 20"
+        width="9"
+        height="16"
+        viewBox="0 0 9 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M1 3C1 1.89543 1.89543 1 3 1H13C14.1046 1 15 1.89543 15 3V19L8 15.5L1 19V3Z"
-          stroke="var(--black)"
+          d="M0.999999 1L8 8L1 15"
+          stroke="#19191A"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -20,4 +20,4 @@ function Saved() {
   );
 }
 
-export default Saved;
+export default ChevronRight;
