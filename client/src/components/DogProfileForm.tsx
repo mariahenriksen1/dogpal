@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
-    null
+    null,
   );
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [dogName, setDogName] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
 
   const handleDogProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -22,7 +22,7 @@ export const DogProfileForm = () => {
   };
 
   const handleDateOfBirthChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setDateOfBirth(event.target.value);
   };
@@ -40,30 +40,29 @@ export const DogProfileForm = () => {
   };
 
   return (
-    <div className="dog-profile-form">
-      <div className="dog-profile-picture">
-        <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
-        <input
-          type="file"
-          id="dog-profile-picture-input"
-          name="dog-profile-picture-input"
-          accept="image/*"
-          onChange={handleDogProfilePictureChange}
-        />
-        {dogProfilePicture && (
-          <img
-            src={dogProfilePicture}
-            alt="Dog Profile Picture"
-            className="dog-profile-picture-preview"
+    <section>
+      <div className="flex-row gap-20">
+        <div className="dog-profile-picture">
+          <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
+          <input
+            type="file"
+            id="dog-profile-picture-input"
+            name="dog-profile-picture-input"
+            accept="image/*"
+            onChange={handleDogProfilePictureChange}
           />
-        )}
-      </div>
-
-      <div className="profile-form-inputs">
-        <div className="row">
-          <div className="input">
-            <div className="input-label">Dog Name</div>
-            <div className="input-box">
+          {dogProfilePicture && (
+            <img
+              src={dogProfilePicture}
+              alt="Dog Profile Picture"
+              className="dog-profile-picture-preview"
+            />
+          )}
+        </div>
+        <div className="profile-form-inputs">
+          <div className="flex-row">
+            <div className="input">
+              <div className="input-label">Dog Name</div>
               <input
                 type="text"
                 name="dogName"
@@ -74,15 +73,13 @@ export const DogProfileForm = () => {
                 placeholder="Enter dog's name"
               />
             </div>
+            <button className="button" onClick={handleDogNameClick}>
+              <span>Edit dog</span>
+            </button>
           </div>
-          <button className="button" onClick={handleDogNameClick}>
-            <span>Edit dog</span>
-          </button>
-        </div>
-        <div className="row">
-          <div className="input">
-            <div className="input-label">Date of Birth</div>
-            <div className="input-box">
+          <div className="row">
+            <div className="input">
+              <div className="input-label">Date of Birth</div>
               <input
                 type="date"
                 name="dateOfBirth"
@@ -93,11 +90,9 @@ export const DogProfileForm = () => {
               />
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="input">
-            <div className="input-label">Breed</div>
-            <div className="input-box">
+          <div className="row">
+            <div className="input">
+              <div className="input-label">Breed</div>
               <input
                 type="text"
                 name="breed"
@@ -111,6 +106,6 @@ export const DogProfileForm = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

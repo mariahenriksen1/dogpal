@@ -20,29 +20,24 @@ function Profile() {
         </section>
       </header>
 
-      <section>
-        <ProfileForm />
+      <ProfileForm />
+      <section className="seperatorLine"></section>
+      <div className="h2TitleDiv">
+        <h2 className="yourDogsTitle">Your dogs</h2>
+      </div>
 
-        <div className="seperatorLine"></div>
-      </section>
-      <section>
-        <div className="h2TitleDiv">
-          <h2 className="yourDogsTitle">Your dogs</h2>
-        </div>
+      <DogProfileForm />
 
-        <DogProfileForm />
+      {dogProfiles.map((profile, index) => (
+        <DogProfileForm key={index} />
+      ))}
 
-        {dogProfiles.map((profile, index) => (
-          <DogProfileForm key={index} />
-        ))}
+      <section className="seperatorLine"></section>
 
-        <div className="seperatorLine"></div>
+      <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
 
-        <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
-
-        <div className="spacerDiv"></div>
-        <div className="spacerDiv"></div>
-      </section>
+      <div className="spacerDiv"></div>
+      <div className="spacerDiv"></div>
     </>
   );
 }
