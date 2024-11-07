@@ -1,72 +1,137 @@
-import React, { useState } from 'react';
+
 import Parse from '../Backend/parseConfig'; // Ensure the correct path to your Parse config
+import React, { useState } from "react"; // Import useState for state management
+import "../App.css";
+import UserProfile from "../components/UserProfile.tsx";
 
-export const EventComponent = () => {
-  const [event, setEvent] = useState<Parse.Object | null>(null);
+function CreateEvent() {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    location: "",
+    time: "",
+    participantLimit: "",
+    price: "",
+  });
 
-  // Function to add an event
-  async function addEvent() {
-    try {
-      const Event = new Parse.Object('Event');
-      
-      Event.set('title', 'Sample Event');
-      Event.set('creatorId', 101);
-      Event.set('description', 'This is a sample event description.');
-      Event.set('date', Date.now());
-      Event.set('location', 12345);
-      Event.set('price', 99);
-  
-      // Save the Event
-      await Event.save();
-      alert('Event saved!');
-    } catch (error) {
-      console.log('Error saving new event: ', error);
-    }
-  }
-  // Function to fetch an event
-  async function fetchEvent() {
-    try {
-      const query = new Parse.Query('Event');
-      query.equalTo('title', 'Sample Event');
-      const Event = await query.first();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-      if (Event) {
-        console.log('Event details:', {
-          title: Event.get('title'),
-          description: Event.get('description'),
-          date: Event.get('date'),
-          location: Event.get('location'),
-          price: Event.get('price'),
-          id: Event.id,
-        });
-        setEvent(Event);
-      } else {
-        console.log('No event found');
-      }
-    } catch (error) {
-      console.log('Error fetching event: ', error);
-    }
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
-    <>
-      <h1>Event</h1>
-      <div>
-        <button onClick={addEvent}>Add Event</button>
-        <button onClick={fetchEvent}>Fetch Event</button>
-        {event && (
-          <div>
-            <p>{`Title: ${event.get('title')}`}</p>
-            <p>{`Creator ID: ${event.get('creatorId')}`}</p>
-            <p>{`Description: ${event.get('description')}`}</p>
-            <p>{`Date: ${new Date(event.get('date')).toLocaleString()}`}</p>
-            <p>{`Location: ${event.get('location')}`}</p>
-            <p>{`Price: $${event.get('price')}`}</p>
+    <form className="flex-column gap-40" onSubmit={handleSubmit}>
+      <header>
+        <section>
+          <div className="flex-column space-between gap-20">
+            <div className="upload-image">
+              <label htmlFor="coverImage">Click to upload cover image...</label>
+              <input type="file" id="coverImage" className="file-input" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="title" className="text color-white">
+                Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Write title here..."
+                className="input-field color-white"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-        )}
-      </div>
-    </>
-  );
-};
+        </section>
+      </header>
+      <section className="gap-20">
+        <div className="form-group">
+          <label htmlFor="description" className="text">
+            Description
+          </label>
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Write description here..."
+            className="input-field"
+            value={formData.description}
+            onChange={handleChange}
+          />
+        </div>
 
-export default EventComponent;
+        <div className="form-group">
+          <label htmlFor="location" className="text">
+            Location
+          </label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Find Location"
+            className="input-field"
+            value={formData.location}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="time" className="text">
+            Time
+          </label>
+          <input
+            type="datetime-local"
+            name="time"
+            id="time"
+            className="input-field"
+            value={formData.time}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="participantLimit" className="text">
+            Participant Limit
+          </label>
+          <input
+            type="number"
+            name="participantLimit"
+            id="participantLimit"
+            placeholder="Enter limit..."
+            className="input-field"
+            value={formData.participantLimit}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="price" className="text">
+            Price (leave empty if free)
+          </label>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            placeholder="Enter price"
+            className="input-field"
+            value={formData.price}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit" className="createEventButton">
+          Create event
+        </button>
+      </section>
+    </form>
+  );
+}
+
