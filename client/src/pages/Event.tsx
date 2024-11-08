@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Parse from '../Backend/parseConfig'; // Ensure the correct path to your Parse config
+import Parse from '../env.Backend/env.parseConfig'; // Ensure the correct path to your Parse config
 import { TextField } from '@mui/material';
 import pictureEvent from "/src/assets/PictureEvent.png";
 import './Styling/StylingEvent.css';

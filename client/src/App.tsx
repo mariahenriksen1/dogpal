@@ -9,7 +9,7 @@ import CreateEvent from "./pages/CreateEvent";
 import NoPage from "./pages/NoPage";
 
 
-import './Backend/parseConfig.ts'; // This will initialize Parse
+import './env.Backend/env.parseConfig.ts'; // This will initialize Parse
 
 
 

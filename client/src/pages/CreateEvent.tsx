@@ -1,10 +1,11 @@
-import Parse from '../Backend/parseConfig';
+import Parse from '../env.Backend/env.parseConfig.ts';
 import React, { useState } from "react";
 import "../App.css";
 import UserProfile from "../components/UserProfile.tsx";
 
 function CreateEvent() {
   const [formData, setFormData] = useState({
+    coverImagePreview: "",
     title: "",
     description: "",
     location: "",
@@ -14,45 +15,57 @@ function CreateEvent() {
     price: "",
   });
 
-async function addEvent() {
-  try {
-    const Event = new Parse.Object('Event');
+  async function addEvent() {
+    try {
+      const Event = new Parse.Object('Event');
 
-    Event.set('title', formData.title);
-    Event.set('description', formData.description);
-    Event.set('date', new Date(formData.Date).getTime()); 
-    Event.set('location', formData.location);
+      // Store the base64 image directly in the Event object
+      if (formData.coverImagePreview) {
+        Event.set('coverImage', formData.coverImagePreview); // store as base64 string
+      }
 
-
-    Event.set('price', formData.price ? parseFloat(formData.price) : 0); 
-    Event.set('participantLimit', formData.participantLimit || "");
+      Event.set('title', formData.title);
+      Event.set('description', formData.description);
+      Event.set('date', new Date(formData.Date).getTime());
+      Event.set('location', formData.location);
+      Event.set('price', formData.price ? parseFloat(formData.price) : 0);
+      Event.set('participantLimit', formData.participantLimit || "");
   
-    await Event.save();
-    alert('Event saved!');
-  } catch (error) {
-    console.log('Error saving new event: ', error);
+      await Event.save();
+      alert('Event saved!');
+    } catch (error) {
+      console.log('Error saving new event: ', error);
+    }
   }
-}
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-
-
-
-//Mangler billede upload
+    const reader = new FileReader();
+    reader.onload = () => {
+      setFormData((prevData) => ({
+        ...prevData,
+        coverImagePreview: reader.result as string, // base64 string
+      }));
+    };
+    reader.readAsDataURL(file);
+  };
 
   interface FormData {
+    coverImagePreview: string;
     title: string;
     description: string;
     location: string;
     Date: string;
     time: string;
-    participantLimit: string; // husk int
-    price: string; // husk int
+    participantLimit: string;
+    price: string;
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData: FormData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -60,7 +73,7 @@ async function addEvent() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addEvent(); 
+    addEvent();
   };
 
   return (
@@ -70,11 +83,14 @@ async function addEvent() {
           <div className="flex-column space-between gap-20">
             <div className="upload-image">
               <label htmlFor="coverImage">Click to upload cover image...</label>
-              <input type="file" id="coverImage" className="file-input" />
+              <input type="file" id="coverImage" className="file-input" onChange={handleImageChange} />
+              
+              {formData.coverImagePreview && (
+                <img src={formData.coverImagePreview} alt="Cover Preview" className="image-preview" />
+              )}
             </div>
-
-
-
+            
+            
 
             <div className="form-group">
               <label htmlFor="title" className="text color-white">Title</label>
