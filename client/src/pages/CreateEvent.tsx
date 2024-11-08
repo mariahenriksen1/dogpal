@@ -1,6 +1,5 @@
-
-import Parse from '../Backend/parseConfig'; // Ensure the correct path to your Parse config
-import React, { useState } from "react"; // Import useState for state management
+import Parse from '../Backend/parseConfig';
+import React, { useState } from "react";
 import "../App.css";
 import UserProfile from "../components/UserProfile.tsx";
 
@@ -9,22 +8,59 @@ function CreateEvent() {
     title: "",
     description: "",
     location: "",
+    Date: "",
     time: "",
     participantLimit: "",
     price: "",
   });
 
-  const handleChange = (e) => {
+async function addEvent() {
+  try {
+    const Event = new Parse.Object('Event');
+
+    Event.set('title', formData.title);
+    Event.set('description', formData.description);
+    Event.set('date', new Date(formData.Date).getTime()); 
+    Event.set('location', formData.location);
+
+
+    Event.set('price', formData.price ? parseFloat(formData.price) : 0); 
+    Event.set('participantLimit', formData.participantLimit || "");
+  
+    await Event.save();
+    alert('Event saved!');
+  } catch (error) {
+    console.log('Error saving new event: ', error);
+  }
+}
+
+
+
+
+
+//Mangler billede upload
+
+  interface FormData {
+    title: string;
+    description: string;
+    location: string;
+    Date: string;
+    time: string;
+    participantLimit: string; // husk int
+    price: string; // husk int
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData((prevData: FormData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    addEvent(); 
   };
 
   return (
@@ -36,10 +72,12 @@ function CreateEvent() {
               <label htmlFor="coverImage">Click to upload cover image...</label>
               <input type="file" id="coverImage" className="file-input" />
             </div>
+
+
+
+
             <div className="form-group">
-              <label htmlFor="title" className="text color-white">
-                Title
-              </label>
+              <label htmlFor="title" className="text color-white">Title</label>
               <input
                 type="text"
                 name="title"
@@ -55,9 +93,7 @@ function CreateEvent() {
       </header>
       <section className="gap-20">
         <div className="form-group">
-          <label htmlFor="description" className="text">
-            Description
-          </label>
+          <label htmlFor="description" className="text">Description</label>
           <textarea
             name="description"
             id="description"
@@ -69,9 +105,7 @@ function CreateEvent() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="location" className="text">
-            Location
-          </label>
+          <label htmlFor="location" className="text">Location</label>
           <input
             type="text"
             name="location"
@@ -84,23 +118,19 @@ function CreateEvent() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="time" className="text">
-            Time
-          </label>
+          <label htmlFor="time" className="text">Time</label>
           <input
             type="datetime-local"
-            name="time"
+            name="Date"
             id="time"
             className="input-field"
-            value={formData.time}
+            value={formData.Date}
             onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="participantLimit" className="text">
-            Participant Limit
-          </label>
+          <label htmlFor="participantLimit" className="text">Participant Limit</label>
           <input
             type="number"
             name="participantLimit"
@@ -113,9 +143,7 @@ function CreateEvent() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="price" className="text">
-            Price (leave empty if free)
-          </label>
+          <label htmlFor="price" className="text">Price (leave empty if free)</label>
           <input
             type="text"
             name="price"
@@ -127,11 +155,10 @@ function CreateEvent() {
           />
         </div>
 
-        <button type="submit" className="createEventButton">
-          Create event
-        </button>
+        <button type="submit" className="createEventButton">Create event</button>
       </section>
     </form>
   );
 }
 
+export default CreateEvent;

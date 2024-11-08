@@ -1,4 +1,3 @@
-// parseConfig.js
 // @ts-ignore
 import Parse from 'parse/dist/parse.min.js';
 

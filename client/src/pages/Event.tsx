@@ -19,6 +19,9 @@ const Event = () => {
     fetchEvents();  // Fetch events when the component mounts
   }, []);
 
+
+
+
   // Fetch all events from Parse
   const fetchEvents = async () => {
     try {
