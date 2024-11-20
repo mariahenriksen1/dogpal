@@ -2,7 +2,13 @@ import React, { useState } from "react";
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode;
-  variant?: "First name" | "Last name" | "Email" | "Date" | "Password"; // Define variants
+  variant?:
+    | "First name"
+    | "Last name"
+    | "Dog name"
+    | "Email"
+    | "Date"
+    | "Password"; // Define variants
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -32,6 +38,14 @@ const InputField: React.FC<InputFieldProps> = ({
           label: "Name",
           type: "text",
           placeholder: "Enter your name",
+          value: inputProps.value ?? internalValue,
+          onChange: inputProps.onChange ?? handleInternalChange,
+        };
+      case "Dog name":
+        return {
+          label: "Dog name",
+          type: "text",
+          placeholder: "Enter your dog's name",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
         };
@@ -68,17 +82,19 @@ const InputField: React.FC<InputFieldProps> = ({
   const variantProps = getVariantProps();
 
   return (
-    <div className="input-field">
-      {variantProps.label && <label>{variantProps.label}</label>}
-      <div className="input-wrapper">
-        {icon || variantProps.icon ? (
-          <span className="icon">{icon || variantProps.icon}</span>
-        ) : null}
-        <input
-          {...variantProps}
-          {...inputProps} // Allow parent props to override
-        />
-      </div>
+    <div className="input">
+      {variantProps.label && (
+        <label className="input-label">{variantProps.label}</label>
+      )}
+
+      {icon || variantProps.icon ? (
+        <span className="icon">{icon || variantProps.icon}</span>
+      ) : null}
+      <input
+        className="input-field"
+        {...variantProps}
+        {...inputProps} // Allow parent props to override
+      />
     </div>
   );
 };

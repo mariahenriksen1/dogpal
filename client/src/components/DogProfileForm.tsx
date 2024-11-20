@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InputField from "../components/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
@@ -61,18 +62,10 @@ export const DogProfileForm = () => {
         </div>
         <div className="profile-form-inputs">
           <div className="row">
-            <div className="input">
-              <label className="input-label">Dog Name</label>
-              <input
-                type="text"
-                name="dogName"
-                id="dogName"
-                className={`input-field ${dogName ? "has-value" : ""}`}
-                value={dogName}
-                onChange={handleDogNameChange}
-                placeholder="Enter dog's name"
-              />
-            </div>
+            <InputField
+              variant="Dog name"
+              onChange={(e) => console.log("Dog Name Changed:", e.target.value)} // Example handler
+            />
           </div>
           <div className="row">
             <div className="input">
