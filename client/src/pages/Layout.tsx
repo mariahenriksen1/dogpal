@@ -32,7 +32,7 @@ const Layout: React.FC = () => {
       </div>
       <Outlet />
       {/* Placeholder for nested routes */}
-      <foooter style={{ height: "100px" }}></foooter>
+      <footer style={{ height: "100px" }}></footer>
     </>
   );
 };
