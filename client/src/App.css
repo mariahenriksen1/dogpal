@@ -218,7 +218,7 @@ section {
 
 /* New profile CSS */
 
-.titleBar {
+.title-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -230,7 +230,7 @@ section {
     height: 100%;
 }
 
-.titleRow {
+.title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -258,7 +258,7 @@ section {
     justify-content: flex-start;
 }
 
-.h2TitleDiv {
+.h2-title-div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -266,7 +266,7 @@ section {
     justify-content: space-around;
 }
 
-.seperatorLine {
+.seperator-line {
     width: 90%;
     height: 90%;
     border: 1px #ebe1ce solid;

@@ -1,4 +1,4 @@
-.titleBar {
+.title-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +8,7 @@
     color: white;
 }
 
-.descriptionBar {
+.description-bar {
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap onto the next line if needed */
     gap: 20px;
@@ -16,13 +16,13 @@
     color: var(--Black, #19191A);
 }
 
-.dateTimeContainer {
+.date-time-container {
     display: flex;
     align-items: center;
     gap: 10px; /* Space between EventDate and EventTime */
 }
 
-.titleRow {
+.title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,21 +31,21 @@
     padding: 20px;
 }
 
-.titleColumn {
+.title-column {
     flex: 1;
 }
-.spacerColumn {
+.spacer-column {
     flex: 1;
 }
 
-.priceAndSignUp {
+.price-and-sign-up {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
 
-.EventTitle {
+.event-title {
     color: #FFF;
     font-family: Lexend;
     font-size: 64px;
@@ -58,7 +58,7 @@
 
 
 
-.eventPrice {
+.event-price {
     font-family: Lexend;
     font-size: 14px;
     font-weight: 400;
@@ -67,7 +67,7 @@
     letter-spacing: -0.28px;
 }
 
-.buttonSignUp {
+.button-sign-up {
     width: 248px;
     height: 48px;
     padding: 12px 16px;
@@ -75,7 +75,7 @@
     background: #F9C069;
 }
 
-.pictureEvent {
+.picture-event {
     margin-top: 100px;
     width: 100%;
     max-width: 1280px;
@@ -85,7 +85,7 @@
     object-fit: cover;
 }
 
-.EventMonth {
+.event-month {
     color: var(--S_darker, #BB4125);
     font-family: Lexend;
     font-size: 12px;
@@ -94,10 +94,10 @@
     line-height: 22px; /* 183.333% */
     letter-spacing: -0.24px;
 }
-.EventMonth, .EventDay {
+.event-month, .event-day {
     margin: 0;
 }
-.EventDate{
+.event-date{
     display: flex;
     flex-direction: column; /* Stack month and date vertically */
     align-items: center;
@@ -113,7 +113,7 @@
     letter-spacing: -0.4px;
 }
 
-.EventTime {
+.event-time {
     color: var(--Black, #19191A);
     font-family: Lexend;
     font-size: 14px;
@@ -125,7 +125,7 @@
 }
 
 
-    .EventLocation, .EventCreator {
+    .event-location, .event-creator {
         display: flex;
         align-items: center;
         gap: 8px; /* Space between SVG and text */
@@ -176,7 +176,7 @@ flex-direction: column;
 align-items: flex-start;
 gap: 10px;
     }
-.EventLocation {
+.event-location {
     color: var(--Black, #19191A);
 
     /* Paragraph */
@@ -200,7 +200,7 @@ gap: 10px;
 height: 26px;
 }
 
-.EventCreator {
+.event-creator {
     color: var(--Black, #19191A);
     /* Paragraph */
     font-family: Lexend;
@@ -212,7 +212,7 @@ height: 26px;
 }
 
 
-.descriptionBar {
+.description-bar {
     margin-left: 8%;
     display: flex;
     flex-direction: row; /* Set horizontal layout */
