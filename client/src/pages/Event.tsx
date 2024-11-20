@@ -137,7 +137,7 @@ const Event = () => {
 
         {/* Comments Section */}
         <div className='comments'>
-          <h3 className='comment-title'>Comments</h3>
+          <h3 className='commenttitle'>Comments</h3>
           {attendees.map(attendee => (
             <div key={attendee.ID}>
               <p>{attendee.Name}</p>
