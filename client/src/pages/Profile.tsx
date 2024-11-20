@@ -21,9 +21,9 @@ function Profile() {
       </header>
 
       <ProfileForm />
-      <section className="seperatorLine"></section>
+      <section className="seperator-line"></section>
 
-      <div className="h2TitleDiv">
+      <div className="h2-title-div">
         <h2 className="yourDogsTitle">Your dogs</h2>
       </div>
 
@@ -33,7 +33,7 @@ function Profile() {
         <DogProfileForm key={index} />
       ))}
 
-      <section className="seperatorLine"></section>
+      <section className="seperator-line"></section>
 
       <section className="flex-column align-center">
         <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />

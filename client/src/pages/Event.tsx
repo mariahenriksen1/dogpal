@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Parse from '../env.Backend/env.parseConfig'; // Ensure the correct path to your Parse config
-import { TextField } from '@mui/material';
 import pictureEvent from "/src/assets/PictureEvent.png";
 import './Styling/StylingEvent.css';
 
@@ -76,10 +75,10 @@ const Event = () => {
   return (
     <>
       {/* Event List Section */}
-      <div className='eventList'>
+      <div className='event-list'>
         <h2>Event List</h2>
         {events.map(event => (
-          <div key={event.id} className='eventItem'>
+          <div key={event.id} className='event-item'>
             <h3>{event.get('title')}</h3>
             <p>{event.get('description')}</p>
             <p>{new Date(event.get('date')).toLocaleString()}</p>
@@ -93,35 +92,35 @@ const Event = () => {
       
        
          
-      <div className='titleBar'>
-  <img className='pictureEvent' src={pictureEvent} alt="Event" />
+      <div className='title-bar'>
+  <img className='picture-event' src={pictureEvent} alt="Event" />
 
   <div className='eventList'>
     {events.map(event => (
-      <div key={event.id} className='eventDetails'>
-        <div className='titleRow'>
-          <div className='titleColumn'>
-            <h1 className='EventTitle'>{event.get('title')}</h1>
+      <div key={event.id} className='event-details'>
+        <div className='title-row'>
+          <div className='title-column'>
+            <h1 className='event-title'>{event.get('title')}</h1>
           </div>
-          <div className='spacerColumn'></div>
-          <div className='priceAndSignUp'>
+          <div className='spacer-column'></div>
+          <div className='price-and-sign-up'>
             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none">
               <path d="M15.2981 16.8302C14.0289 18.9455 11.9711 18.9455 10.7019 16.8302..." stroke="white" strokeWidth="2" />
             </svg>
-            <p className='eventPrice'>{eventprice(event.get('price'))}</p>
-            <button className='buttonSignUp'>Sign Up</button>
+            <p className='event-price'>{eventprice(event.get('price'))}</p>
+            <button className='button-sign-up'>Sign Up</button>
           </div>
         </div>
 
-        <div className='descriptionBar'>
-          <div className='EventDate'>
-            <p className='EventMonth'>{new Date(event.get('date')).toLocaleString('default', { month: 'short' })}</p>
-            <p className='EventDate'>{new Date(event.get('date')).getDate()}</p>
+        <div className='description-bar'>
+          <div className='event-date'>
+            <p className='event-month'>{new Date(event.get('date')).toLocaleString('default', { month: 'short' })}</p>
+            <p className='event-date'>{new Date(event.get('date')).getDate()}</p>
           </div>
 
-          <p className='EventTime'>{new Date(event.get('date')).toLocaleTimeString()}</p>
-          <p className='EventLocation'>{event.get('location')}</p>
-          <p className='EventCreator'>By {event.get('creatorId')}</p>
+          <p className='event-time'>{new Date(event.get('date')).toLocaleTimeString()}</p>
+          <p className='event-location'>{event.get('location')}</p>
+          <p className='event-creator'>By {event.get('creatorId')}</p>
         </div>
 
         <div className='description'>
