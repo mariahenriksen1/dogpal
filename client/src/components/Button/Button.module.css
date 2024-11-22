@@ -1,0 +1,32 @@
+.button {
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Primary Button Styles */
+.primary {
+    background-color: var(--p-light);
+    color: var(--black);
+}
+
+.primary:hover {
+    background-color: var(--p-dark);
+}
+
+/* Secondary Button Styles */
+.secondary {
+    background-color: var(--gray);
+    color: var(--white);
+}
+
+.secondary:hover {
+    background-color: var(--black);
+}
+
+.icon {
+    margin-right: 8px; /* Space between the icon and label */
+}
