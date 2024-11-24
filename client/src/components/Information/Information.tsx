@@ -1,24 +1,21 @@
-import ChevronRight from "../assets/ChevronRight.tsx";
 import React from "react";
+import styles from "./Information.module.css";
 
 interface InformationProps {
-  icon: string;
+  icon?: React.ReactNode;
   text: string;
   color: string;
 }
 
-let iconComponent;
 let colorInformation = "--var(black)";
 
 const Information: React.FC<InformationProps> = ({ icon, text, color }) => {
-  if (icon == "location") iconComponent = ChevronRight;
-
-  if (color == "white") colorInformation = "var(--white)";
+  if (color === "white") colorInformation = "var(--white)";
   else colorInformation = color;
 
   return (
-    <div>
-      {iconComponent}
+    <div className={styles.information}>
+      {icon && <span>{icon}</span>}
       <p style={{ color: colorInformation }}>{text}</p>
     </div>
   );

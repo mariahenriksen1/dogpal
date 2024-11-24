@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./pages/Layout";
@@ -9,14 +8,7 @@ import CreateEvent from "./pages/CreateEvent";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUser.tsx";
 
-
-import './env.Backend/env.parseConfig.ts'; 
-
-
-
-
-
-
+import "./env.Backend/env.parseConfig.ts";
 
 function App() {
   return (

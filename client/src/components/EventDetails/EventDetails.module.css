@@ -1,0 +1,39 @@
+.details {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.information {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dateMonth {
+    color: var(--s-dark);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dateDay {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.timeName {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 18px;
+}

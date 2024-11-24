@@ -1,0 +1,48 @@
+.featured {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-end;
+}
+
+.graphic {
+    position: relative;
+    max-width: 840px;
+    max-height: 420px;
+    width: 100%;
+    border-radius: 6px;
+    overflow: clip;
+}
+
+.featured h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.featured .overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    padding: 20px 40px;
+    background: linear-gradient(0deg, rgba(100, 100, 100, 0.8) 0%, rgba(0, 0, 0, 0) 50%);
+
+}
+
+.featured img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 840 / 420;
+    object-fit: cover;
+    background-color: var(--p-dark);
+}
+.information {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
