@@ -4,7 +4,7 @@ export const ProfileForm = () => {
   const [ProfilePicture, setProfilePicture] = useState<string | null>(null);
 
   const handleProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -17,20 +17,22 @@ export const ProfileForm = () => {
   };
 
   const handleChangePasswordClick = () => {
-    // Handle the button click event here
     console.log("Change password button clicked");
   };
 
   return (
-    <section>
-      <div className="flex-row">
-        <div className="profile-picture">
-          <label htmlFor="profile-picture-label">Profile Picture</label>
+    <section className="profile-form">
+      <div className="flex-row gap-20">
+        <div className="profile-picture-section1">
+          <label htmlFor="profile-picture-input" className="input-label">
+            Profile Picture
+          </label>
           <input
             type="file"
             id="profile-picture-input"
             name="profile-picture-input"
             accept="image/*"
+            className="file-input"
             onChange={handleProfilePictureChange}
           />
           {ProfilePicture && (
@@ -42,43 +44,46 @@ export const ProfileForm = () => {
           )}
         </div>
 
-        <div className="profile-form-inputs">
-          <div className="row">
+        <div className="profile-form-inputs flex-column gap-20">
+          <div className="row flex-row gap-20">
             <div className="input">
-              <div className="input-label">First name</div>
+              <label className="input-label">First Name</label>
               <div className="input-box">
-                <div className="input-value">Freja</div>
+                <span className="input-value">Freja</span>
               </div>
             </div>
             <div className="input">
-              <div className="input-label">Last name</div>
+              <label className="input-label">Last Name</label>
               <div className="input-box">
-                <div className="input-value">Sunesen</div>
+                <span className="input-value">Sunesen</span>
               </div>
             </div>
           </div>
-          <div className="weird">
-            <div className="input-label">E-mail</div>
 
-            <div className="input-box">
-              <div className="input-value">freja@sunesen.com</div>
-              <div className="icon-div">
-                <div className="icon" />
-              </div>
-            </div>
-          </div>
           <div className="row">
             <div className="input">
-              <div className="input-label">Password</div>
-              <div className="input-box">
-                <div className="input-value">**********</div>
+              <label className="input-label">E-mail</label>
+              <div className="input-box flex-row align-center">
+                <span className="input-value">freja@sunesen.com</span>
                 <div className="icon-div">
-                  <div className="icon" />
+                  <div className="icon"></div>
                 </div>
               </div>
             </div>
-            <button className="button" onClick={handleChangePasswordClick}>
-              <span>Change password</span>
+          </div>
+
+          <div className="row flex-row space-between align-center">
+            <div className="input">
+              <label className="input-label">Password</label>
+              <div className="input-box flex-row align-center">
+                <span className="input-value">**********</span>
+                <div className="icon-div">
+                  <div className="icon"></div>
+                </div>
+              </div>
+            </div>
+            <button className="button primary-button" onClick={handleChangePasswordClick}>
+              <span>Change Password</span>
             </button>
           </div>
         </div>

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
-    null,
+    null
   );
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [dogName, setDogName] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
 
   const handleDogProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -22,7 +22,7 @@ export const DogProfileForm = () => {
   };
 
   const handleDateOfBirthChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDateOfBirth(event.target.value);
   };
@@ -35,20 +35,19 @@ export const DogProfileForm = () => {
     setBreed(event.target.value);
   };
 
-  const handleDogNameClick = () => {
-    console.log("Edit dog button clicked");
-  };
-
   return (
-    <section>
+    <section className="dog-profile-form">
       <div className="flex-row gap-20">
         <div className="dog-profile-picture">
-          <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
+          <label htmlFor="dog-profile-picture-input" className="input-label">
+            Dog Profile Picture
+          </label>
           <input
             type="file"
             id="dog-profile-picture-input"
             name="dog-profile-picture-input"
             accept="image/*"
+            className="file-input"
             onChange={handleDogProfilePictureChange}
           />
           {dogProfilePicture && (
@@ -59,10 +58,13 @@ export const DogProfileForm = () => {
             />
           )}
         </div>
+
         <div className="profile-form-inputs">
           <div className="row">
             <div className="input">
-              <label className="input-label">Dog Name</label>
+              <label htmlFor="dogName" className="input-label">
+                Dog Name
+              </label>
               <input
                 type="text"
                 name="dogName"
@@ -74,9 +76,12 @@ export const DogProfileForm = () => {
               />
             </div>
           </div>
+
           <div className="row">
             <div className="input">
-              <div className="input-label">Date of Birth</div>
+              <label htmlFor="dateOfBirth" className="input-label">
+                Date of Birth
+              </label>
               <input
                 type="date"
                 name="dateOfBirth"
@@ -87,9 +92,12 @@ export const DogProfileForm = () => {
               />
             </div>
           </div>
+
           <div className="row">
             <div className="input">
-              <div className="input-label">Breed</div>
+              <label htmlFor="breed" className="input-label">
+                Breed
+              </label>
               <input
                 type="text"
                 name="breed"
