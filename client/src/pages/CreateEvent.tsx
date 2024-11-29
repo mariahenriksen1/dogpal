@@ -1,7 +1,7 @@
 import Parse from "../env.Backend/env.parseConfig.ts";
 import React, { useState } from "react";
 import "../App.css";
-import UserProfile from "../components/UserProfile.tsx";
+import HeaderProfile from "../components/HeaderProfile/HeaderProfile.tsx";
 
 function CreateEvent() {
   const [formData, setFormData] = useState({

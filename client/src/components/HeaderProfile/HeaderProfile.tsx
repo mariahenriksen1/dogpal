@@ -1,20 +1,22 @@
-function UserProfile() {
+import styles from "./HeaderProfile.module.css";
+
+function HeaderProfile() {
   return (
-    <div className="flex-row gap-20 align-center">
-      <div className="flex-column gap-10">
+    <div className={styles.headerProfile}>
+      <div className={styles.profileDetails}>
         <h2 className="color-white">Mogens Mogensen</h2>
-        <div className="flex-row gap-20">
-          <div className="flex-row gap-10">
+        <div className={styles.dogList}>
+          <div className={styles.dogItem}>
             <img
-              className="dog-picture"
+              className={styles.dogPicture}
               src="/assets/dog-picture.jpeg"
               alt="Dog picture"
             />
             <p className="color-white">Maggie</p>
           </div>
-          <div className="flex-row gap-10">
+          <div className={styles.dogItem}>
             <img
-              className="dog-picture"
+              className={styles.dogPicture}
               src="/assets/dog-picture.jpeg"
               alt="Dog picture"
             />
@@ -23,7 +25,7 @@ function UserProfile() {
         </div>
       </div>
       <img
-        className="profile-picture"
+        className={styles.profilePicture}
         src="/assets/profile-picture.jpeg"
         alt="Profile picture"
       />
@@ -31,4 +33,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default HeaderProfile;
