@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "../components/InputField";
+import InputField from "./InputField/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
@@ -28,8 +28,8 @@ export const DogProfileForm = () => {
     setDateOfBirth(event.target.value);
   };
 
-  const handleDogNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDogName(event.target.value);
+  const handleDogNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDogName(e.target.value);
   };
 
   const handleBreedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ export const DogProfileForm = () => {
 
   return (
     <section>
-      <div className="flex-row ">
+      <div className="flex-row">
         <div className="dog-profile-picture">
           <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
           <input
@@ -64,35 +64,25 @@ export const DogProfileForm = () => {
           <div className="row">
             <InputField
               variant="Dog name"
-              onChange={(e) => console.log("Dog Name Changed:", e.target.value)} // Example handler
+              value={dogName}
+              onChange={handleDogNameChange}
             />
           </div>
           <div className="row">
-            <div className="input">
-              <div className="input-label">Date of Birth</div>
-              <input
-                type="date"
-                name="dateOfBirth"
-                id="dateOfBirth"
-                className={`input-field ${dateOfBirth ? "has-value" : ""}`}
-                value={dateOfBirth}
-                onChange={handleDateOfBirthChange}
-              />
-            </div>
+            <InputField
+              variant="Date"
+              value={dateOfBirth}
+              onChange={handleDateOfBirthChange}
+            />
           </div>
           <div className="row">
-            <div className="input">
-              <div className="input-label">Breed</div>
-              <input
-                type="text"
-                name="breed"
-                id="breed"
-                className={`input-field ${breed ? "has-value" : ""}`}
-                value={breed}
-                onChange={handleBreedChange}
-                placeholder="Enter breed"
-              />
-            </div>
+            <InputField
+              variant="Text input"
+              label="Breed"
+              placeholder="Enter breed"
+              value={breed}
+              onChange={handleBreedChange}
+            />
           </div>
         </div>
       </div>

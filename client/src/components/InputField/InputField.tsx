@@ -1,15 +1,14 @@
 import React, { useState } from "react";
+import styles from "./InputField.module.css";
 
-interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type InputFieldProps = {
+  variant: string;
+  label?: string;
+  placeholder?: string;
+  value: string;
   icon?: React.ReactNode;
-  variant?:
-    | "First name"
-    | "Last name"
-    | "Dog name"
-    | "Email"
-    | "Date"
-    | "Password"; // Define variants
-}
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 const InputField: React.FC<InputFieldProps> = ({
   icon,
@@ -25,19 +24,27 @@ const InputField: React.FC<InputFieldProps> = ({
 
   const getVariantProps = () => {
     switch (variant) {
+      case "Text input":
+        return {
+          label: inputProps.label,
+          type: "text",
+          placeholder: inputProps.placeholder,
+          value: inputProps.value ?? internalValue,
+          onChange: inputProps.onChange ?? handleInternalChange,
+        };
       case "First name":
         return {
-          label: "Name",
+          label: "First name",
           type: "text",
-          placeholder: "Enter your name",
+          placeholder: "Enter your first name",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
         };
       case "Last name":
         return {
-          label: "Name",
+          label: "Last name",
           type: "text",
-          placeholder: "Enter your name",
+          placeholder: "Enter your last name",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
         };
@@ -54,7 +61,6 @@ const InputField: React.FC<InputFieldProps> = ({
           label: "E-mail",
           type: "email",
           placeholder: "Enter your email",
-          icon: <div className="email-icon" />,
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
         };
@@ -70,7 +76,6 @@ const InputField: React.FC<InputFieldProps> = ({
           label: "Password",
           type: "password",
           placeholder: "Enter your password",
-          icon: <div className="password-icon" />,
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
         };
@@ -82,19 +87,18 @@ const InputField: React.FC<InputFieldProps> = ({
   const variantProps = getVariantProps();
 
   return (
-    <div className="input">
+    <div className={styles.input}>
       {variantProps.label && (
-        <label className="input-label">{variantProps.label}</label>
+        <label className={styles.inputLabel}>{variantProps.label}</label>
       )}
-
-      {icon || variantProps.icon ? (
-        <span className="icon">{icon || variantProps.icon}</span>
-      ) : null}
-      <input
-        className="input-field"
-        {...variantProps}
-        {...inputProps} // Allow parent props to override
-      />
+      <div className={styles.inputContainer}>
+        <input
+          className={styles.inputField}
+          {...variantProps}
+          {...inputProps} // Allow parent props to override
+        />
+        {icon && <span className={styles.icon}>{icon}</span>}
+      </div>
     </div>
   );
 };
