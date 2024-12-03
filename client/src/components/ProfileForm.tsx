@@ -25,7 +25,7 @@ export const ProfileForm = () => {
     <section>
       <div className="flex-row">
         <div className="profile-picture">
-          <label htmlFor="profile-picture-label">Profile Picture</label>
+          <label htmlFor="profile-picture-input">Profile Picture</label>
           <input
             type="file"
             id="profile-picture-input"

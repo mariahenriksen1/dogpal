@@ -43,7 +43,7 @@ export const DogProfileForm = () => {
     <section>
       <div className="flex-row gap-20">
         <div className="dog-profile-picture">
-          <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
+          <label htmlFor="dog-profile-picture-input">Dog Profile Picture</label>
           <input
             type="file"
             id="dog-profile-picture-input"
