@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 import { FiMail, FiLock } from "react-icons/fi";
 
 export const ProfileForm = () => {

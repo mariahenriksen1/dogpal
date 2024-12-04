@@ -8,11 +8,14 @@ type InputFieldProps = {
   value: string;
   icon?: React.ReactNode;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  name?: string;
+  labelTextColor?: string;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
   icon,
   variant,
+  labelTextColor,
   ...inputProps
 }) => {
   // Define internal state for each variant (for demonstration)
@@ -89,7 +92,12 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className={styles.input}>
       {variantProps.label && (
-        <label className={styles.inputLabel}>{variantProps.label}</label>
+        <label
+          className={styles.inputLabel}
+          style={{ color: labelTextColor || "inherit" }} // Apply labelTextColor dynamically
+        >
+          {variantProps.label}
+        </label>
       )}
       <div className={styles.inputContainer}>
         <input
@@ -102,5 +110,4 @@ const InputField: React.FC<InputFieldProps> = ({
     </div>
   );
 };
-
-export default InputField;
+  export default InputField;

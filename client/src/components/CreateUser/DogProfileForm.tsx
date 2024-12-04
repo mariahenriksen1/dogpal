@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
@@ -65,16 +65,14 @@ export const DogProfileForm = () => {
             <InputField
               variant="Dog name"
               value={dogName}
-              onChange={handleDogNameChange}
-            />
+              onChange={handleDogNameChange}          />
           </div>
 
           <div className="row">
             <InputField
               variant="Date"
               value={dateOfBirth}
-              onChange={handleDateOfBirthChange}
-            />
+              onChange={handleDateOfBirthChange}           />
           </div>
 
           <div className="row">
@@ -83,8 +81,7 @@ export const DogProfileForm = () => {
               label="Breed"
               placeholder="Enter breed"
               value={breed}
-              onChange={handleBreedChange}
-            />
+              onChange={handleBreedChange}           />
           </div>
         </div>
       </div>

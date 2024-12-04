@@ -1,12 +1,57 @@
 .title-bar {
-    display: flex;
+      display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
     padding-top: 20px;
-    background-color: #19191A;
-    color: white;
+    background-color: #19191A; /* Black background */
+    color: white; /* White text */
+    border: 1px solid white; /* White border */
 }
+.title-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid black; /* Black border */
+    border-radius: 4px;
+    background-color: #f9f1e1; /* Same background color as the container */
+    width: 100%; /* Make the input field as long as its container */
+    opacity: 1;
+    color: #19191a;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    word-wrap: break-word;
+}
+
+
+.inputLabel {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+
+  }
+  
+  .inputContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative; /* Ensure icon positions correctly */
+  }
+  
+  .inputField {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid black; /* Black border */
+    border-radius: 4px;
+    background-color: #f9f1e1; /* Same background color as the container */
+    width: 100%; /* Make the input field as long as its container */
+    opacity: 1;
+    color: #19191a;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    word-wrap: break-word;
+  }
 
 .description-bar {
     display: flex;
@@ -231,3 +276,54 @@ height: 26px;
 .comments {
     margin-top: 20px;
 }
+.upload-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 480px;
+    max-width: 1280px;
+    padding: 10px;
+    gap: 10px;
+    align-self: stretch;
+    overflow: hidden;
+  }
+  
+  .upload-image-label {
+    position: absolute;
+    color: white;
+    text-align: center;
+    font-size: 1.5rem;
+    z-index: 2; /* Ensure it is above the image */
+    pointer-events: none; /* So it doesn't block clicks */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  .file-input {
+    position: absolute; /* File input covers the entire area */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Make it invisible but still clickable */
+  }
+  
+  /* When image is uploaded, hide the label */
+  .upload-image img + .upload-image-label {
+    opacity: 0;
+  }
+  
