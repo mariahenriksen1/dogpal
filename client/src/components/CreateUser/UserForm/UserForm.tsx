@@ -1,58 +1,58 @@
-import React from "react";
-import PreviewImage from "../../PreviewImage/PreviewImage";
+import React, { useState } from "react";
 import InputField from "../../InputField/InputField";
+import PreviewImage from "../../PreviewImage/PreviewImage";
 
-interface UserFormProps {
-  userData: {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    profilePicture: string;
-    birthDate: string;
-  };
-  setUserData: React.Dispatch<React.SetStateAction<any>>;
-}
+const UserForm: React.FC = () => {
+  const [userData, setUserData] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    profilePicture: "",
+    birthDate: "",
+  });
 
-// const [emailError, setEmailError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState<string>("");
 
-const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData((prevData: typeof userData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = event.target.value;
+    setUserData((prevData) => ({ ...prevData, email: emailValue }));
 
-    const reader = new FileReader();
-    reader.onload = () =>
-      setUserData((prevData: typeof userData) => ({
-        ...prevData,
-        profilePicture: reader.result as string,
-      }));
-    reader.readAsDataURL(file);
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
   };
 
-  //   // Email validation regex
-  //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   if (!emailRegex.test(emailValue)) {
-  //     setEmailError("Please enter a valid email address.");
-  //   } else {
-  //     setEmailError("");
-  //   }
-  // };
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUserData((prevData) => ({
+          ...prevData,
+          profilePicture: reader.result as string,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <section>
       <div className="flex-row">
         <div className="profile-picture">
-          <label htmlFor="profile-picture-label">Profile Picture</label>
+          <label htmlFor="profile-picture-input">Profile Picture</label>
           <input
             type="file"
             id="profile-picture-input"
@@ -69,6 +69,7 @@ const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
           <div className="row">
             <InputField
               variant="First name"
+              name="firstName"
               value={userData.firstName}
               onChange={handleInputChange}
             />
@@ -76,6 +77,7 @@ const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
           <div className="row">
             <InputField
               variant="Last name"
+              name="lastName"
               value={userData.lastName}
               onChange={handleInputChange}
             />
@@ -83,31 +85,36 @@ const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
           <div className="row">
             <InputField
               variant="Text input"
+              name="username"
               label="Username"
               placeholder="Enter your user name"
-              value={userData.userName}
+              value={userData.username}
               onChange={handleInputChange}
             />
           </div>
           <div className="row">
             <InputField
               variant="Email"
+              name="email"
               value={userData.email}
-              onChange={handleInputChange}
+              onChange={handleEmailChange}
             />
-            {/* {emailError && <div className="error-message">{emailError}</div>} */}
+          </div>
+          <div className="row">
+            {emailError && <div className="error-message">{emailError}</div>}
           </div>
           <div className="row">
             <InputField
               variant="Password"
+              name="password"
               value={userData.password}
               onChange={handleInputChange}
             />
           </div>
-
           <div className="row">
             <InputField
               variant="Date"
+              name="birthDate"
               value={userData.birthDate}
               onChange={handleInputChange}
             />
