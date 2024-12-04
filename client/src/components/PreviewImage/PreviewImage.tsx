@@ -1,4 +1,5 @@
 import React from "react";
+import "./PreviewImage.modules.css"; // Import the CSS file
 
 interface PreviewImageProps {
   src: string;
@@ -6,7 +7,7 @@ interface PreviewImageProps {
 }
 
 const PreviewImage: React.FC<PreviewImageProps> = ({ src, alt }) => {
-  return <img src={src} alt={alt} style={{ width: "100px", marginTop: "10px" }} />;
+  return <img src={src} alt={alt} className="profile-picture-preview" />;
 };
 
 export default PreviewImage;

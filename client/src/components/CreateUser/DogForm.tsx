@@ -1,8 +1,9 @@
 import React from "react";
-import PreviewImage from "../PreviewImage";
+import PreviewImage from "../PreviewImage/PreviewImage";
+import InputField from "../InputField/InputField";
 
 interface DogFormProps {
-  dog: { name: string; dogPicture: string; race: string; dogBirthDate: string };
+  dog: { name: string; picture: string; breed: string; birthDate: string };
   index: number;
   setDogs: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -23,7 +24,7 @@ const DogForm: React.FC<DogFormProps> = ({ dog, index, setDogs }) => {
     reader.onload = () => {
       setDogs((prevDogs: any[]) =>
         prevDogs.map((d, i) =>
-          i === index ? { ...d, dogPicture: reader.result as string } : d
+          i === index ? { ...d, picture: reader.result as string } : d
         )
       );
     };
@@ -32,63 +33,46 @@ const DogForm: React.FC<DogFormProps> = ({ dog, index, setDogs }) => {
 
   return (
     <section>
-      <div className="flex-row gap-20">
+      <div className="flex-row">
         <div className="dog-profile-picture">
-          <label htmlFor={`dog-picture-${index}`}>Dog Profile Picture</label>
+          <label htmlFor={`dog-profile-picture-input-${index}`}>
+            Dog Profile Picture
+          </label>
           <input
             type="file"
-            id={`dog-picture-${index}`}
-            name="dogPicture"
+            id={`dog-profile-picture-input-${index}`}
+            name="dog-profile-picture-input"
             accept="image/*"
             onChange={handleImageChange}
           />
-          {dog.dogPicture && (
-            <img
-              src={dog.dogPicture}
-              alt="Dog Profile Picture"
-              className="dog-profile-picture-preview"
-            />
+          {dog.picture && (
+            <PreviewImage src={dog.picture} alt="Dog picture preview" />
           )}
         </div>
-
         <div className="profile-form-inputs">
           <div className="row">
-            <div className="input">
-              <label className="input-label">Dog Name</label>
-              <input
-                type="text"
-                name="name"
-                className="input-field"
-                value={dog.name}
-                onChange={handleDogChange}
-                placeholder="Enter dog's name"
-              />
-            </div>
+            <InputField
+              variant="Dog name"
+              value={dog.name}
+              onChange={handleDogChange}
+            />
           </div>
           <div className="row">
-            <div className="input">
-              <label className="input-label">Dog Race</label>
-              <input
-                type="text"
-                name="race"
-                className="input-field"
-                value={dog.race}
-                onChange={handleDogChange}
-                placeholder="Enter breed"
-              />
-            </div>
+            <InputField
+              variant="Date"
+              value={dog.birthDate}
+              onChange={handleDogChange}
+            />
           </div>
           <div className="row">
-            <div className="input">
-              <label className="input-label">Date of Birth</label>
-              <input
-                type="date"
-                name="dogBirthDate"
-                className="input-field"
-                value={dog.dogBirthDate}
-                onChange={handleDogChange}
-              />
-            </div>
+            <InputField
+              variant="Text input"
+              name="breed"
+              label="Breed"
+              placeholder="Enter your dog's breed"
+              value={dog.breed}
+              onChange={handleDogChange}
+            />
           </div>
         </div>
       </div>
