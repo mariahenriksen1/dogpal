@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 import { FiMail, FiLock } from "react-icons/fi";
+import Button from "../Button/Button";
+import { FaSave } from "react-icons/fa";
 
 export const ProfileForm = () => {
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
@@ -51,22 +53,20 @@ export const ProfileForm = () => {
   };
 
   const handleChangePasswordClick = () => {
+    // Handle the button click event here
     console.log("Change password button clicked");
   };
 
   return (
-    <section className="profile-form">
-      <div className="flex-row gap-20">
-        <div className="profile-picture-section1">
-          <label htmlFor="profile-picture-input" className="input-label">
-            Profile Picture
-          </label>
+    <section>
+      <div className="flex-row">
+        <div className="profile-picture">
+          <label htmlFor="profile-picture-label">Profile Picture</label>
           <input
             type="file"
             id="profile-picture-input"
             name="profile-picture-input"
             accept="image/*"
-            className="file-input"
             onChange={handleProfilePictureChange}
           />
           {profilePicture && (
@@ -115,9 +115,12 @@ export const ProfileForm = () => {
               onChange={handlePasswordChange}
               icon={<FiLock />}
             />
-            <button className="button" onClick={handleChangePasswordClick}>
-              <span>Change password</span>
-            </button>
+            <Button
+              label="Save changes"
+              variant="secondary"
+              icon={<FaSave />} // Pass an icon for the button
+              onClick={handleChangePasswordClick}
+            />
           </div>
         </div>
       </div>

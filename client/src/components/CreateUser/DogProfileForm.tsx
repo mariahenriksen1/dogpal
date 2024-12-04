@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
@@ -36,19 +36,20 @@ export const DogProfileForm = () => {
     setBreed(event.target.value);
   };
 
+  const handleDogNameClick = () => {
+    console.log("Edit dog button clicked");
+  };
+
   return (
     <section>
       <div className="flex-row">
         <div className="dog-profile-picture">
-          <label htmlFor="dog-profile-picture-input" className="input-label">
-            Dog Profile Picture
-          </label>
+          <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
           <input
             type="file"
             id="dog-profile-picture-input"
             name="dog-profile-picture-input"
             accept="image/*"
-            className="file-input"
             onChange={handleDogProfilePictureChange}
           />
           {dogProfilePicture && (
@@ -59,7 +60,6 @@ export const DogProfileForm = () => {
             />
           )}
         </div>
-
         <div className="profile-form-inputs">
           <div className="row">
             <InputField
@@ -68,7 +68,6 @@ export const DogProfileForm = () => {
               onChange={handleDogNameChange}
             />
           </div>
-
           <div className="row">
             <InputField
               variant="Date"
@@ -76,7 +75,6 @@ export const DogProfileForm = () => {
               onChange={handleDateOfBirthChange}
             />
           </div>
-
           <div className="row">
             <InputField
               variant="Text input"
