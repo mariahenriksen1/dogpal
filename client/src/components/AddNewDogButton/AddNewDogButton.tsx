@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./Button/Button";
+import Button from "../Button/Button";
 import { FaPlus } from "react-icons/fa";
 
 interface AddNewDogButtonProps {

@@ -4,7 +4,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
 import Profile from "./pages/Profile";
-import CreateEvent from "./pages/CreateEvent";
+import CreateEvent from "./pages/CreateEvent.tsx";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";

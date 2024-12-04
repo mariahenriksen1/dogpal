@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ProfileForm } from "../components/CreateUser/ProfileForm";
 import { DogProfileForm } from "../components/CreateUser/DogProfileForm";
-import { AddNewDogButton } from "../components/AddNewDogButton";
+import { AddNewDogButton } from "../components/AddNewDogButton/AddNewDogButton";
 
 function Profile() {
   const [dogProfiles, setDogProfiles] = useState<number[]>([]);

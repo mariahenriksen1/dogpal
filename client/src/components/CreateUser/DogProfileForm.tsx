@@ -65,15 +65,13 @@ export const DogProfileForm = () => {
             <InputField
               variant="Dog name"
               value={dogName}
-              onChange={handleDogNameChange}
-            />
+              onChange={handleDogNameChange}          />
           </div>
           <div className="row">
             <InputField
               variant="Date"
               value={dateOfBirth}
-              onChange={handleDateOfBirthChange}
-            />
+              onChange={handleDateOfBirthChange}           />
           </div>
           <div className="row">
             <InputField
@@ -81,8 +79,7 @@ export const DogProfileForm = () => {
               label="Breed"
               placeholder="Enter breed"
               value={breed}
-              onChange={handleBreedChange}
-            />
+              onChange={handleBreedChange}           />
           </div>
         </div>
       </div>
