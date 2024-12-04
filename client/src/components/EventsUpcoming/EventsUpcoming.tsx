@@ -1,7 +1,7 @@
 import styles from "./EventsUpcoming.module.css";
 import EventFeatured from "../EventFeatured/EventFeatured.tsx";
 import EventCard from "../EventCard/EventCard.tsx";
-import IEvent from "../../interfaces.ts";
+import { IEvent } from "../../interfaces.ts";
 
 const testEvent: IEvent = {
   id: "evt123",
