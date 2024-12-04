@@ -4,7 +4,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 import Button from "../Button/Button";
 import { FaSave } from "react-icons/fa";
 
-const ProfileForm: React.FC = () => {
+export const ProfileForm: React.FC = () => {
   const [profileData, setProfileData] = useState({
     firstName: "",
     lastName: "",

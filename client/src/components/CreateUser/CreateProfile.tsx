@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Parse from "../../env.Backend/env.parseConfig";
-import UserForm from "./UserForm";
+import UserForm from "./UserForm/UserForm";
 import DogForm from "./DogForm";
 import { AddNewDogButton } from "../AddNewDogButton";
 
@@ -99,7 +99,10 @@ const CreateProfile = () => {
   };
 
   const handleAddNewDogClick = () => {
-    setDogs([...dogs, { name: "", dogPicture: "", race: "", dogBirthDate: "" }]);
+    setDogs([
+      ...dogs,
+      { name: "", dogPicture: "", race: "", dogBirthDate: "" },
+    ]);
   };
 
   return (
@@ -112,10 +115,7 @@ const CreateProfile = () => {
         </section>
       </header>
 
-      <form
-        className="profile-form flex-column gap-40"
-        onSubmit={handleSubmit}
-      >
+      <form className="profile-form flex-column gap-40" onSubmit={handleSubmit}>
         <UserForm userData={userData} setUserData={setUserData} />
         <section className="separator-line"></section>
 
@@ -136,11 +136,7 @@ const CreateProfile = () => {
         </section>
 
         <div className="submit-button-container flex-row align-center">
-          <button
-            type="submit"
-            className="primary-button"
-            disabled={loading}
-          >
+          <button type="submit" className="primary-button" disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
           </button>
         </div>

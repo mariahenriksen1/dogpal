@@ -1,5 +1,5 @@
 import React from "react";
-import PreviewImage from "../PreviewImage";
+import PreviewImage from "../PreviewImage/PreviewImage";
 
 interface DogFormProps {
   dog: { name: string; dogPicture: string; race: string; dogBirthDate: string };
