@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./InputField.module.css";
+import { FiLock, FiMail } from "react-icons/fi";
 
 type InputFieldProps = {
   variant: string;
   label?: string;
+  name?: string;
   placeholder?: string;
   value: string;
   icon?: React.ReactNode;
@@ -27,6 +29,7 @@ const InputField: React.FC<InputFieldProps> = ({
       case "Text input":
         return {
           label: inputProps.label,
+          name: "text",
           type: "text",
           placeholder: inputProps.placeholder,
           value: inputProps.value ?? internalValue,
@@ -35,6 +38,7 @@ const InputField: React.FC<InputFieldProps> = ({
       case "First name":
         return {
           label: "First name",
+          name: "firstName",
           type: "text",
           placeholder: "Enter your first name",
           value: inputProps.value ?? internalValue,
@@ -43,6 +47,7 @@ const InputField: React.FC<InputFieldProps> = ({
       case "Last name":
         return {
           label: "Last name",
+          name: "lastName",
           type: "text",
           placeholder: "Enter your last name",
           value: inputProps.value ?? internalValue,
@@ -51,6 +56,7 @@ const InputField: React.FC<InputFieldProps> = ({
       case "Dog name":
         return {
           label: "Dog name",
+          name: "dogName",
           type: "text",
           placeholder: "Enter your dog's name",
           value: inputProps.value ?? internalValue,
@@ -59,14 +65,17 @@ const InputField: React.FC<InputFieldProps> = ({
       case "Email":
         return {
           label: "E-mail",
+          name: "email",
           type: "email",
           placeholder: "Enter your email",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
+          icon: <FiMail />,
         };
       case "Date":
         return {
           label: "Date of Birth",
+          name: "birthDate",
           type: "date",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
@@ -74,10 +83,12 @@ const InputField: React.FC<InputFieldProps> = ({
       case "Password":
         return {
           label: "Password",
+          name: "password",
           type: "password",
           placeholder: "Enter your password",
           value: inputProps.value ?? internalValue,
           onChange: inputProps.onChange ?? handleInternalChange,
+          icon: <FiLock />,
         };
       default:
         return {};
@@ -97,7 +108,9 @@ const InputField: React.FC<InputFieldProps> = ({
           {...variantProps}
           {...inputProps} // Allow parent props to override
         />
-        {icon && <span className={styles.icon}>{icon}</span>}
+        {variantProps.icon && ( // Display icon based on variantProps
+          <span className={styles.icon}>{variantProps.icon}</span>
+        )}
       </div>
     </div>
   );

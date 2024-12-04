@@ -4,13 +4,21 @@ import { FiMail, FiLock } from "react-icons/fi";
 import Button from "../Button/Button";
 import { FaSave } from "react-icons/fa";
 
-export const ProfileForm = () => {
+const ProfileForm: React.FC = () => {
+  const [profileData, setProfileData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
-  const [email, setEmail] = useState<string>("freja@sunesen.com");
-  const [firstName, setFirstName] = useState<string>("Freja");
-  const [lastName, setLastName] = useState<string>("Sunesen");
-  const [password, setPassword] = useState<string>("**********");
   const [emailError, setEmailError] = useState<string>("");
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setProfileData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleProfilePictureChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -27,7 +35,7 @@ export const ProfileForm = () => {
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
-    setEmail(emailValue);
+    setProfileData((prevData) => ({ ...prevData, email: emailValue }));
 
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,25 +44,6 @@ export const ProfileForm = () => {
     } else {
       setEmailError("");
     }
-  };
-
-  const handleFirstNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFirstName(event.target.value);
-  };
-
-  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleChangePasswordClick = () => {
-    // Handle the button click event here
-    console.log("Change password button clicked");
   };
 
   return (
@@ -82,44 +71,36 @@ export const ProfileForm = () => {
           <div className="row">
             <InputField
               variant="First name"
-              label="First name"
-              placeholder="Enter your first name"
-              value={firstName}
-              onChange={handleFirstNameChange}
+              value={profileData.firstName}
+              onChange={handleInputChange}
             />
+          </div>
+          <div className="row">
             <InputField
               variant="Last name"
-              label="Last name"
-              placeholder="Enter your last name"
-              value={lastName}
-              onChange={handleLastNameChange}
+              value={profileData.lastName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="row">
             <InputField
               variant="Email"
-              label="E-mail"
-              placeholder="Enter your email"
-              value={email}
+              value={profileData.email}
               onChange={handleEmailChange}
-              icon={<FiMail />}
             />
             {emailError && <div className="error-message">{emailError}</div>}
           </div>
           <div className="row">
             <InputField
               variant="Password"
-              label="Password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={handlePasswordChange}
-              icon={<FiLock />}
+              value={profileData.password}
+              onChange={handleInputChange}
             />
             <Button
               label="Save changes"
               variant="secondary"
-              icon={<FaSave />} // Pass an icon for the button
-              onClick={handleChangePasswordClick}
+              icon={<FaSave />}
+              onClick={() => console.log("Save changes clicked")}
             />
           </div>
         </div>
@@ -127,3 +108,5 @@ export const ProfileForm = () => {
     </section>
   );
 };
+
+export default ProfileForm;
