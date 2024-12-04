@@ -51,20 +51,22 @@ export const ProfileForm = () => {
   };
 
   const handleChangePasswordClick = () => {
-    // Handle the button click event here
     console.log("Change password button clicked");
   };
 
   return (
-    <section>
-      <div className="flex-row">
-        <div className="profile-picture">
-          <label htmlFor="profile-picture-label">Profile Picture</label>
+    <section className="profile-form">
+      <div className="flex-row gap-20">
+        <div className="profile-picture-section1">
+          <label htmlFor="profile-picture-input" className="input-label">
+            Profile Picture
+          </label>
           <input
             type="file"
             id="profile-picture-input"
             name="profile-picture-input"
             accept="image/*"
+            className="file-input"
             onChange={handleProfilePictureChange}
           />
           {profilePicture && (

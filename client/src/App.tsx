@@ -6,7 +6,8 @@ import Event from "./pages/Event";
 import Profile from "./pages/Profile";
 import CreateEvent from "./pages/CreateEvent";
 import NoPage from "./pages/NoPage";
-import CreateUser from "./pages/CreateUser.tsx";
+import CreateUser from "./pages/CreateUserPage.tsx";
+import Login from "./pages/LoginPage.tsx";
 
 import "./env.Backend/env.parseConfig.ts";
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="login" element={<Login />} />
         <Route path="createUser" element={<CreateUser />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

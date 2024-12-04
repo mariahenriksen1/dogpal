@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { ProfileForm } from "../components/ProfileForm";
-import { DogProfileForm } from "../components/DogProfileForm";
+import { ProfileForm } from "../components/CreateUser/ProfileForm";
+import { DogProfileForm } from "../components/CreateUser/DogProfileForm";
 import { AddNewDogButton } from "../components/AddNewDogButton";
 
 function Profile() {
