@@ -100,11 +100,11 @@ const InputField: React.FC<InputFieldProps> = ({
   return (
     <div className={styles.input}>
       {variantProps.label && (
-        <label className={styles.inputLabel}>{variantProps.label}</label>
+        <label className={styles.inputlabel}>{variantProps.label}</label>
       )}
-      <div className={styles.inputContainer}>
+      <div className={styles.inputcontainer}>
         <input
-          className={styles.inputField}
+          className={styles.inputfield}
           {...variantProps}
           {...inputProps} // Allow parent props to override
         />

@@ -4,20 +4,20 @@
   gap: 10px;
 } */
 
-.inputLabel {
+.inputlabel {
   font-size: 14px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.inputContainer {
+.inputcontainer {
   display: flex;
   align-items: center;
   width: 100%;
   position: relative; /* Ensure icon positions correctly */
 }
 
-.inputField {
+.inputfield {
   flex: 1;
   padding: 10px;
   border: 1px solid black; /* Black border */
@@ -37,7 +37,7 @@
   right: 10px; /* Adjust as needed */
 }
 
-.inputField.has-value {
+.inputfield.has-value {
   width: 100%;
   border-radius: 4px;
   opacity: 1;
@@ -46,6 +46,7 @@
   font-weight: 400;
   line-height: 19px;
   word-wrap: break-word;
+  background-color: #f9f1e1;
 }
 
 .row {
@@ -64,6 +65,8 @@
   align-items: flex-start;
   gap: 7px;
   display: inline-flex;
+  background-color: #f9f1e1;
+  color: #19191a;
 }
 
 .input-label {
