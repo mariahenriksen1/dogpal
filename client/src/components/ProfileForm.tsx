@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import InputField from "./InputField/InputField";
+import { FiMail, FiLock } from "react-icons/fi";
 
 export const ProfileForm = () => {
-  const [ProfilePicture, setProfilePicture] = useState<string | null>(null);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>("freja@sunesen.com");
+  const [firstName, setFirstName] = useState<string>("Freja");
+  const [lastName, setLastName] = useState<string>("Sunesen");
+  const [password, setPassword] = useState<string>("**********");
+  const [emailError, setEmailError] = useState<string>("");
 
   const handleProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -14,6 +21,33 @@ export const ProfileForm = () => {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handleFirstNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFirstName(event.target.value);
+  };
+
+  const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLastName(event.target.value);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
   };
 
   const handleChangePasswordClick = () => {
@@ -33,9 +67,9 @@ export const ProfileForm = () => {
             accept="image/*"
             onChange={handleProfilePictureChange}
           />
-          {ProfilePicture && (
+          {profilePicture && (
             <img
-              src={ProfilePicture}
+              src={profilePicture}
               alt="Profile Picture"
               className="profile-picture-preview"
             />
@@ -44,39 +78,41 @@ export const ProfileForm = () => {
 
         <div className="profile-form-inputs">
           <div className="row">
-            <div className="input">
-              <div className="input-label">First name</div>
-              <div className="input-box">
-                <div className="input-value">Freja</div>
-              </div>
-            </div>
-            <div className="input">
-              <div className="input-label">Last name</div>
-              <div className="input-box">
-                <div className="input-value">Sunesen</div>
-              </div>
-            </div>
-          </div>
-          <div className="weird">
-            <div className="input-label">E-mail</div>
-
-            <div className="input-box">
-              <div className="input-value">freja@sunesen.com</div>
-              <div className="icon-div">
-                <div className="icon" />
-              </div>
-            </div>
+            <InputField
+              variant="First name"
+              label="First name"
+              placeholder="Enter your first name"
+              value={firstName}
+              onChange={handleFirstNameChange}
+            />
+            <InputField
+              variant="Last name"
+              label="Last name"
+              placeholder="Enter your last name"
+              value={lastName}
+              onChange={handleLastNameChange}
+            />
           </div>
           <div className="row">
-            <div className="input">
-              <div className="input-label">Password</div>
-              <div className="input-box">
-                <div className="input-value">**********</div>
-                <div className="icon-div">
-                  <div className="icon" />
-                </div>
-              </div>
-            </div>
+            <InputField
+              variant="Email"
+              label="E-mail"
+              placeholder="Enter your email"
+              value={email}
+              onChange={handleEmailChange}
+              icon={<FiMail />}
+            />
+            {emailError && <div className="error-message">{emailError}</div>}
+          </div>
+          <div className="row">
+            <InputField
+              variant="Password"
+              label="Password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={handlePasswordChange}
+              icon={<FiLock />}
+            />
             <button className="button" onClick={handleChangePasswordClick}>
               <span>Change password</span>
             </button>
