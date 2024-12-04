@@ -1,5 +1,4 @@
 import HeaderProfile from "../components/HeaderProfile/HeaderProfile.tsx";
-import Notification from "../components/Notification/Notification.tsx";
 import EventsUpcoming from "../components/EventsUpcoming/EventsUpcoming.tsx";
 import EventsSaved from "../components/EventsSaved/EventsSaved.tsx";
 import { Link } from "react-router-dom";
@@ -18,7 +17,6 @@ function Home() {
       </header>
 
       <main>
-        <Notification />
         <section>
           <div className="sectionHeader">
             <h2>Upcoming events near you</h2>
