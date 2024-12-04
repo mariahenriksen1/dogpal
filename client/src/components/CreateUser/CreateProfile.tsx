@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Parse from "../../env.Backend/env.parseConfig";
 import UserForm from "./UserForm";
 import DogForm from "./DogForm";
-import { AddNewDogButton } from "../AddNewDogButton";
+import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
 
 const CreateProfile = () => {
   const [userData, setUserData] = useState({
