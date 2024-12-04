@@ -1,9 +1,7 @@
 // Den her components logger brugeren ind i af systemet.
 // Når brugeren logger ind, er det derefter muligt at logge ud igen.
 
-
 import { useState, FC, ReactElement } from "react";
-import { Divider, Input } from "@mui/material";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button"; //
 
@@ -21,7 +19,9 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   const doUserLogIn = async function () {
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
-      alert(`Success! User ${loggedInUser.get("username")} has successfully signed in!`);
+      alert(
+        `Success! User ${loggedInUser.get("username")} has successfully signed in!`,
+      );
       await getCurrentUser();
       setUsername("");
       setPassword("");
@@ -46,41 +46,31 @@ export const UserLogin: FC<{}> = (): ReactElement => {
 
   return (
     <div>
-     
-
       {currentUser === null ? (
         <div className="container">
           <h2 className="heading">User Login</h2>
-          <Divider />
           <div className="form_wrapper">
-            <Input
+            <input
               value={username}
               onChange={(event) => setUsername(event.target.value)}
               placeholder="Username"
-              size="medium"
               className="form_input"
             />
-            <Input
+            <input
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="Password"
-              size="medium"
               type="password"
               className="form_input"
             />
           </div>
           <div className="form_buttons">
-            <Button
-              label="Log In"
-              variant="primary"
-              onClick={doUserLogIn}
-            />
+            <Button label="Log In" variant="primary" onClick={doUserLogIn} />
           </div>
         </div>
       ) : (
         <div className="container">
           <h2 className="heading">{`Hello, ${currentUser.get("username")}!`}</h2>
-          <Divider />
           <div className="form_buttons">
             <Button
               label="Log Out"

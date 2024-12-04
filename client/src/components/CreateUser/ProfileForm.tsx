@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 import { FiMail, FiLock } from "react-icons/fi";
 
 export const ProfileForm = () => {
@@ -11,7 +11,7 @@ export const ProfileForm = () => {
   const [emailError, setEmailError] = useState<string>("");
 
   const handleProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -37,7 +37,7 @@ export const ProfileForm = () => {
   };
 
   const handleFirstNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setFirstName(event.target.value);
   };

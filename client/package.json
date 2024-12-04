@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/material": "^6.1.10",
     "@types/parse": "^3.0.9",
     "eventemitter3": "^5.0.1",
     "parse": "^5.3.0",

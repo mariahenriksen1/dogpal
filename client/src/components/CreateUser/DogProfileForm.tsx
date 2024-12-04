@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import InputField from "./InputField/InputField";
+import InputField from "../InputField/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
-    null
+    null,
   );
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [dogName, setDogName] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
 
   const handleDogProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -23,7 +23,7 @@ export const DogProfileForm = () => {
   };
 
   const handleDateOfBirthChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setDateOfBirth(event.target.value);
   };
