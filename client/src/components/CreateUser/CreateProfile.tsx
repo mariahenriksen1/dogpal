@@ -4,7 +4,7 @@ import UserForm from "./UserForm/UserForm";
 import DogForm from "./DogForm";
 import { AddNewDogButton } from "../AddNewDogButton";
 
-const CreateProfile = () => {
+const CreateProfile: React.FC = () => {
   const [userData, setUserData] = useState({
     username: "",
     firstName: "",
@@ -16,13 +16,13 @@ const CreateProfile = () => {
   });
 
   const [dogs, setDogs] = useState([
-    { name: "", dogPicture: "", race: "", dogBirthDate: "" },
+    { name: "", picture: "", breed: "", birthDate: "" },
   ]);
 
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent the default form behavior
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setLoading(true);
 
     try {
@@ -68,10 +68,10 @@ const CreateProfile = () => {
             const Dog = new Parse.Object("Dog");
             Dog.set("Name", dog.name);
             Dog.set("UserId", savedPublicUser); // Link to the PublicUser
-            Dog.set("DogPicture", dog.dogPicture);
-            Dog.set("race", dog.race);
-            if (dog.dogBirthDate) {
-              Dog.set("DogBirthDate", new Date(dog.dogBirthDate));
+            Dog.set("DogPicture", dog.picture);
+            Dog.set("race", dog.breed);
+            if (dog.birthDate) {
+              Dog.set("DogBirthDate", new Date(dog.birthDate));
             }
             await Dog.save();
             console.log("Dog saved:", dog);
@@ -89,7 +89,7 @@ const CreateProfile = () => {
         profilePicture: "",
         birthDate: "",
       });
-      setDogs([{ name: "", dogPicture: "", race: "", dogBirthDate: "" }]);
+      setDogs([{ name: "", picture: "", breed: "", birthDate: "" }]);
     } catch (error: any) {
       console.error("Error creating user:", error);
       alert(error.message);
@@ -99,10 +99,7 @@ const CreateProfile = () => {
   };
 
   const handleAddNewDogClick = () => {
-    setDogs([
-      ...dogs,
-      { name: "", dogPicture: "", race: "", dogBirthDate: "" },
-    ]);
+    setDogs([...dogs, { name: "", picture: "", breed: "", birthDate: "" }]);
   };
 
   return (
@@ -123,11 +120,9 @@ const CreateProfile = () => {
           <h2 className="your-dogs-title">Your Dogs</h2>
         </div>
 
-        <div className="dog-forms flex-column gap-20">
-          {dogs.map((dog, index) => (
-            <DogForm key={index} dog={dog} index={index} setDogs={setDogs} />
-          ))}
-        </div>
+        {dogs.map((dog, index) => (
+          <DogForm key={index} dog={dog} index={index} setDogs={setDogs} />
+        ))}
 
         <section className="separator-line"></section>
 

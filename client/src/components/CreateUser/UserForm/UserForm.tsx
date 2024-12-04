@@ -2,21 +2,34 @@ import React, { useState } from "react";
 import InputField from "../../InputField/InputField";
 import PreviewImage from "../../PreviewImage/PreviewImage";
 
-const UserForm: React.FC = () => {
-  const [userData, setUserData] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    profilePicture: "",
-    birthDate: "",
-  });
+interface UserFormProps {
+  userData: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    profilePicture: string;
+    birthDate: string;
+  };
+  setUserData: React.Dispatch<
+    React.SetStateAction<{
+      username: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+      profilePicture: string;
+      birthDate: string;
+    }>
+  >;
+}
 
+const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState<string>("");
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -61,7 +74,10 @@ const UserForm: React.FC = () => {
             onChange={handleImageChange}
           />
           {userData.profilePicture && (
-            <PreviewImage src={userData.profilePicture} alt="Profile Preview" />
+            <PreviewImage
+              src={userData.profilePicture}
+              alt="Profile picture preview"
+            />
           )}
         </div>
 
@@ -71,7 +87,7 @@ const UserForm: React.FC = () => {
               variant="First name"
               name="firstName"
               value={userData.firstName}
-              onChange={handleInputChange}
+              onChange={handleChange}
             />
           </div>
           <div className="row">
@@ -79,7 +95,7 @@ const UserForm: React.FC = () => {
               variant="Last name"
               name="lastName"
               value={userData.lastName}
-              onChange={handleInputChange}
+              onChange={handleChange}
             />
           </div>
           <div className="row">
@@ -89,7 +105,7 @@ const UserForm: React.FC = () => {
               label="Username"
               placeholder="Enter your user name"
               value={userData.username}
-              onChange={handleInputChange}
+              onChange={handleChange}
             />
           </div>
           <div className="row">
@@ -108,7 +124,7 @@ const UserForm: React.FC = () => {
               variant="Password"
               name="password"
               value={userData.password}
-              onChange={handleInputChange}
+              onChange={handleChange}
             />
           </div>
           <div className="row">
@@ -116,7 +132,7 @@ const UserForm: React.FC = () => {
               variant="Date"
               name="birthDate"
               value={userData.birthDate}
-              onChange={handleInputChange}
+              onChange={handleChange}
             />
           </div>
         </div>
