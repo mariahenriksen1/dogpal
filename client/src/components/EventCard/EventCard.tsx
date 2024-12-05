@@ -1,7 +1,7 @@
 import EventDetails from "../EventDetails/EventDetails.tsx";
 import styles from "./EventCard.module.css";
 import { Link } from "react-router-dom";
-import IEvent from "../../interfaces.ts";
+import { IEvent } from "../../interfaces.ts";
 
 interface EventPreviewProps {
   event: IEvent;
