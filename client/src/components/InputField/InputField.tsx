@@ -115,9 +115,14 @@ const InputField: React.FC<InputFieldProps> = ({
           {...variantProps}
           {...inputProps} // Allow parent props to override
         />
-        {icon && <span className={styles.icon}>{icon}</span>}
-      </div>
+       {variantProps.icon && (
+        <span className={styles.icon}>{variantProps.icon}</span>
+      )}
+      {icon && (
+        <span className={styles.icon}>{icon}</span>
+      )}
     </div>
-  );
+  </div>
+);
 };
 export default InputField;
