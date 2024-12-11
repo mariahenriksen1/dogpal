@@ -1,102 +1,112 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
+import InputField from "../InputField/InputField";
+import { FiMail, FiLock } from "react-icons/fi";
+import Button from "../Button/Button";
+import { FaSave } from "react-icons/fa";
 
-export const ProfileForm = () => {
+export const ProfileForm: React.FC = () => {
+  const [profileData, setProfileData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
   const [profilePicture, setProfilePicture] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string>("");
 
-  const handleProfilePictureChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          setProfilePicture(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-    []
-  );
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setProfileData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
-  const handleChangePasswordClick = useCallback(() => {
-    console.log("Change password button clicked");
-  }, []);
+  const handleProfilePictureChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePicture(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const emailValue = event.target.value;
+    setProfileData((prevData) => ({ ...prevData, email: emailValue }));
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailValue)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
 
   return (
-    <section className="profile-form">
-      <div className="flex-row gap-20">
-        {/* Profile Picture Section */}
-        <div className="profile-picture-section">
-          <label htmlFor="profile-picture-input" className="input-label">
-            Profile Picture
-          </label>
+    <section>
+      <div className="flex-row">
+        <div className="profile-picture">
+          <label htmlFor="profile-picture-label">Profile Picture</label>
           <input
             type="file"
             id="profile-picture-input"
             name="profile-picture-input"
             accept="image/*"
-            className="file-input"
             onChange={handleProfilePictureChange}
           />
           {profilePicture && (
             <img
               src={profilePicture}
-              alt="Selected profile preview"
+              alt="Profile Picture"
               className="profile-picture-preview"
             />
           )}
         </div>
 
-        {/* Profile Information Section */}
-        <div className="profile-form-inputs flex-column gap-20">
-          {/* Name Inputs */}
-          <div className="row flex-row gap-20">
-            <div className="input">
-              <label className="input-label">First Name</label>
-              <div className="input-box">
-                <span className="input-value">Freja</span>
-              </div>
-            </div>
-            <div className="input">
-              <label className="input-label">Last Name</label>
-              <div className="input-box">
-                <span className="input-value">Sunesen</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Email Input */}
+        <div className="profile-form-inputs">
           <div className="row">
-            <div className="input">
-              <label className="input-label">E-mail</label>
-              <div className="input-box flex-row align-center">
-                <span className="input-value">freja@sunesen.com</span>
-                <div className="icon-div">
-                  <div className="icon"></div>
-                </div>
-              </div>
-            </div>
+            <InputField
+              variant="First name"
+              value={profileData.firstName}
+              onChange={handleInputChange}
+            />
           </div>
-
-          {/* Password Section */}
-          <div className="row flex-row space-between align-center">
-            <div className="input">
-              <label className="input-label">Password</label>
-              <div className="input-box flex-row align-center">
-                <span className="input-value">**********</span>
-                <div className="icon-div">
-                  <div className="icon"></div>
-                </div>
-              </div>
-            </div>
-            <button
-              className="button primary-button"
-              onClick={handleChangePasswordClick}
-            >
-              <span>Change Password</span>
-            </button>
+          <div className="row">
+            <InputField
+              variant="Last name"
+              value={profileData.lastName}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="row">
+            <InputField
+              variant="Email"
+              value={profileData.email}
+              onChange={handleEmailChange}
+            />
+            {emailError && <div className="error-message">{emailError}</div>}
+          </div>
+          <div className="row">
+            <InputField
+              variant="Password"
+              value={profileData.password}
+              onChange={handleInputChange}
+            />
+            <Button
+              label="Save changes"
+              variant="secondary"
+              icon={<FaSave />}
+              onClick={() => console.log("Save changes clicked")}
+            />
           </div>
         </div>
       </div>
     </section>
   );
 };
+
+export default ProfileForm;

@@ -1,7 +1,16 @@
 import Parse from "../env.Backend/env.parseConfig.ts";
 import React, { useState } from "react";
-import "../App.css";
-import UserProfile from "../components/UserProfile.tsx";
+import InputField from "../components/InputField/InputField.tsx";
+//import "../App.css";
+import  "./Styling/StylingEvent.css";
+import Button from "../components/Button/Button";
+import { IoLocationOutline } from "react-icons/io5";
+import { GrGroup } from "react-icons/gr";
+import { MdEuroSymbol } from "react-icons/md";
+
+
+
+import HeaderProfile from "../components/HeaderProfile/HeaderProfile.tsx";
 
 function CreateEvent() {
   const [formData, setFormData] = useState({
@@ -50,22 +59,11 @@ function CreateEvent() {
       }));
     };
     reader.readAsDataURL(file);
+    
   };
 
-  interface FormData {
-    coverImagePreview: string;
-    title: string;
-    description: string;
-    location: string;
-    Date: string;
-    time: string;
-    participantLimit: string;
-    price: string;
-  }
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -84,117 +82,88 @@ function CreateEvent() {
         <section>
           <div className="flex-column space-between gap-20">
             <div className="upload-image">
-              <label htmlFor="coverImage">Click to upload cover image...</label>
+            {!formData.coverImagePreview && (
+            <label htmlFor="coverImage" className="upload-image-label">
+              Click to upload cover image...
+            </label>
+            )}
               <input
                 type="file"
                 id="coverImage"
                 className="file-input"
                 onChange={handleImageChange}
               />
-
               {formData.coverImagePreview && (
-                <img
-                  src={formData.coverImagePreview}
-                  alt="Cover Preview"
-                  className="image-preview"
-                />
+                <img src={formData.coverImagePreview} alt="Cover Preview" className="image-preview" />
               )}
             </div>
 
-            <div className="form-group">
-              <label htmlFor="title" className="text color-white">
-                Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                id="title"
+             
+              <InputField
+                variant="Text input"
+                label="Title"
                 placeholder="Write title here..."
-                className="input-field color-white"
                 value={formData.title}
                 onChange={handleChange}
+                name="title"
+                labelTextColor="white"
               />
+        
+          
             </div>
-          </div>
         </section>
       </header>
-      <section className="gap-20">
-        <div className="form-group">
-          <label htmlFor="description" className="text">
-            Description
-          </label>
-          <textarea
-            name="description"
-            id="description"
-            placeholder="Write description here..."
-            className="input-field"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </div>
+      
+      <section>
+        <InputField
+          variant="Text input"
+          label="Description"
+          placeholder="Write description here..."
+          value={formData.description}
+          onChange={handleChange}
+          name="description"
+        />
+        <InputField
+          variant="Text input"
+          label="Location"
+          placeholder="Find Location"
+          value={formData.location}
+          onChange={handleChange}
+          name="location"
+          icon={<IoLocationOutline />} 
 
-        <div className="form-group">
-          <label htmlFor="location" className="text">
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="Find Location"
-            className="input-field"
-            value={formData.location}
-            onChange={handleChange}
+        />
+        <InputField
+          variant="Date"
+          label="Date"
+          value={formData.Date}
+          onChange={handleChange}
+          name="date"
+        />
+        <InputField
+          variant="Text input"
+          label="Participant Limit"
+          placeholder="Enter limit..."
+          value={formData.participantLimit}
+          onChange={handleChange}
+          name="participantLimit"
+          icon={<GrGroup />}
+        />
+        <InputField
+          variant="Text input"
+          label="Price (leave empty if free)"
+          placeholder="Enter price"
+          value={formData.price}
+          onChange={handleChange}
+          name="price"
+          icon={<MdEuroSymbol />}
+        />
+       
+        <Button 
+          label="Submit" 
+          variant="primary" 
+          onClick={() => handleSubmit} // Wrap handleSubmit in an anonymous function
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="time" className="text">
-            Time
-          </label>
-          <input
-            type="datetime-local"
-            name="Date"
-            id="time"
-            className="input-field"
-            value={formData.Date}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="participantLimit" className="text">
-            Participant Limit
-          </label>
-          <input
-            type="number"
-            name="participantLimit"
-            id="participantLimit"
-            placeholder="Enter limit..."
-            className="input-field"
-            value={formData.participantLimit}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="price" className="text">
-            Price (leave empty if free)
-          </label>
-          <input
-            type="text"
-            name="price"
-            id="price"
-            placeholder="Enter price"
-            className="input-field"
-            value={formData.price}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit" className="createEventButton">
-          Create event
-        </button>
       </section>
     </form>
   );
