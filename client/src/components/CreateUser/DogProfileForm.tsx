@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import InputField from "../InputField/InputField";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
-    null
+    null,
   );
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [dogName, setDogName] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
 
   const handleDogProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -22,32 +23,33 @@ export const DogProfileForm = () => {
   };
 
   const handleDateOfBirthChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setDateOfBirth(event.target.value);
   };
 
-  const handleDogNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDogName(event.target.value);
+  const handleDogNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDogName(e.target.value);
   };
 
   const handleBreedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBreed(event.target.value);
   };
 
+  const handleDogNameClick = () => {
+    console.log("Edit dog button clicked");
+  };
+
   return (
-    <section className="dog-profile-form">
-      <div className="flex-row gap-20">
+    <section>
+      <div className="flex-row">
         <div className="dog-profile-picture">
-          <label htmlFor="dog-profile-picture-input" className="input-label">
-            Dog Profile Picture
-          </label>
+          <label htmlFor="dog-profile-picture-label">Dog Profile Picture</label>
           <input
             type="file"
             id="dog-profile-picture-input"
             name="dog-profile-picture-input"
             accept="image/*"
-            className="file-input"
             onChange={handleDogProfilePictureChange}
           />
           {dogProfilePicture && (
@@ -58,56 +60,26 @@ export const DogProfileForm = () => {
             />
           )}
         </div>
-
         <div className="profile-form-inputs">
           <div className="row">
-            <div className="input">
-              <label htmlFor="dogName" className="input-label">
-                Dog Name
-              </label>
-              <input
-                type="text"
-                name="dogName"
-                id="dogName"
-                className={`input-field ${dogName ? "has-value" : ""}`}
-                value={dogName}
-                onChange={handleDogNameChange}
-                placeholder="Enter dog's name"
-              />
-            </div>
+            <InputField
+              variant="Dog name"
+              value={dogName}
+              onChange={handleDogNameChange}          />
           </div>
-
           <div className="row">
-            <div className="input">
-              <label htmlFor="dateOfBirth" className="input-label">
-                Date of Birth
-              </label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                id="dateOfBirth"
-                className={`input-field ${dateOfBirth ? "has-value" : ""}`}
-                value={dateOfBirth}
-                onChange={handleDateOfBirthChange}
-              />
-            </div>
+            <InputField
+              variant="Date"
+              value={dateOfBirth}
+              onChange={handleDateOfBirthChange}           />
           </div>
-
           <div className="row">
-            <div className="input">
-              <label htmlFor="breed" className="input-label">
-                Breed
-              </label>
-              <input
-                type="text"
-                name="breed"
-                id="breed"
-                className={`input-field ${breed ? "has-value" : ""}`}
-                value={breed}
-                onChange={handleBreedChange}
-                placeholder="Enter breed"
-              />
-            </div>
+            <InputField
+              variant="Text input"
+              label="Breed"
+              placeholder="Enter breed"
+              value={breed}
+              onChange={handleBreedChange}           />
           </div>
         </div>
       </div>

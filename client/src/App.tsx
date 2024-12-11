@@ -1,23 +1,15 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
 import Profile from "./pages/Profile";
-import CreateEvent from "./pages/CreateEvent";
+import CreateEvent from "./pages/CreateEvent.tsx";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
 
-
-import './env.Backend/env.parseConfig.ts'; 
-
-
-
-
-
-
+import "./env.Backend/env.parseConfig.ts";
 
 function App() {
   return (
