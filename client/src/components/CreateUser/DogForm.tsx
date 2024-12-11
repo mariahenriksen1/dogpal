@@ -5,13 +5,14 @@ import InputField from "../InputField/InputField";
 interface DogFormProps {
   dog: { name: string; picture: string; breed: string; birthDate: string };
   index: number;
-  setDogs: React.Dispatch<React.SetStateAction<any>>;
+  dog: Omit<Dog, "objectId" | "createdAt" | "updatedAt" | "userId">;
+  setDogs: React.Dispatch<React.SetStateAction<Omit<Dog, "objectId" | "createdAt" | "updatedAt" | "userId">[]>>;
 }
 
-const DogForm: React.FC<DogFormProps> = ({ dog, index, setDogs }) => {
-  const handleDogChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const DogForm: React.FC<DogFormProps> = ({ index, dog, setDogs }) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setDogs((prevDogs: any[]) =>
+    setDogs((prevDogs) =>
       prevDogs.map((d, i) => (i === index ? { ...d, [name]: value } : d))
     );
   };

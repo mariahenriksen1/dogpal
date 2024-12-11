@@ -1,11 +1,9 @@
 import React from 'react'
-import CreateProfile from '../components/CreateUser/CreateProfile'
+import CreateUserAndDog from '../components/SignUp/SignUp'
 
 const CreateUserPage = () => {
   return (
-    <div>
-      <CreateProfile/>
-    </div>
+    <div><CreateUserAndDog/></div>
   )
 }
 
