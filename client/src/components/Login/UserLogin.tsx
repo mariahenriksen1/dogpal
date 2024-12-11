@@ -1,5 +1,4 @@
 import { useState, FC, ReactElement, useEffect } from "react";
-import { Divider, Input } from "@mui/material";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button";
 
@@ -7,7 +6,10 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [currentUser, setCurrentUser] = useState<Parse.Object | null>(null);
-  const [userDetails, setUserDetails] = useState<{ firstName: string; lastName: string } | null>(null);
+  const [userDetails, setUserDetails] = useState<{
+    firstName: string;
+    lastName: string;
+  } | null>(null);
 
   const getCurrentUser = async function (): Promise<void> {
     const user: Parse.User | null = await Parse.User.current();
@@ -89,9 +91,12 @@ export const UserLogin: FC<{}> = (): ReactElement => {
               <p>{`Last Name: ${userDetails.lastName}`}</p>
             </div>
           )}
-          <Divider />
           <div className="form_buttons">
-            <Button label="Log Out" variant="secondary" onClick={doUserLogOut} />
+            <Button
+              label="Log Out"
+              variant="secondary"
+              onClick={doUserLogOut}
+            />
           </div>
         </div>
       )}
