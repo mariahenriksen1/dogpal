@@ -3,7 +3,7 @@ import "./App.css";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile.tsx";
 import CreateEvent from "./pages/CreateEvent.tsx";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
