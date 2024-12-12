@@ -11,6 +11,7 @@ type InputFieldProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   labelTextColor?: string;
+  type?: string;
 };
 
 const InputField: React.FC<InputFieldProps> = ({

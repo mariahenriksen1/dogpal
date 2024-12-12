@@ -4,8 +4,14 @@ import Logo from "../assets/Logo.tsx";
 import Chat from "../assets/Chat.tsx";
 import Profile from "../assets/Profile.tsx";
 import Saved from "../assets/Saved.tsx";
+import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
+import Button from "../components/Button/Button.tsx";
 
 const Layout: React.FC = () => {
+  function handleSignUpClick(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <div className="black-bg">
@@ -27,6 +33,19 @@ const Layout: React.FC = () => {
             <Link to="/profile" className="icon-stroke">
               <Profile />
             </Link>
+
+            <Link to="/createUser" className="icon-stroke">
+            <Button 
+              label="Sign Up"
+              variant="primary"
+              onClick={handleSignUpClick}
+              className="sign-up-button"
+
+            />
+            </Link>
+
+      
+            <LogoutButton />
           </div>
         </nav>
       </div>

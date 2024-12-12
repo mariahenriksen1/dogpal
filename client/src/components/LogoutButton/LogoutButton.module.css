@@ -1,0 +1,19 @@
+.logout-button {
+  position: fixed; /* Keeps the button visible while scrolling */
+  top: 20px; /* Adjust to the desired vertical position */
+  right: 300px; /* Adjust to the desired horizontal position */
+  z-index: 1000; /* Ensures it stays above other elements */
+  cursor: pointer; /* Consistent pointer style */
+  /* Reuse existing button styles */
+  padding: 8px 16px; /* Matches the .button padding */
+  font-size: 16px; /* Matches the .button font size */
+  border: none;
+  border-radius: 6px; /* Matches the .button border radius */
+  background-color: var(--gray); /* Matches secondary button style */
+  color: var(--white); /* Matches secondary button text color */
+  transition: background-color 0.3s ease; /* Matches button transition */
+}
+
+.logout-button:hover {
+  background-color: var(--p-light); /* Matches secondary button hover style */
+}

@@ -6,13 +6,17 @@ type ButtonProps = {
   variant: "primary" | "secondary";
   icon?: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ label, variant, icon, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ label, variant, icon, onClick, className }) => {
   const buttonClass = variant === "primary" ? styles.primary : styles.secondary;
 
   return (
-    <button className={`${styles.button} ${buttonClass}`} onClick={onClick}>
+    <button
+      className={`${styles.button} ${buttonClass} ${className}`} // Combine buttonClass and className
+      onClick={onClick}
+    >
       {icon && <span className={styles.icon}>{icon}</span>} {label}
     </button>
   );

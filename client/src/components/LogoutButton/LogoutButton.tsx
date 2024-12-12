@@ -1,12 +1,13 @@
 import React, { FC } from "react";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button"; 
+import styles from "./LogoutButton.module.css";
 
 type LogoutProps = {
   onLogoutSuccess?: () => void; 
 };
 
-const Logout: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement => {
+const LogoutButton: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement => {
   const handleLogout = async () => {
     try {
       await Parse.User.logOut(); 
@@ -23,13 +24,16 @@ const Logout: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement => {
 
   return (
     <div>
-      <Button
-        label="Log Out"
-        variant="secondary"
-        onClick={handleLogout}
-      />
-    </div>
+      
+        <Button
+          label="Log Out"
+          variant="secondary"
+          onClick={handleLogout}
+          className={styles["logout-button"]} 
+        />
+      </div>
+    
   );
 };
 
-export default Logout;
+export default LogoutButton;

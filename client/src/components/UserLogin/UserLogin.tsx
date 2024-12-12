@@ -1,6 +1,7 @@
 import { useState, FC, ReactElement, useEffect } from "react";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button";
+import InputField from "../InputField/InputField";
 
 export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
@@ -62,23 +63,20 @@ export const UserLogin: FC<{}> = (): ReactElement => {
       {currentUser === null ? (
         <div className="container">
           <h2 className="heading">User Login</h2>
-          <div className="form_wrapper">
-            <input
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              placeholder="Username"
-              className="form_input"
+      
+            <InputField
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            placeholder="Username" variant={""}              
             />
-            <input
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="Password"
-              type="password"
-              className="form_input"
+            <InputField
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Password"
+            type="password" variant={""}              
             />
-          </div>
+    
           <div className="form_buttons">
-            <Button label="Log In" variant="primary" onClick={doUserLogIn} />
             <Button label="Log In" variant="primary" onClick={doUserLogIn} />
           </div>
         </div>
