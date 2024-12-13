@@ -3,8 +3,6 @@ import Parse from "../env.Backend/env.parseConfig";
 import { User,Dog, PublicUser } from "../Interface.ts";
 
 
-
-
 export const useUserAndDogs = () => {
   const [currentUser, setCurrentUser] = useState<PublicUser | null>(null);
   const [dogs, setDogs] = useState<Dog[]>([]);
