@@ -1,18 +1,29 @@
 .dogItem {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 
 .dogPicture {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #BB4125;
+  width: var(--picture-size, 40px); /* Use CSS variable with default value */
+  height: var(--picture-size, 40px); /* Use CSS variable with default value */
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #bb4125;
 }
 
 .dogName {
-    color: white;
+  color: white;
+  font-size: 20px;
+}
+
+.dogAge {
+  color: white;
+  font-size: 16px;
+}
+
+.dogBreed {
+  color: white;
+  font-size: 16px;
 }

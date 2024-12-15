@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HeaderDog from "../components/HeaderDogs/HeaderDog";
+import DogInfo from "../components/DogInfo/DogInfo.tsx";
 import { IDog } from "./../interfaces.ts";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
 import profileDefault from "./../assets/profileDefault.png"; // Ensure the path is correct
@@ -51,18 +51,26 @@ function Profile() {
         </section>
       </header>
 
-      {/* evt lav nedenstående "doglist" til component */}
-      <div className="dog-list">
-        {dogs.map((dog) => (
-          <HeaderDog key={dog.id} dog={dog} />
-        ))}
-      </div>
+      {/* evt lav nedenstående "doglist" til component ? */}
+      <section className="flex-column align-center">
+        <div className="dog-list">
+          {dogs.map((dog) => (
+            <DogInfo
+              key={dog.id}
+              dog={dog}
+              variant="Detailed dog info"
+              textColor="black"
+              pictureSize="60px"
+            />
+          ))}
+        </div>
+      </section>
 
       <section className="seperator-line"></section>
 
       <section className="flex-column align-center">
         <div className="h2-title-div">
-          <h2 className="yourDogsTitle">Recently attended events</h2>
+          <h2 className="">Recently attended events</h2>
         </div>{" "}
       </section>
     </>
