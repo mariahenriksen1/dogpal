@@ -1,12 +1,13 @@
-import styles from "./HeaderDog.module.css";
+import styles from "./DogInfo.module.css";
 import { IDog } from "../../interfaces.ts";
 import { useState } from "react";
 
-interface HeaderDogProps {
+interface DogInfoProps {
   dog: IDog;
+  variant: "Dog info" | "Detailed dog info";
 }
 
-export default function HeaderDog({ dog }: HeaderDogProps) {
+export default function DogInfo({ dog, variant }: DogInfoProps) {
   const dogDefault = "../../assets/dogDefault.png";
   const [imageError, setImageError] = useState(false);
 
@@ -19,6 +20,12 @@ export default function HeaderDog({ dog }: HeaderDogProps) {
         onError={() => setImageError(true)}
       />
       <p className={styles.dogName}>{dog.name}</p>
+      {variant === "Detailed dog info" && (
+        <>
+          <p className={styles.dogName}>{dog.age}</p>
+          <p className={styles.dogName}>{dog.breed}</p>
+        </>
+      )}
     </div>
   );
 }
