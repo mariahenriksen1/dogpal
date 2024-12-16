@@ -3,6 +3,7 @@ import InputField from "../InputField/InputField";
 import { FiMail, FiLock } from "react-icons/fi";
 import Button from "../Button/Button";
 import { FaSave } from "react-icons/fa";
+import PreviewImage from "../PreviewImage/PreviewImage";
 
 export const ProfileForm: React.FC = () => {
   const [profileData, setProfileData] = useState({
@@ -21,7 +22,7 @@ export const ProfileForm: React.FC = () => {
   };
 
   const handleProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -59,11 +60,7 @@ export const ProfileForm: React.FC = () => {
             onChange={handleProfilePictureChange}
           />
           {profilePicture && (
-            <img
-              src={profilePicture}
-              alt="Profile Picture"
-              className="profile-picture-preview"
-            />
+            <PreviewImage src={profilePicture} alt="Profile picture" />
           )}
         </div>
 

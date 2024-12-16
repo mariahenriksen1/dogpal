@@ -1,9 +1,10 @@
 import styles from "./HeaderProfile.module.css";
 import useCurrentPublicUser from "../../hooks/useCurrentPublicUser.ts";
-import HeaderDog from "../HeaderDogs/HeaderDog.tsx";
 import { IDog } from "../../interfaces.ts";
 import { useState } from "react";
 import profileDefault from "../../assets/profileDefault.png"; // Ensure the path is correct
+import DogInfo from "../DogInfo/DogInfo.tsx";
+import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 
 const testDog: IDog = {
   id: "123",
@@ -38,15 +39,20 @@ function HeaderProfile() {
         <h2 className="color-white">{`${firstName} ${lastName}`}</h2>
         <div className={styles.dogList}>
           {dogs.map((dog) => (
-            <HeaderDog key={dog.id} dog={dog} />
+            <DogInfo
+              key={dog.id}
+              dog={dog}
+              variant="Dog info"
+              pictureSize="25px"
+            />
           ))}
         </div>
       </div>
-      <img
-        className={styles.profilePicture}
+      <PreviewImage
         src={profilePicture}
-        onError={() => setImageError(true)}
         alt="Profile picture"
+        pictureSize="70px" // Use the specified size
+        onError={() => setImageError(true)}
       />
     </div>
   );
