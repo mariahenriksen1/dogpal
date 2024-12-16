@@ -1,7 +1,7 @@
+import React, { useState } from "react";
+import PreviewImage from "../PreviewImage/PreviewImage";
 import styles from "./DogInfo.module.css";
 import { IDog } from "../../interfaces.ts";
-import { useState } from "react";
-import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 
 interface DogInfoProps {
   dog: IDog;
@@ -9,6 +9,7 @@ interface DogInfoProps {
   textColor?: string;
   flexDirection?: "row" | "column"; // Add flexDirection prop
   pictureSize?: string; // Add pictureSize prop
+  border?: string; // Add border prop
 }
 
 export default function DogInfo({
@@ -16,17 +17,20 @@ export default function DogInfo({
   variant,
   textColor,
   flexDirection,
+  pictureSize,
+  border,
 }: DogInfoProps) {
   const dogDefault = "../../assets/dogDefault.png";
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section className="flex-row align-center">
+    <section className={styles.dogItem}>
       <PreviewImage
         src={imageError ? dogDefault : dog.image}
         alt={`${dog.name} picture`}
-        pictureSize="100px" // Use the pictureSize prop or default to "40px"
         onError={() => setImageError(true)}
+        pictureSize={pictureSize} // Pass pictureSize prop
+        border={border} // Pass border prop
       />
       <div
         className={styles.dogItem}

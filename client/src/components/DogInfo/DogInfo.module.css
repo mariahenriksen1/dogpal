@@ -3,7 +3,7 @@
   flex-direction: row;
   gap: 10px;
   align-items: left;
-  line-height: 4px;
+  line-height: 7px;
 }
 
 .dogPicture {
@@ -17,6 +17,8 @@
 .dogName {
   color: white;
   font-size: 18px;
+  padding: 3px;
+  padding-left: 0px;
 }
 
 .dogAge {

@@ -50,6 +50,7 @@ function Profile() {
               src={profilePicture}
               alt="Profile picture"
               onError={() => setImageError(true)}
+              border="3px #f9c069 solid"
             />
             <div className="profile-details">
               <h1 className="color-white">{`${firstName} ${lastName}`}</h1>
@@ -82,6 +83,8 @@ function Profile() {
                   variant="Detailed dog info"
                   textColor="black"
                   flexDirection="column"
+                  pictureSize="100px"
+                  border="3px #f9c069 solid"
                 />
               ))}
             </div>

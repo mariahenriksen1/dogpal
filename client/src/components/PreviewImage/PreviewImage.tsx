@@ -5,6 +5,8 @@ interface PreviewImageProps {
   src: string;
   alt: string;
   pictureSize?: string; // Add pictureSize prop
+  border?: string; // Add border prop
+  className?: string;
   onError?: () => void;
 }
 
@@ -12,6 +14,7 @@ const PreviewImage: React.FC<PreviewImageProps> = ({
   src,
   alt,
   pictureSize,
+  border,
   onError,
 }) => {
   return (
@@ -20,7 +23,7 @@ const PreviewImage: React.FC<PreviewImageProps> = ({
       alt={alt}
       className={"picture-preview"}
       onError={onError}
-      style={{ width: pictureSize, height: pictureSize }} // Apply pictureSize dynamically
+      style={{ width: pictureSize, height: pictureSize, border }} // Apply pictureSize and border dynamically
     />
   );
 };
