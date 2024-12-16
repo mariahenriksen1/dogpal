@@ -1,4 +1,4 @@
-.header-profile {
+.profile-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,13 +18,20 @@
   gap: 20px;
 }
 
-.profile-picture {
+.dog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 50px;
+}
+
+/* .profile-picture {
   object-fit: cover;
   height: 100px;
   width: 100px;
   border-radius: 200px;
   position: relative;
-}
+} */
 
 .profile-section {
   display: flex;
@@ -32,4 +39,38 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+}
+
+.profile-button-container {
+  max-width: 1280px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 15px, 0px;
+  gap: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--black);
+  align-items: left;
+}
+
+.h2-title-div {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  align-self: stretch;
+  justify-content: space-around;
+  /* padding: 15px;
+  padding-left: 0px;
+  padding-right: 0px; */
+}
+
+.button-div {
+  padding: 15px;
+  padding-right: 0px;
 }

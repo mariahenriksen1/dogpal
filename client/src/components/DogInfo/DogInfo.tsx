@@ -1,20 +1,20 @@
 import styles from "./DogInfo.module.css";
 import { IDog } from "../../interfaces.ts";
 import { useState } from "react";
+import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 
 interface DogInfoProps {
   dog: IDog;
   variant: "Dog info" | "Detailed dog info";
   textColor?: string;
-  pictureSize?: string; // Add pictureSize prop
   flexDirection?: "row" | "column"; // Add flexDirection prop
+  pictureSize?: string; // Add pictureSize prop
 }
 
 export default function DogInfo({
   dog,
   variant,
   textColor,
-  pictureSize,
   flexDirection,
 }: DogInfoProps) {
   const dogDefault = "../../assets/dogDefault.png";
@@ -22,12 +22,11 @@ export default function DogInfo({
 
   return (
     <section className="flex-row align-center">
-      <img
-        className={styles.dogPicture}
+      <PreviewImage
         src={imageError ? dogDefault : dog.image}
         alt={`${dog.name} picture`}
+        pictureSize="100px" // Use the pictureSize prop or default to "40px"
         onError={() => setImageError(true)}
-        style={{ width: pictureSize, height: pictureSize }} // Apply pictureSize dynamically
       />
       <div
         className={styles.dogItem}

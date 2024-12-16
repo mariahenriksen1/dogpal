@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DogInfo from "../components/DogInfo/DogInfo.tsx";
 import { IDog } from "./../interfaces.ts";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
 import profileDefault from "./../assets/profileDefault.png"; // Ensure the path is correct
 import "./Styling/StylingProfile.css";
+import Button from "../components/Button/Button.tsx";
+import PreviewImage from "../components/PreviewImage/PreviewImage.tsx";
 
 const testDog: IDog = {
   id: "123",
@@ -20,6 +23,7 @@ const dogs: IDog[] = [testDog, testDog];
 function Profile() {
   const currentPublicUser = useCurrentPublicUser();
   const [imageError, setImageError] = useState(false);
+  const navigate = useNavigate();
 
   if (!currentPublicUser) {
     return null;
@@ -32,17 +36,20 @@ function Profile() {
     ? profileDefault
     : currentPublicUser?.get("profilePicture");
 
+  const handleEditProfileClick = () => {
+    navigate("/editProfile");
+  };
+
   return (
     <>
       <header>
         <section className="profile-section">
           {/* evt lav nedenstående "profile-view" til component */}
-          <div className="header-profile">
-            <img
-              className="profile-picture"
+          <div className="profile-container">
+            <PreviewImage
               src={profilePicture}
-              onError={() => setImageError(true)}
               alt="Profile picture"
+              onError={() => setImageError(true)}
             />
             <div className="profile-details">
               <h1 className="color-white">{`${firstName} ${lastName}`}</h1>
@@ -51,28 +58,43 @@ function Profile() {
         </section>
       </header>
 
-      {/* evt lav nedenstående "doglist" til component ? */}
-      <section className="flex-column align-center">
-        <div className="dog-list">
-          {dogs.map((dog) => (
-            <DogInfo
-              key={dog.id}
-              dog={dog}
-              variant="Detailed dog info"
-              textColor="black"
-              pictureSize="70px"
-              flexDirection="column"
+      <section>
+        <div className="profile-button-container">
+          <div className="h2-title-div">
+            <h2 className="yourDogsTitle">Your dogs</h2>
+          </div>
+          <div className="button-div">
+            <Button
+              label="Edit profile"
+              variant="primary"
+              onClick={handleEditProfileClick}
             />
-          ))}
+          </div>
         </div>
-      </section>
+        {/* evt lav nedenstående "doglist" til component ? */}
+        <section className="flex-column align-center">
+          <div className="dog-container">
+            <div className="dog-list">
+              {dogs.map((dog) => (
+                <DogInfo
+                  key={dog.id}
+                  dog={dog}
+                  variant="Detailed dog info"
+                  textColor="black"
+                  flexDirection="column"
+                />
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <section className="seperator-line"></section>
+        <section className="seperator-line"></section>
 
-      <section className="flex-column align-center">
-        <div className="h2-title-div">
-          <h2 className="">Recently attended events</h2>
-        </div>{" "}
+        <section className="flex-column align-center">
+          <div className="h2-title-div">
+            <h2 className="">Recently attended events</h2>
+          </div>{" "}
+        </section>
       </section>
     </>
   );
