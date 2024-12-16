@@ -8,7 +8,7 @@ import CreateEvent from "./pages/CreateEvent.tsx";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
-
+import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="event" element={<Event />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="editProfile" element={<EditProfile />} />
           <Route path="createEvent" element={<CreateEvent />} />
           <Route path="*" element={<NoPage />} />
         </Route>
