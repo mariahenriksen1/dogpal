@@ -7,6 +7,7 @@ interface DogInfoProps {
   variant: "Dog info" | "Detailed dog info";
   textColor?: string;
   pictureSize?: string; // Add pictureSize prop
+  flexDirection?: "row" | "column"; // Add flexDirection prop
 }
 
 export default function DogInfo({
@@ -14,12 +15,13 @@ export default function DogInfo({
   variant,
   textColor,
   pictureSize,
+  flexDirection,
 }: DogInfoProps) {
   const dogDefault = "../../assets/dogDefault.png";
   const [imageError, setImageError] = useState(false);
 
   return (
-    <div className={styles.dogItem}>
+    <section className="flex-row align-center">
       <img
         className={styles.dogPicture}
         src={imageError ? dogDefault : dog.image}
@@ -27,22 +29,30 @@ export default function DogInfo({
         onError={() => setImageError(true)}
         style={{ width: pictureSize, height: pictureSize }} // Apply pictureSize dynamically
       />
-      <p className={styles.dogName} style={{ color: textColor || "white" }}>
-        {dog.name}
-      </p>
-      {variant === "Detailed dog info" && (
-        <>
-          <p className={styles.dogAge} style={{ color: textColor || "white" }}>
-            Age: {dog.age}
-          </p>
-          <p
-            className={styles.dogBreed}
-            style={{ color: textColor || "white" }}
-          >
-            Breed: {dog.breed}
-          </p>
-        </>
-      )}
-    </div>
+      <div
+        className={styles.dogItem}
+        style={{ flexDirection: flexDirection || "row" }}
+      >
+        <p className={styles.dogName} style={{ color: textColor || "white" }}>
+          {dog.name}
+        </p>
+        {variant === "Detailed dog info" && (
+          <>
+            <p
+              className={styles.dogAge}
+              style={{ color: textColor || "white" }}
+            >
+              Age: {dog.age}
+            </p>
+            <p
+              className={styles.dogBreed}
+              style={{ color: textColor || "white" }}
+            >
+              Breed: {dog.breed}
+            </p>
+          </>
+        )}
+      </div>
+    </section>
   );
 }

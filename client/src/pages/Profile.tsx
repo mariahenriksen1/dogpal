@@ -60,7 +60,8 @@ function Profile() {
               dog={dog}
               variant="Detailed dog info"
               textColor="black"
-              pictureSize="60px"
+              pictureSize="70px"
+              flexDirection="column"
             />
           ))}
         </div>
