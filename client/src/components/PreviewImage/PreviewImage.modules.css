@@ -1,6 +1,6 @@
-.profile-picture-preview {
-  width: 150px;
-  height: 150px;
+.picture-preview {
+  width: var(--picture-size, 150px); /* Use CSS variable with default value */
+  height: var(--picture-size, 150px); /* Use CSS variable with default value */
   border-radius: 50%;
   margin-top: 10px;
   position: relative;
