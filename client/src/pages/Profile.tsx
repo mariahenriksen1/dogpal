@@ -7,6 +7,7 @@ import profileDefault from "./../assets/profileDefault.png"; // Ensure the path 
 import "./Styling/StylingProfile.css";
 import Button from "../components/Button/Button.tsx";
 import PreviewImage from "../components/PreviewImage/PreviewImage.tsx";
+import EventsAttended from "../components/EventsAttended/EventsAttended.tsx";
 
 const testDog: IDog = {
   id: "123",
@@ -59,7 +60,7 @@ function Profile() {
         </section>
       </header>
 
-      <section>
+      <main>
         <div className="profile-button-container">
           <div className="h2-title-div">
             <h2 className="yourDogsTitle">Your dogs</h2>
@@ -96,9 +97,10 @@ function Profile() {
         <section className="flex-column align-center">
           <div className="h2-title-div">
             <h2 className="">Recently attended events</h2>
-          </div>{" "}
+          </div>
+          <EventsAttended />
         </section>
-      </section>
+      </main>
     </>
   );
 }
