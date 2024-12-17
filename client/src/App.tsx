@@ -10,6 +10,7 @@ import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
+import { ToastContainer, Slide } from "react-toastify";
 
 function App() {
   return (
@@ -26,6 +27,19 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </Router>
   );
 }

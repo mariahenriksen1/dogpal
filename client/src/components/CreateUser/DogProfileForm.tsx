@@ -68,6 +68,7 @@ export const DogProfileForm = () => {
           <div className="row">
             <InputField
               variant="Date"
+              label="Date of Birth"
               value={dateOfBirth}
               onChange={handleDateOfBirthChange}
             />

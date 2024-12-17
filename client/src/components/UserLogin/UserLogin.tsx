@@ -2,6 +2,8 @@ import { useState, FC, ReactElement, useEffect } from "react";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
@@ -32,7 +34,7 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   const doUserLogIn = async function () {
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
-      alert(
+      toast.success(
         `Success! User ${loggedInUser.get("username")} has successfully signed in!`,
       );
       await getCurrentUser();
@@ -40,7 +42,7 @@ export const UserLogin: FC<{}> = (): ReactElement => {
       setPassword("");
     } catch (error) {
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
+        toast.error(`Error during login: ${error.message}`);
       }
     }
   };
@@ -48,12 +50,13 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   const doUserLogOut = async function () {
     try {
       await Parse.User.logOut();
-      alert("Successfully logged out!");
+      toast.success("Successfully logged out!");
       setCurrentUser(null);
       setUserDetails(null);
     } catch (error) {
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
+        toast.error(`Error during logout: ${error.message}`);
+
       }
     }
   };

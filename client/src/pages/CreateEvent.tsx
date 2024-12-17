@@ -1,12 +1,16 @@
 import Parse from "../env.Backend/env.parseConfig.ts";
 import React, { useState } from "react";
 import InputField from "../components/InputField/InputField.tsx";
-//import "../App.css";
+import "../App.css";
 import  "./Styling/StylingEvent.css";
 import Button from "../components/Button/Button";
 import { IoLocationOutline } from "react-icons/io5";
 import { GrGroup } from "react-icons/gr";
 import { MdEuroSymbol } from "react-icons/md";
+import { toast, ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 
@@ -41,7 +45,11 @@ function CreateEvent() {
       Event.set("participantLimit", formData.participantLimit || "");
 
       await Event.save();
-      alert("Event saved!");
+      toast.success("Event saved!");
+    
+    
+  
+
     } catch (error) {
       console.log("Error saving new event: ", error);
     }

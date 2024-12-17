@@ -77,7 +77,7 @@ const InputField: React.FC<InputFieldProps> = ({
         };
       case "Date":
         return {
-          label: "Date of Birth",
+          label: inputProps.label,
           name: "birthDate",
           type: "date",
           value: inputProps.value ?? internalValue,

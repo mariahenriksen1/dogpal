@@ -3,6 +3,8 @@ import Parse from "../../env.Backend/env.parseConfig";
 import UserForm from "./UserForm";
 import DogManager from "./DogManager";
 import { PublicUser, Dog } from "../../Interface";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserProfileManager: React.FC = () => {
   const [userData, setUserData] = useState<Omit<PublicUser, "objectId" | "createdAt" | "updatedAt" | "userId"> & { password?: string, birthDate: Date }>({
@@ -42,6 +44,8 @@ const UserProfileManager: React.FC = () => {
       console.log("Cloud Code Response:", response);
 
       alert("User and public profile created successfully!");
+
+      toast.success("User and public profile created successfully!");
       setUserData({
         username: "",
         email: "",
