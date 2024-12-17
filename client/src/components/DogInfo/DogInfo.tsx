@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import PreviewImage from "../PreviewImage/PreviewImage";
 import styles from "./DogInfo.module.css";
-import { IDog } from "../../interfaces.ts";
+import { Dog, getDogAge } from "../../Interface";
 
 interface DogInfoProps {
-  dog: IDog;
+  dog: Dog; // Accept a single dog as a prop
   variant: "Dog info" | "Detailed dog info";
   textColor?: string;
   flexDirection?: "row" | "column"; // Add flexDirection prop
@@ -23,12 +23,23 @@ export default function DogInfo({
   const dogDefault = "../../assets/dogDefault.png";
   const [imageError, setImageError] = useState(false);
 
+  if (!dog) {
+    console.error("Dog object is undefined");
+    return null;
+  }
+
+  const imageUrl = imageError ? dogDefault : dog.dogPicture || dogDefault;
+  console.log(`Image URL for ${dog.name}: ${imageUrl}`); // Log the image URL
+
   return (
-    <section className={styles.dogItem}>
+    <div key={dog.objectId} className={styles.dogItem}>
       <PreviewImage
-        src={imageError ? dogDefault : dog.image}
+        src={imageUrl}
         alt={`${dog.name} picture`}
-        onError={() => setImageError(true)}
+        onError={() => {
+          console.error(`Error loading image for ${dog.name}`);
+          setImageError(true);
+        }}
         pictureSize={pictureSize} // Pass pictureSize prop
         border={border} // Pass border prop
       />
@@ -45,17 +56,17 @@ export default function DogInfo({
               className={styles.dogAge}
               style={{ color: textColor || "white" }}
             >
-              Age: {dog.age}
+              Age: {getDogAge(dog)}
             </p>
             <p
               className={styles.dogBreed}
               style={{ color: textColor || "white" }}
             >
-              Breed: {dog.breed}
+              Breed: {dog.race}
             </p>
           </>
         )}
       </div>
-    </section>
+    </div>
   );
 }
