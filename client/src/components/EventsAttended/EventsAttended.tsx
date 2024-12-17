@@ -3,7 +3,7 @@ import { IEvent } from "../../interfaces.ts";
 import styles from "./EventsAttended.module.css";
 
 const testEvent: IEvent = {
-  id: "evt123",
+  id: "evt1234",
   name: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
   image:
@@ -15,7 +15,7 @@ const testEvent: IEvent = {
 };
 
 const testEvent2: IEvent = {
-  id: "evt1234",
+  id: "evt12345",
   name: "Dog Playdate Week 51 2024",
   description: "The weekly dog playdate event for all dog lovers",
   image:

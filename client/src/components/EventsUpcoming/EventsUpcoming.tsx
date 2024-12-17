@@ -4,7 +4,7 @@ import EventCard from "../EventCard/EventCard.tsx";
 import { IEvent } from "../../interfaces.ts";
 
 const testEvent: IEvent = {
-  id: "evt123",
+  id: "evt1123",
   name: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
   image: "",
@@ -14,7 +14,12 @@ const testEvent: IEvent = {
   creator: "John Doe",
 };
 
-const events: IEvent[] = [testEvent, testEvent, testEvent, testEvent];
+const events: IEvent[] = [
+  { ...testEvent, id: "evt1123-1" },
+  { ...testEvent, id: "evt1123-2" },
+  { ...testEvent, id: "evt1123-3" },
+  { ...testEvent, id: "evt1123-4" },
+];
 
 function EventsUpcoming() {
   return (

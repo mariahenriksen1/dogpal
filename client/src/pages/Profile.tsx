@@ -1,30 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DogInfo from "../components/DogInfo/DogInfo.tsx";
-import { IDog } from "./../interfaces.ts";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
+import { useUserAndDogs } from "../hooks/useUserAndDogs"; // Import the hook
 import profileDefault from "./../assets/profileDefault.png"; // Ensure the path is correct
 import "./Styling/StylingProfile.css";
 import Button from "../components/Button/Button.tsx";
 import PreviewImage from "../components/PreviewImage/PreviewImage.tsx";
 import EventsAttended from "../components/EventsAttended/EventsAttended.tsx";
 
-const testDog: IDog = {
-  id: "123",
-  name: "Charlie",
-  breed: "Labrador",
-  age: 4,
-  image:
-    "https://images.squarespace-cdn.com/content/v1/54822a56e4b0b30bd821480c/51fe71a3-cb12-4ac2-882f-45955401dd53/Golden+Retrievers+dans+pet+care.jpeg?format=500wstring",
-  date: "date",
-};
-
-const dogs: IDog[] = [testDog, testDog];
-
 function Profile() {
   const currentPublicUser = useCurrentPublicUser();
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
+  const { dogs, loading } = useUserAndDogs(); // Use the hook to get the dog data
 
   if (!currentPublicUser) {
     return null;
@@ -77,17 +66,21 @@ function Profile() {
         <section className="flex-column align-center">
           <div className="dog-container">
             <div className="dog-list">
-              {dogs.map((dog) => (
-                <DogInfo
-                  key={dog.id}
-                  dog={dog}
-                  variant="Detailed dog info"
-                  textColor="black"
-                  flexDirection="column"
-                  pictureSize="100px"
-                  border="3px #f9c069 solid"
-                />
-              ))}
+              {loading ? (
+                <div>Loading...</div>
+              ) : (
+                dogs.map((dog) => (
+                  <DogInfo
+                    key={dog.objectId}
+                    dog={dog} // Pass the single dog as a prop
+                    variant="Detailed dog info"
+                    textColor="black"
+                    flexDirection="column"
+                    pictureSize="100px"
+                    border="3px #f9c069 solid"
+                  />
+                ))
+              )}
             </div>
           </div>
         </section>
