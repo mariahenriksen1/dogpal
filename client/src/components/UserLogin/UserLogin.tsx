@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useCurrentPublicUser from "../../hooks/useCurrentPublicUser";
 
 export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
@@ -14,22 +15,30 @@ export const UserLogin: FC<{}> = (): ReactElement => {
     lastName: string;
   } | null>(null);
 
-  const getCurrentUser = async function (): Promise<void> {
-    const user: Parse.User | null = await Parse.User.current();
-    setCurrentUser(user);
+  const publicUser = useCurrentPublicUser(); // Public user hook
 
+  const getCurrentUser = async function (): Promise<void> {
+    const user = await Parse.User.current();
     if (user) {
-      const firstName = user.get("FirstName") || "N/A";
-      const lastName = user.get("LastName") || "N/A";
-      setUserDetails({ firstName, lastName });
+      setCurrentUser(user);
+      // Fetch public user details from current user
+      if (publicUser) {
+        const firstName = publicUser.get("firstName") || "N/A";
+        const lastName = publicUser.get("lastName") || "N/A";
+        setUserDetails({ firstName, lastName });
+      } else {
+        setUserDetails(null); // Set null if publicUser is not available
+      }
     } else {
+      setCurrentUser(null);
       setUserDetails(null);
     }
   };
 
   useEffect(() => {
-    getCurrentUser();
-  }, []);
+    getCurrentUser(); // Fetch user details when publicUser changes
+  }, [publicUser]); // Trigger effect when publicUser is available
+
 
   const doUserLogIn = async function () {
     try {
