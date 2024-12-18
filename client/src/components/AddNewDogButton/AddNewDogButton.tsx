@@ -1,21 +1,28 @@
 import React from "react";
 import Button from "../Button/Button";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 interface AddNewDogButtonProps {
-  onAddNewDogClick: () => void;
+  label: string;
+  onClick: () => void;
+  iconType: "add" | "remove"; // Define icon type dynamically
 }
 
 export const AddNewDogButton: React.FC<AddNewDogButtonProps> = ({
-  onAddNewDogClick,
+  label,
+  onClick,
+  iconType,
 }) => {
+  // Determine icon based on type
+  const icon = iconType === "add" ? <FaPlus /> : <FaMinus />;
+
   return (
-    <div className="addNewDog">
+    <div className="dogActionButton">
       <Button
-        label="Add new dog"
+        label={label}
         variant="secondary"
-        icon={<FaPlus />} // Pass an icon for the button
-        onClick={onAddNewDogClick}
+        icon={icon}
+        onClick={onClick}
       />
     </div>
   );

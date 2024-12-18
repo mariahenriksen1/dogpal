@@ -9,6 +9,9 @@ function EditProfile() {
   const handleAddNewDogClick = () => {
     setDogProfiles([...dogProfiles, dogProfiles.length]);
   };
+  const handleRemoveLastDogClick = () => {
+    setDogProfiles(dogProfiles.slice(0, -1));
+  };
 
   return (
     <>
@@ -35,8 +38,21 @@ function EditProfile() {
 
       <section className="seperator-line"></section>
 
-      <section className="flex-column align-center">
-        <AddNewDogButton onAddNewDogClick={handleAddNewDogClick} />
+     {/* Add and Remove Dog Buttons */}
+     <section className="flex-column align-center">
+        {/* Reuse AddNewDogButton for both actions */}
+        <AddNewDogButton
+          onClick={handleAddNewDogClick}
+          label="Add New Dog"
+          iconType="add"
+        />
+        {dogProfiles.length > 0 && (
+          <AddNewDogButton
+            onClick={handleRemoveLastDogClick}
+            label="Remove Last Dog"
+            iconType="remove"
+          />
+        )}
       </section>
     </>
   );
