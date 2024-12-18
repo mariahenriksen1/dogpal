@@ -16,7 +16,6 @@ function Home() {
           <div className="flex-row space-between">
             <h1 className="color-white">Wuuf wuuf!</h1>
             <HeaderProfile />
-            <UserLogin />
 
           </div>
         </section>

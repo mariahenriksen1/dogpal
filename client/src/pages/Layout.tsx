@@ -40,11 +40,16 @@ const Layout: React.FC = () => {
               variant="primary"
               onClick={handleSignUpClick}
               className="sign-up-button"
-
             />
             </Link>
-
-      
+             <Link to="/login" className="icon-stroke">
+            <Button 
+              label="Login"
+              variant="primary"
+              onClick={handleSignUpClick}
+              className="sign-up-button"
+            />
+            </Link>
             <LogoutButton />
           </div>
         </nav>
