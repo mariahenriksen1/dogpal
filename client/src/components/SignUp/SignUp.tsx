@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { saveUserAndDogs } from "../../hooks/useUserAndDogs";
 import { Dog } from "../../Interface";
+import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
 
 const CreateUserAndDog: React.FC = () => {
   const [userData, setUserData] = useState({
@@ -89,6 +90,10 @@ const CreateUserAndDog: React.FC = () => {
         updatedAt: "",
       },
     ]);
+  };
+
+  const handleRemoveDog = (index: number) => {
+    setDogs(dogs.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async () => {
@@ -184,9 +189,18 @@ const CreateUserAndDog: React.FC = () => {
             type="file"
             onChange={(e) => handleDogPictureChange(index, e)}
           />
+
+          {/* Add Remove Dog Button */}
+          <AddNewDogButton
+            label="Remove Dog"
+            iconType="remove"
+            onClick={() => handleRemoveDog(index)}
+          />
         </div>
       ))}
-      <button onClick={handleAddDog}>Add Another Dog</button>
+
+      {/* Add Add Dog Button */}
+      <AddNewDogButton label="Add Another Dog" iconType="add" onClick={handleAddDog} />
       <button onClick={handleSubmit} disabled={loading}>
         {loading ? "Saving..." : "Save"}
       </button>
