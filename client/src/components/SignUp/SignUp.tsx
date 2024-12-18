@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { saveUserAndDogs } from "../../hooks/useUserAndDogs";
 import { Dog } from "../../Interface";
 import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
+import { toast } from "react-toastify";
 
 const CreateUserAndDog: React.FC = () => {
   const [userData, setUserData] = useState({
@@ -100,7 +101,7 @@ const CreateUserAndDog: React.FC = () => {
     setLoading(true);
     try {
       await saveUserAndDogs(userData, dogs);
-      alert("User and Dogs saved successfully!");
+      toast.success("User and Dogs saved successfully!");
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error saving user and dogs:", error.message);
@@ -108,9 +109,9 @@ const CreateUserAndDog: React.FC = () => {
         console.error("Error saving user and dogs:", error);
       }
       if (error instanceof Error) {
-        alert(`Error: ${error.message}`);
+        toast.error(`Error: ${error.message}`);
       } else {
-        alert("An unknown error occurred.");
+        toast.error("An unknown error occurred.");
       }
     } finally {
       setLoading(false);
