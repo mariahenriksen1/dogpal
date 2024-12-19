@@ -5,6 +5,7 @@ import InputField from "../InputField/InputField";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useCurrentPublicUser from "../../hooks/useCurrentPublicUser";
+import { useNavigate } from "react-router-dom";
 
 export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,7 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   } | null>(null);
 
   const publicUser = useCurrentPublicUser(); // Public user hook
+  const navigate = useNavigate();
 
   const getCurrentUser = async function (): Promise<void> {
     const user = await Parse.User.current();
@@ -46,9 +48,11 @@ export const UserLogin: FC<{}> = (): ReactElement => {
       toast.success(
         `Success! User ${loggedInUser.get("username")} has successfully signed in!`,
       );
-      await getCurrentUser();
-      setUsername("");
-      setPassword("");
+        await getCurrentUser(); // Update user state
+        navigate("/profile"); // Navigate immediately
+        setUsername("");
+        setPassword("");
+
     } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error during login: ${error.message}`);

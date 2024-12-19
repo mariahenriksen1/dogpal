@@ -8,8 +8,7 @@ export default function Login() {
     
     <div>
         <UserLogin/>
-        <UserInfoWithDogs/>
-        
+  
     </div>
   )
 }
