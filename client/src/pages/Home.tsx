@@ -3,8 +3,6 @@ import EventsUpcoming from "../components/EventsUpcoming/EventsUpcoming.tsx";
 import EventsSaved from "../components/EventsSaved/EventsSaved.tsx";
 import { Link } from "react-router-dom";
 import Saved from "../assets/Saved.tsx";
-import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
-import { UserLogin } from "../components/UserLogin/UserLogin.tsx";
 
 
 function Home() {
