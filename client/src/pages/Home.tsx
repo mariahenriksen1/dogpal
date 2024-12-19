@@ -3,21 +3,30 @@ import EventsUpcoming from "../components/EventsUpcoming/EventsUpcoming.tsx";
 import EventsSaved from "../components/EventsSaved/EventsSaved.tsx";
 import { Link } from "react-router-dom";
 import Saved from "../assets/Saved.tsx";
-
+import { useState } from "react";
+import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
 
 function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // Track login state
+
+  // This function will be called after logout to update the state
+  const handleLogoutSuccess = () => {
+    setIsLoggedIn(false); // Set to false to hide profile section
+  };
+
   return (
-    
     <>
       <header>
         <section>
           <div className="flex-row space-between">
             <h1 className="color-white">Wuuf wuuf!</h1>
-            <HeaderProfile />
-
+            {/* Conditionally render HeaderProfile based on login state */}
+            {isLoggedIn && <HeaderProfile />}
           </div>
         </section>
       </header>
+      {/* Add LogoutButton outside of flex container */}
+      <LogoutButton onLogoutSuccess={handleLogoutSuccess} />
 
       <main>
         <section>

@@ -25,15 +25,13 @@ const LogoutButton: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement 
 
   return (
     <div>
-      
-        <Button
-          label="Log Out"
-          variant="secondary"
-          onClick={handleLogout}
-          className={styles["logout-button"]} 
-        />
-      </div>
-    
+      <Button
+        label="Log Out"
+        variant="secondary"
+        onClick={handleLogout}
+        className={styles["logout-button"]} 
+      />
+    </div>
   );
 };
 

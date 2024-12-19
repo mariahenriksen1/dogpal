@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-import HeaderProfile from "../components/HeaderProfile/HeaderProfile.tsx";
 
 function CreateEvent() {
   const [formData, setFormData] = useState({
