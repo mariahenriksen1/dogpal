@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
-import Chat from "../assets/Chat.tsx";
 import Profile from "../assets/Profile.tsx";
 import Saved from "../assets/Saved.tsx";
 import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
@@ -20,16 +19,14 @@ const Layout: React.FC = () => {
             <Logo color="white" type={true} />
           </Link>
           <div className="links">
-            <Link to="/calendar">Calendar</Link>
+
             <Link to="/createEvent">+ Create event</Link>
           </div>
           <div className="links">
             <Link to="/saved" className="icon-stroke">
               <Saved />
             </Link>
-            <Link to="/chat" className="icon-stroke">
-              <Chat />
-            </Link>
+           
             <Link to="/profile" className="icon-stroke">
               <Profile />
             </Link>
