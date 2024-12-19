@@ -5,16 +5,16 @@ import styles from "./LogoutButton.module.css";
 import { toast } from "react-toastify";
 
 type LogoutProps = {
-  onLogoutSuccess?: () => void; 
+  onLogoutSuccess?: () => void;
 };
 
 const LogoutButton: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement => {
   const handleLogout = async () => {
     try {
-      await Parse.User.logOut(); 
+      await Parse.User.logOut();
       toast.success("Successfully logged out!");
       if (onLogoutSuccess) {
-        onLogoutSuccess();
+        onLogoutSuccess(); // Notify parent of successful logout
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -24,14 +24,12 @@ const LogoutButton: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement 
   };
 
   return (
-    <div>
       <Button
         label="Log Out"
         variant="secondary"
         onClick={handleLogout}
-        className={styles["logout-button"]} 
+        className={styles["logout-button"]} // Custom styling
       />
-    </div>
   );
 };
 

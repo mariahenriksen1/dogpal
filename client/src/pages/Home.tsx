@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Saved from "../assets/Saved.tsx";
 import { useState } from "react";
 import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
-import { UserLogin } from "../components/UserLogin/UserLogin.tsx";
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(true); // Track login state
@@ -27,7 +26,7 @@ function Home() {
         </section>
       </header>
       {/* Add LogoutButton outside of flex container */}
-      <LogoutButton onLogoutSuccess={handleLogoutSuccess} />
+      {isLoggedIn && <LogoutButton onLogoutSuccess={handleLogoutSuccess} />}
 
       <main>
         <section>

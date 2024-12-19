@@ -7,9 +7,11 @@ import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
 import Button from "../components/Button/Button.tsx";
 
 const Layout: React.FC = () => {
-  function handleSignUpClick(): void {
-    throw new Error("Function not implemented.");
-  }
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true); // Manage login state globally
+
+  const handleLogoutSuccess = () => {
+    setIsLoggedIn(false); // Update the state when the user logs out
+  };
 
   return (
     <>
@@ -19,40 +21,46 @@ const Layout: React.FC = () => {
             <Logo color="white" type={true} />
           </Link>
           <div className="links">
-
             <Link to="/createEvent">+ Create event</Link>
           </div>
           <div className="links">
             <Link to="/saved" className="icon-stroke">
               <Saved />
             </Link>
-           
             <Link to="/profile" className="icon-stroke">
               <Profile />
             </Link>
 
-            <Link to="/createUser" className="icon-stroke">
-            <Button 
-              label="Sign Up"
-              variant="primary"
-              onClick={handleSignUpClick}
-              className="sign-up-button"
-            />
-            </Link>
-             <Link to="/login" className="icon-stroke">
-            <Button 
-              label="Login"
-              variant="primary"
-              onClick={handleSignUpClick}
-              className="sign-up-button"
-            />
-            </Link>
-            <LogoutButton />
+            {/* Show Sign Up and Login buttons if not logged in */}
+            {!isLoggedIn && (
+              <>
+                <Link to="/createUser" className="icon-stroke">
+                  <Button
+                    label="Sign Up"
+                    variant="primary"
+                    onClick={() => {}}
+                    className="sign-up-button"
+                  />
+                </Link>
+                <Link to="/login" className="icon-stroke">
+                  <Button
+                    label="Login"
+                    variant="primary"
+                    onClick={() => {}}
+                    className="sign-up-button"
+                  />
+                </Link>
+              </>
+            )}
+
+            {/* Show LogoutButton if logged in */}
+            {isLoggedIn && (
+              <LogoutButton onLogoutSuccess={handleLogoutSuccess} />
+            )}
           </div>
         </nav>
       </div>
-      <Outlet />
-      {/* Placeholder for nested routes */}
+      <Outlet /> {/* This renders the child routes */}
       <footer style={{ height: "100px" }}></footer>
     </>
   );

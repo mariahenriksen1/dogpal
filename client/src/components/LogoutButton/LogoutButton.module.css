@@ -12,8 +12,13 @@
   background-color: var(--gray); /* Matches secondary button style */
   color: var(--white); /* Matches secondary button text color */
   transition: background-color 0.3s ease; /* Matches button transition */
+  display: block; /* Ensure it displays by default */
 }
 
 .logout-button:hover {
   background-color: var(--p-light); /* Matches secondary button hover style */
+}
+
+.hidden {
+  display: none; /* Hide the button when the class is added */
 }
