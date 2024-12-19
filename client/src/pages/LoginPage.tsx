@@ -6,9 +6,12 @@ export default function Login() {
   
   return (
     
-    <div>
+
+      <nav>
+        <section>
         <UserLogin/>
+        </section>
+        </nav>
   
-    </div>
   )
 }

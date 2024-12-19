@@ -41,18 +41,18 @@ export const UserLogin: FC<{}> = (): ReactElement => {
     getCurrentUser(); // Fetch user details when publicUser changes
   }, [publicUser]); // Trigger effect when publicUser is available
 
-
   const doUserLogIn = async function () {
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
       toast.success(
-        `Success! User ${loggedInUser.get("username")} has successfully signed in!`,
+        `Success! User ${loggedInUser.get(
+          "username"
+        )} has successfully signed in!`
       );
-        await getCurrentUser(); // Update user state
-        navigate("/profile"); // Navigate immediately
-        setUsername("");
-        setPassword("");
-
+      await getCurrentUser(); // Update user state
+      navigate("/profile"); // Navigate immediately
+      setUsername("");
+      setPassword("");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error during login: ${error.message}`);
@@ -69,7 +69,6 @@ export const UserLogin: FC<{}> = (): ReactElement => {
     } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error during logout: ${error.message}`);
-
       }
     }
   };
@@ -78,27 +77,37 @@ export const UserLogin: FC<{}> = (): ReactElement => {
     <div>
       {currentUser === null ? (
         <div className="container">
-          <h2 className="heading">User Login</h2>
-      
-            <InputField
+          <h2>User Login</h2>
+
+          <InputField
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-            placeholder="Username" variant={""}              
-            />
-            <InputField
+            placeholder="Username"
+            variant={""}
+          />
+          <InputField
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
-            type="password" variant={""}              
-            />
-    
+            type="password"
+            variant={""}
+          />
+
           <div className="form_buttons">
             <Button label="Log In" variant="primary" onClick={doUserLogIn} />
+            </div>
+            <Button
+              label="Sign Up"
+              variant="secondary"
+              onClick={() => navigate("/createUser")}
+            />
           </div>
-        </div>
+
       ) : (
         <div className="container">
-          <h2 className="heading">{`Hello, ${currentUser.get("username")}!`}</h2>
+          <h2 className="heading">{`Hello, ${currentUser.get(
+            "username"
+          )}!`}</h2>
           {userDetails && (
             <div>
               <p>{`First Name: ${userDetails.firstName}`}</p>
