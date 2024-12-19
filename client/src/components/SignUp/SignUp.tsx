@@ -4,7 +4,7 @@ import { Dog } from "../../Interface";
 import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
 import { toast } from "react-toastify";
 
-const CreateUserAndDog: React.FC = () => {
+const SignUp: React.FC = () => {
   const [userData, setUserData] = useState({
     username: "",
     firstName: "",
@@ -209,4 +209,4 @@ const CreateUserAndDog: React.FC = () => {
   );
 };
 
-export default CreateUserAndDog;
+export default SignUp;
