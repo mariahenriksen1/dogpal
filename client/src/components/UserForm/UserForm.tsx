@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import InputField from "../../InputField/InputField";
-import PreviewImage from "../../PreviewImage/PreviewImage";
+import InputField from "../InputField/InputField";
+import PreviewImage from "../PreviewImage/PreviewImage";
 
 interface UserFormProps {
   userData: {
