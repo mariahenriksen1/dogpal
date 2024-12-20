@@ -3,13 +3,14 @@ import "./App.css";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile.tsx";
 import CreateEvent from "./pages/CreateEvent.tsx";
 import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
-
+import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
+import { ToastContainer, Slide } from "react-toastify";
 
 function App() {
   return (
@@ -21,10 +22,24 @@ function App() {
           <Route index element={<Home />} />
           <Route path="event" element={<Event />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="editProfile" element={<EditProfile />} />
           <Route path="createEvent" element={<CreateEvent />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </Router>
   );
 }

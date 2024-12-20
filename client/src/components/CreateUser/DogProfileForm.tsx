@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import InputField from "../InputField/InputField";
+import PreviewImage from "../PreviewImage/PreviewImage";
 
 export const DogProfileForm = () => {
   const [dogProfilePicture, setDogProfilePicture] = useState<string | null>(
-    null,
+    null
   );
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [dogName, setDogName] = useState<string>("");
   const [breed, setBreed] = useState<string>("");
 
   const handleDogProfilePictureChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -23,7 +24,7 @@ export const DogProfileForm = () => {
   };
 
   const handleDateOfBirthChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDateOfBirth(event.target.value);
   };
@@ -53,11 +54,7 @@ export const DogProfileForm = () => {
             onChange={handleDogProfilePictureChange}
           />
           {dogProfilePicture && (
-            <img
-              src={dogProfilePicture}
-              alt="Dog Profile Picture"
-              className="dog-profile-picture-preview"
-            />
+            <PreviewImage src={dogProfilePicture} alt="Dog Profile Picture" />
           )}
         </div>
         <div className="profile-form-inputs">
@@ -65,13 +62,16 @@ export const DogProfileForm = () => {
             <InputField
               variant="Dog name"
               value={dogName}
-              onChange={handleDogNameChange}          />
+              onChange={handleDogNameChange}
+            />
           </div>
           <div className="row">
             <InputField
               variant="Date"
+              label="Date of Birth"
               value={dateOfBirth}
-              onChange={handleDateOfBirthChange}           />
+              onChange={handleDateOfBirthChange}
+            />
           </div>
           <div className="row">
             <InputField
@@ -79,7 +79,8 @@ export const DogProfileForm = () => {
               label="Breed"
               placeholder="Enter breed"
               value={breed}
-              onChange={handleBreedChange}           />
+              onChange={handleBreedChange}
+            />
           </div>
         </div>
       </div>

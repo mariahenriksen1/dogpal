@@ -11,6 +11,7 @@ type InputFieldProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   labelTextColor?: string;
+  type?: string;
 };
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -76,7 +77,7 @@ const InputField: React.FC<InputFieldProps> = ({
         };
       case "Date":
         return {
-          label: "Date of Birth",
+          label: inputProps.label,
           name: "birthDate",
           type: "date",
           value: inputProps.value ?? internalValue,

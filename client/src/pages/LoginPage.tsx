@@ -1,15 +1,17 @@
 import React from 'react'
-import { UserLogin } from '../components/Login/UserLogin'
+import { UserLogin } from '../components/UserLogin/UserLogin'
 import UserInfoWithDogs from '../components/Profile/Profile'
 
 export default function Login() {
   
   return (
     
-    <div>
+
+      <nav>
+        <section>
         <UserLogin/>
-        <UserInfoWithDogs/>
-        
-    </div>
+        </section>
+        </nav>
+  
   )
 }
