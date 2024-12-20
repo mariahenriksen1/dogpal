@@ -14,7 +14,7 @@ const LogoutButton: FC<LogoutProps> = ({ onLogoutSuccess }): React.ReactElement 
       await Parse.User.logOut();
       toast.success("Successfully logged out!");
       if (onLogoutSuccess) {
-        onLogoutSuccess(); // Notify parent of successful logout
+        onLogoutSuccess(); 
       }
     } catch (error) {
       if (error instanceof Error) {

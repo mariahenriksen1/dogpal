@@ -1,29 +1,27 @@
 import styles from "./HeaderProfile.module.css";
-import useCurrentPublicUser from "../../hooks/useCurrentPublicUser.ts";
 import { useState } from "react";
-import profileDefault from "../../assets/profileDefault.png"; // Ensure the path is correct
+import profileDefault from "../../assets/profileDefault.png"; 
 import DogInfo from "../DogInfo/DogInfo.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
-import { useUserAndDogs } from "../../hooks/useUserAndDogs"; // Import the hook
+import { useUser } from "../../context/UserContext"; 
 
 function HeaderProfile() {
-  const currentPublicUser = useCurrentPublicUser();
+  const { publicUser, dogs } = useUser(); // Access publicUser and dogs from context
   const [imageError, setImageError] = useState(false);
-  const { dogs } = useUserAndDogs(); // Use the hook to get the dog data
 
-  if (!currentPublicUser) {
-    return null;
+  if (!publicUser) {
+    return null; 
   }
 
-  const firstName = currentPublicUser?.get("firstName") || "Unknown";
-  const lastName = currentPublicUser?.get("lastName") || "User";
+  const firstName = publicUser.get("firstName") || "Unknown";
+  const lastName = publicUser.get("lastName") || "User";
 
   const profilePicture = imageError
     ? profileDefault
-    : currentPublicUser?.get("profilePicture");
+    : (publicUser.get("profilePicture") as string) || profileDefault;
 
   if (dogs.length === 0) {
-    return <div>No dogs available</div>;
+    return <div>No dogs available</div>; // Handle no dogs scenario
   }
 
   return (

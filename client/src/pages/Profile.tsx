@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DogInfo from "../components/DogInfo/DogInfo.tsx";
-import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
-import { useUserAndDogs } from "../hooks/useUserAndDogs"; // Import the hook
-import profileDefault from "./../assets/profileDefault.png"; // Ensure the path is correct
+import { useUser } from "../context/UserContext";
+import profileDefault from "./../assets/profileDefault.png";
 import "./Styling/StylingProfile.css";
 import Button from "../components/Button/Button.tsx";
 import PreviewImage from "../components/PreviewImage/PreviewImage.tsx";
 import EventsAttended from "../components/EventsAttended/EventsAttended.tsx";
 
 function Profile() {
-  const currentPublicUser = useCurrentPublicUser();
+  const { publicUser, dogs, loadingDogs } = useUser(); 
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
-  const { dogs, loading } = useUserAndDogs(); // Use the hook to get the dog data
 
-  if (!currentPublicUser) {
-    return null;
+  if (!publicUser) {
+    return <div>Loading...</div>;
   }
 
-  const firstName = currentPublicUser?.get("firstName") || "Unknown";
-  const lastName = currentPublicUser?.get("lastName") || "User";
-
+  const firstName = publicUser.get("firstName") || "Unknown";
+  const lastName = publicUser.get("lastName") || "User";
   const profilePicture = imageError
     ? profileDefault
-    : currentPublicUser?.get("profilePicture");
+    : (publicUser.get("profilePicture") as string) || profileDefault;
 
   const handleEditProfileClick = () => {
     navigate("/editProfile");
@@ -34,7 +31,6 @@ function Profile() {
     <>
       <header>
         <section className="profile-section">
-          {/* evt lav nedenstående "profile-view" til component */}
           <div className="profile-container">
             <PreviewImage
               src={profilePicture}
@@ -62,17 +58,16 @@ function Profile() {
             />
           </div>
         </div>
-        {/* evt lav nedenstående "doglist" til component ? */}
         <section className="flex-column align-center">
           <div className="dog-container">
             <div className="dog-list">
-              {loading ? (
+              {loadingDogs ? (
                 <div>Loading...</div>
               ) : (
-                dogs.map((dog) => (
+                dogs.map((dog: any) => (
                   <DogInfo
                     key={dog.objectId}
-                    dog={dog} // Pass the single dog as a prop
+                    dog={dog}
                     variant="Detailed dog info"
                     textColor="black"
                     flexDirection="column"

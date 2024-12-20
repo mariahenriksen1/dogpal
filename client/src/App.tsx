@@ -11,9 +11,13 @@ import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
 import { ToastContainer, Slide } from "react-toastify";
+import { UserProvider } from './context/UserContext'; 
+
 
 function App() {
   return (
+    <UserProvider> 
+
     <Router>
       <Routes>
         <Route path="login" element={<Login />} />
@@ -27,6 +31,9 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
+
+
+
       <ToastContainer
         position="bottom-right"
         autoClose={5000}
@@ -41,6 +48,7 @@ function App() {
         transition={Slide}
       />
     </Router>
+    </UserProvider>
   );
 }
 
