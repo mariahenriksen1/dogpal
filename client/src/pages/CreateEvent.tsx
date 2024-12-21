@@ -1,58 +1,26 @@
-import Parse from "../env.Backend/env.parseConfig.ts";
 import React, { useState } from "react";
 import InputField from "../components/InputField/InputField.tsx";
 import "../App.css";
-import  "./Styling/StylingEvent.css";
+import "./Styling/StylingEvent.css";
 import Button from "../components/Button/Button";
 import { IoLocationOutline } from "react-icons/io5";
 import { GrGroup } from "react-icons/gr";
 import { MdEuroSymbol } from "react-icons/md";
-import { toast, ToastContainer, Slide } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
-
-
-
+import { toast, ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useCreateEvent } from "../hooks/useCreateEvent";
 
 function CreateEvent() {
+  const { createEvent, loading, error, success } = useCreateEvent();
   const [formData, setFormData] = useState({
     coverImagePreview: "",
     title: "",
     description: "",
     location: "",
-    Date: "",
-    time: "",
+    date: "",
     participantLimit: "",
     price: "",
   });
-
-  async function addEvent() {
-    try {
-      const Event = new Parse.Object("Event");
-
-      // Store the base64 image directly in the Event object
-      if (formData.coverImagePreview) {
-        Event.set("coverImage", formData.coverImagePreview); // store as base64 string
-      }
-
-      Event.set("title", formData.title);
-      Event.set("description", formData.description);
-      Event.set("date", new Date(formData.Date).getTime());
-      Event.set("location", formData.location);
-      Event.set("price", formData.price ? parseFloat(formData.price) : 0);
-      Event.set("participantLimit", formData.participantLimit || "");
-
-      await Event.save();
-      toast.success("Event saved!");
-    
-    
-  
-
-    } catch (error) {
-      console.log("Error saving new event: ", error);
-    }
-  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -62,13 +30,11 @@ function CreateEvent() {
     reader.onload = () => {
       setFormData((prevData) => ({
         ...prevData,
-        coverImagePreview: reader.result as string, // base64 string
+        coverImagePreview: reader.result as string, // Base64 string
       }));
     };
     reader.readAsDataURL(file);
-    
   };
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -78,10 +44,28 @@ function CreateEvent() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addEvent();
+  
+    try {
+      await createEvent({
+        title: formData.title,
+        description: formData.description,
+        location: formData.location,
+        date: new Date(formData.date).getTime(), // Convert to timestamp
+        participantLimit: formData.participantLimit
+          ? parseInt(formData.participantLimit, 10)
+          : undefined,
+        price: formData.price ? parseFloat(formData.price) : undefined,
+        coverImage: formData.coverImagePreview,
+      });
+      toast.success("Event created successfully!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to create event. Please try again.");
+    }
   };
+  
 
   return (
     <form className="flex-column gap-40" onSubmit={handleSubmit}>
@@ -89,11 +73,11 @@ function CreateEvent() {
         <section>
           <div className="flex-column space-between gap-20">
             <div className="upload-image">
-            {!formData.coverImagePreview && (
-            <label htmlFor="coverImage" className="upload-image-label">
-              Click to upload cover image...
-            </label>
-            )}
+              {!formData.coverImagePreview && (
+                <label htmlFor="coverImage" className="upload-image-label">
+                  Click to upload cover image...
+                </label>
+              )}
               <input
                 type="file"
                 id="coverImage"
@@ -101,26 +85,27 @@ function CreateEvent() {
                 onChange={handleImageChange}
               />
               {formData.coverImagePreview && (
-                <img src={formData.coverImagePreview} alt="Cover Preview" className="image-preview" />
+                <img
+                  src={formData.coverImagePreview}
+                  alt="Cover Preview"
+                  className="image-preview"
+                />
               )}
             </div>
 
-             
-              <InputField
-                variant="Text input"
-                label="Title"
-                placeholder="Write title here..."
-                value={formData.title}
-                onChange={handleChange}
-                name="title"
-                labelTextColor="white"
-              />
-        
-          
-            </div>
+            <InputField
+              variant="Text input"
+              label="Title"
+              placeholder="Write title here..."
+              value={formData.title}
+              onChange={handleChange}
+              name="title"
+              labelTextColor="white"
+            />
+          </div>
         </section>
       </header>
-      
+
       <section>
         <InputField
           variant="Text input"
@@ -137,13 +122,12 @@ function CreateEvent() {
           value={formData.location}
           onChange={handleChange}
           name="location"
-          icon={<IoLocationOutline />} 
-
+          icon={<IoLocationOutline />}
         />
         <InputField
           variant="Date"
           label="Date"
-          value={formData.Date}
+          value={formData.date}
           onChange={handleChange}
           name="date"
         />
@@ -165,13 +149,16 @@ function CreateEvent() {
           name="price"
           icon={<MdEuroSymbol />}
         />
-       
-        <Button 
-          label="Submit" 
-          variant="primary" 
-          onClick={() => handleSubmit} // Wrap handleSubmit in an anonymous function
-          />
+        <Button
+          label={loading ? "Creating..." : "Submit"}
+          variant="primary"
+          onClick={handleSubmit} 
+          disabled={loading} 
+        />
       </section>
+      <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>Event created successfully!</p>}
     </form>
   );
 }
