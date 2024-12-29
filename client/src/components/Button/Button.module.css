@@ -1,5 +1,6 @@
 .button {
     padding: 8px 16px;
+    width: auto;
     font-size: 16px;
     border: none;
     border-radius: 6px;
@@ -27,6 +28,16 @@
     background-color: var(--black);
 }
 
+/* Transparent Button Styles */
+.transparent {
+    background-color: transparent;
+    color: var(--white);
+}
+
+.transparent:hover {
+    color: var(--p-light);
+}
+
 .icon {
     margin-right: 8px; /* Space between the icon and label */
 }
@@ -34,3 +45,7 @@
 .sign-up-button {
     margin-left: 16px;
   }
+
+.shrink {
+    display: inline-flex;
+}

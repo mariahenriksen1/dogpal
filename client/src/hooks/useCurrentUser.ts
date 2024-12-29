@@ -8,8 +8,7 @@ export default function useCurrentUser(): Parse.User | null {
     const fetchCurrentUser = async () => {
       const user = await Parse.User.currentAsync();
       if (user !== null) {
-        console.log("Success!", `${user} is the current user!`);
-        console.log("User JSON:", user.toJSON());
+        console.log("Success!", `${user.toJSON().username} is the current user!`);
       } else {
         console.log("No current user found.");
       }

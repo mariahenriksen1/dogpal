@@ -11,10 +11,14 @@ import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
 import { ToastContainer, Slide } from "react-toastify";
-import { UserProvider } from './context/UserContext'; 
+import { UserProvider } from './context/UserContext';
+import Parse from "./env.Backend/env.parseConfig.ts";
 
 
 function App() {
+
+  const isLoggedIn = Parse.User.current() !== null;
+  console.log(isLoggedIn);
   return (
     <UserProvider> 
 
