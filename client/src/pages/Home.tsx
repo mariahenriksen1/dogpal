@@ -1,18 +1,14 @@
 import HeaderProfile from "../components/HeaderProfile/HeaderProfile.tsx";
 import EventsUpcoming from "../components/EventsUpcoming/EventsUpcoming.tsx";
 import EventsSaved from "../components/EventsSaved/EventsSaved.tsx";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Saved from "../assets/Saved.tsx";
-import { useState } from "react";
-import LogoutButton from "../components/LogoutButton/LogoutButton.tsx";
+import RequireAuth from "../components/Auth/RequireAuth.tsx";
+import {useUser} from "../context/UserContext.tsx";
 
 function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Track login state
 
-  // This function will be called after logout to update the state
-  const handleLogoutSuccess = () => {
-    setIsLoggedIn(false); // Set to false to hide profile section
-  };
+  useUser();
 
   return (
     <>
@@ -20,13 +16,10 @@ function Home() {
         <section>
           <div className="flex-row space-between">
             <h1 className="color-white">Wuuf wuuf!</h1>
-            {/* Conditionally render HeaderProfile based on login state */}
-            {isLoggedIn && <HeaderProfile />}
+            <HeaderProfile/>
           </div>
         </section>
       </header>
-      {/* Add LogoutButton outside of flex container */}
-      {isLoggedIn && <LogoutButton onLogoutSuccess={handleLogoutSuccess} />}
 
       <main>
         <section>
@@ -34,18 +27,20 @@ function Home() {
             <h2>Upcoming events near you</h2>
             <Link to="/calendar">View all</Link>
           </div>
-          <EventsUpcoming />
+          <EventsUpcoming/>
         </section>
-        <section>
-          <div className="sectionHeader">
-            <div className="flex-row gap-10 align-center">
-              <Saved />
-              <h2>Saved</h2>
+        <RequireAuth>
+          <section>
+            <div className="sectionHeader">
+              <div className="flex-row gap-10 align-center">
+                <Saved/>
+                <h2>Saved</h2>
+              </div>
+              <Link to="/saved">View all</Link>
             </div>
-            <Link to="/saved">View all</Link>
-          </div>
-          <EventsSaved />
-        </section>
+            <EventsSaved/>
+          </section>
+        </RequireAuth>
       </main>
     </>
   );
