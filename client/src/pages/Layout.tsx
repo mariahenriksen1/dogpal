@@ -10,7 +10,7 @@ const Layout: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true); // Manage login state globally
 
   const handleLogoutSuccess = () => {
-    setIsLoggedIn(false); // Update the state when the user logs out
+    setIsLoggedIn(false); 
   };
 
   return (

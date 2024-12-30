@@ -30,7 +30,7 @@ function CreateEvent() {
     reader.onload = () => {
       setFormData((prevData) => ({
         ...prevData,
-        coverImagePreview: reader.result as string, // Base64 string
+        coverImagePreview: reader.result as string, 
       }));
     };
     reader.readAsDataURL(file);

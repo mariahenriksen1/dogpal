@@ -12,6 +12,7 @@ import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
 import { ToastContainer, Slide } from "react-toastify";
 import { UserProvider } from './context/UserContext'; 
+import Calendar from "./pages/Calendar.tsx";
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
           <Route path="editProfile" element={<EditProfile />} />
           <Route path="createEvent" element={<CreateEvent />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="calendar" element={<Calendar />} />
+
         </Route>
       </Routes>
 

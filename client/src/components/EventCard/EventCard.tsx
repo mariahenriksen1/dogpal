@@ -9,7 +9,7 @@ interface EventPreviewProps {
 
 function EventCard({ event }: EventPreviewProps) {
   return (
-    <Link to="/test" className={styles.eventPreview}>
+    <Link to={`/events/${event.id}`} className={styles.eventPreview}>
       <img src={event.image} alt="Event image" />
       <EventDetails event={event} />
     </Link>
