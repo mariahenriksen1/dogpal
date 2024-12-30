@@ -1,9 +1,9 @@
 // External libraries and dependencies (third-party)
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import {ToastContainer, Slide} from "react-toastify";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer, Slide } from "react-toastify";
 
 // Context and backend configuration
-import {UserProvider} from './context/UserContext';
+import { UserProvider } from './context/UserContext';
 import Parse from "./env.Backend/env.parseConfig.ts";
 
 // Pages
@@ -15,6 +15,7 @@ import CreateEvent from "./pages/CreateEvent.tsx";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
+import Calendar from "./pages/Calendar.tsx";
 import NoPage from "./pages/NoPage";
 
 // Components
@@ -24,34 +25,35 @@ import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
 import "./App.css";
 
 function App() {
-
   const isLoggedIn = Parse.User.current() !== null;
   console.log(isLoggedIn);
+
   return (
     <UserProvider>
       <Router>
         <Routes>
-          <Route path="login" element={<Login/>}/>
-          <Route path="createUser" element={<CreateUser/>}/>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<Home/>}/>
-            <Route path="event" element={<Event/>}/>
+          <Route path="login" element={<Login />} />
+          <Route path="createUser" element={<CreateUser />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="event" element={<Event />} />
             <Route path="profile" element={
               <ProtectRoute>
-                <Profile/>
+                <Profile />
               </ProtectRoute>
-            }/>
+            } />
             <Route path="editProfile" element={
               <ProtectRoute>
-                <EditProfile/>
+                <EditProfile />
               </ProtectRoute>
-            }/>
+            } />
             <Route path="createEvent" element={
               <ProtectRoute>
-                <CreateEvent/>
+                <CreateEvent />
               </ProtectRoute>
-            }/>
-            <Route path="*" element={<NoPage/>}/>
+            } />
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
 

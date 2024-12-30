@@ -5,7 +5,7 @@ import { IEvent } from "../../interfaces.ts";
 
 const testEvent: IEvent = {
   id: "evt1123",
-  name: "Tech Conference 2023",
+  title: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
   image: "",
   location: "San Francisco, CA",
