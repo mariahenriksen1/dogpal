@@ -1,12 +1,12 @@
 import styles from "./HeaderProfile.module.css";
-import { useState } from "react";
-import profileDefault from "../../assets/profileDefault.png"; 
+import {useState} from "react";
+import profileDefault from "../../assets/profileDefault.png";
 import DogInfo from "../DogInfo/DogInfo.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
-import { useUser } from "../../context/UserContext"; 
+import {useUser} from "../../context/UserContext";
 
 function HeaderProfile() {
-  const { publicUser, dogs } = useUser(); // Access publicUser and dogs from context
+  const {publicUser, dogs} = useUser(); // Access publicUser and dogs from context
   const [imageError, setImageError] = useState(false);
 
   if (!publicUser) {
@@ -36,7 +36,7 @@ function HeaderProfile() {
             />
           ))}
           {dogs.length === 0 ? (
-            <div className="color-white">No dogs available</div>
+            <div className="color-white">No barks were found</div>
           ) : null}
         </div>
       </div>

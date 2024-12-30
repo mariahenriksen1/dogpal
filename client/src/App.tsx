@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import "./App.css";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
@@ -10,9 +10,10 @@ import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
 import "./env.Backend/env.parseConfig.ts";
-import { ToastContainer, Slide } from "react-toastify";
-import { UserProvider } from './context/UserContext';
+import {ToastContainer, Slide} from "react-toastify";
+import {UserProvider} from './context/UserContext';
 import Parse from "./env.Backend/env.parseConfig.ts";
+import ProtectRoute from "./components/Auth/ProtectRoute.tsx"
 
 
 function App() {
@@ -20,38 +21,48 @@ function App() {
   const isLoggedIn = Parse.User.current() !== null;
   console.log(isLoggedIn);
   return (
-    <UserProvider> 
+    <UserProvider>
 
-    <Router>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="createUser" element={<CreateUser />} />
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="event" element={<Event />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="editProfile" element={<EditProfile />} />
-          <Route path="createEvent" element={<CreateEvent />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="login" element={<Login/>}/>
+          <Route path="createUser" element={<CreateUser/>}/>
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<Home/>}/>
+            <Route path="event" element={<Event/>}/>
+            <Route path="profile" element={
+              <ProtectRoute>
+                <Profile/>
+              </ProtectRoute>
+            }/>
+            <Route path="editProfile" element={
+              <ProtectRoute>
+                <EditProfile/>
+              </ProtectRoute>
+            }/>
+            <Route path="createEvent" element={
+              <ProtectRoute>
+                <CreateEvent/>
+              </ProtectRoute>
+            }/>
+            <Route path="*" element={<NoPage/>}/>
+          </Route>
+        </Routes>
 
-
-
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Slide}
-      />
-    </Router>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Slide}
+        />
+      </Router>
     </UserProvider>
   );
 }
