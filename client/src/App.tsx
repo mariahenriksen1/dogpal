@@ -1,20 +1,27 @@
+// External libraries and dependencies (third-party)
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import "./App.css";
+import {ToastContainer, Slide} from "react-toastify";
+
+// Context and backend configuration
+import {UserProvider} from './context/UserContext';
+import Parse from "./env.Backend/env.parseConfig.ts";
+
+// Pages
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Event from "./pages/Event";
 import Profile from "./pages/Profile.tsx";
 import CreateEvent from "./pages/CreateEvent.tsx";
-import NoPage from "./pages/NoPage";
 import CreateUser from "./pages/CreateUserPage.tsx";
 import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
-import "./env.Backend/env.parseConfig.ts";
-import {ToastContainer, Slide} from "react-toastify";
-import {UserProvider} from './context/UserContext';
-import Parse from "./env.Backend/env.parseConfig.ts";
-import ProtectRoute from "./components/Auth/ProtectRoute.tsx"
+import NoPage from "./pages/NoPage";
 
+// Components
+import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
+
+// Stylesheets
+import "./App.css";
 
 function App() {
 
@@ -22,7 +29,6 @@ function App() {
   console.log(isLoggedIn);
   return (
     <UserProvider>
-
       <Router>
         <Routes>
           <Route path="login" element={<Login/>}/>
