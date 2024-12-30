@@ -3,14 +3,19 @@ import styles from "./Button.module.css";
 
 type ButtonProps = {
   label: string;
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "transparent";
   icon?: React.ReactNode;
   onClick?: () => void;
   className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({ label, variant, icon, onClick, className }) => {
-  const buttonClass = variant === "primary" ? styles.primary : styles.secondary;
+  const buttonClass =
+      variant === "primary"
+          ? styles.primary
+          : variant === "secondary"
+              ? styles.secondary
+              : styles.transparent;
 
   return (
     <button

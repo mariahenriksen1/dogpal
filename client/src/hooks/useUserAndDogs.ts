@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Parse from "../env.Backend/env.parseConfig";
-import { User,Dog, PublicUser } from "../Interface.ts";
+import { Dog, PublicUser } from "../Interface.ts";
 
 
 export const useUserAndDogs = () => {

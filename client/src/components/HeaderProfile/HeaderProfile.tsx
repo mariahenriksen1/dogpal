@@ -1,16 +1,16 @@
 import styles from "./HeaderProfile.module.css";
-import { useState } from "react";
-import profileDefault from "../../assets/profileDefault.png"; 
+import {useState} from "react";
+import profileDefault from "../../assets/profileDefault.png";
 import DogInfo from "../DogInfo/DogInfo.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
-import { useUser } from "../../context/UserContext"; 
+import {useUser} from "../../context/UserContext";
 
 function HeaderProfile() {
-  const { publicUser, dogs } = useUser(); // Access publicUser and dogs from context
+  const {publicUser, dogs} = useUser(); // Access publicUser and dogs from context
   const [imageError, setImageError] = useState(false);
 
   if (!publicUser) {
-    return null; 
+    return null;
   }
 
   const firstName = publicUser.get("firstName") || "Unknown";
@@ -20,10 +20,6 @@ function HeaderProfile() {
     ? profileDefault
     : (publicUser.get("profilePicture") as string) || profileDefault;
 
-  if (dogs.length === 0) {
-    return <div>No dogs available</div>; // Handle no dogs scenario
-  }
-
   return (
     <div className={styles.headerProfile}>
       <div className={styles.profileDetails}>
@@ -31,7 +27,7 @@ function HeaderProfile() {
         <div className={styles.dogList}>
           {dogs.map((dog) => (
             <DogInfo
-              key={dog.objectId} // Ensure each key is unique
+              key={dog.objectId}
               dog={dog}
               variant="Dog info"
               textColor="white"
@@ -39,6 +35,9 @@ function HeaderProfile() {
               pictureSize="27px"
             />
           ))}
+          {dogs.length === 0 ? (
+            <div className="color-white">No barks were found</div>
+          ) : null}
         </div>
       </div>
       <PreviewImage
