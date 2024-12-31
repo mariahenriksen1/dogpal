@@ -1,26 +1,5 @@
-/*´´ .upload-image {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 100px;
-    aspect-ratio: 21 / 9;
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    opacity: 100%;
-    color: var(--white);
-    border-radius: 6px;
-} */
 
-/* .file-input {
-    top: 0;
-    position: absolute;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #BB4125;
-} */
+
 
 .container {
   display: flex;
@@ -422,4 +401,33 @@ section {
   top: 5px;
   position: absolute;
   border: 2px #19191a solid;
+}
+
+
+/* ------------------------------------------------------ */
+
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+.react-time-picker__wrapper
+{
+
+  max-height: 40px;
+  width: 50%;
+  max-width: 110px;
+  height: 50%;
+  border-radius: 6px;
+  border: 1px #19191a solid;
+  padding-left: 30px;
+  margin-bottom: -25px;
+}
+
+.form-label {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 0px;
+  display: block;
+  
 }
