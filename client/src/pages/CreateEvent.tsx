@@ -9,10 +9,22 @@ import { MdEuroSymbol } from "react-icons/md";
 import { toast, ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCreateEvent } from "../hooks/useCreateEvent";
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
 
 function CreateEvent() {
   const { createEvent, loading, error, success } = useCreateEvent();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    coverImagePreview: string | ArrayBuffer | null;
+    title: string;
+    description: string;
+    location: string;
+    date: string;
+    participantLimit: string;
+    price: string;
+    startTime: string | undefined;
+    endTime: string | undefined;
+  }>({
     coverImagePreview: "",
     title: "",
     description: "",
@@ -20,6 +32,8 @@ function CreateEvent() {
     date: "",
     participantLimit: "",
     price: "",
+    startTime: undefined,
+    endTime: undefined,
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +44,7 @@ function CreateEvent() {
     reader.onload = () => {
       setFormData((prevData) => ({
         ...prevData,
-        coverImagePreview: reader.result as string, 
+        coverImagePreview: reader.result,
       }));
     };
     reader.readAsDataURL(file);
@@ -44,28 +58,45 @@ function CreateEvent() {
     }));
   };
 
+  const handleTimeChange = (name: string, value: string | null) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
+      const startTime = formData.startTime ? parseInt(formData.startTime.replace(":", ""), 10) : undefined;
+      const endTime = formData.endTime ? parseInt(formData.endTime.replace(":", ""), 10) : undefined;
+
+      if (startTime && endTime && startTime >= endTime) {
+        toast.error("Start time must be before end time.");
+        return;
+      }
+
       await createEvent({
         title: formData.title,
         description: formData.description,
         location: formData.location,
-        date: new Date(formData.date).getTime(), // Convert to timestamp
+        date: new Date(formData.date).getTime(),
+        startTime,
+        endTime,
         participantLimit: formData.participantLimit
           ? parseInt(formData.participantLimit, 10)
           : undefined,
         price: formData.price ? parseFloat(formData.price) : undefined,
-        coverImage: formData.coverImagePreview,
+        coverImage: typeof formData.coverImagePreview === "string" ? formData.coverImagePreview : undefined,
       });
+
       toast.success("Event created successfully!");
     } catch (err) {
       console.error(err);
       toast.error("Failed to create event. Please try again.");
     }
   };
-  
 
   return (
     <form className="flex-column gap-40" onSubmit={handleSubmit}>
@@ -86,7 +117,7 @@ function CreateEvent() {
               />
               {formData.coverImagePreview && (
                 <img
-                  src={formData.coverImagePreview}
+                  src={typeof formData.coverImagePreview === "string" ? formData.coverImagePreview : undefined}
                   alt="Cover Preview"
                   className="image-preview"
                 />
@@ -131,6 +162,27 @@ function CreateEvent() {
           onChange={handleChange}
           name="date"
         />
+         <div className="form-group">
+          <label className="form-label">Start Time</label>
+          <TimePicker
+            className="custom-time-picker"
+            onChange={(value) => handleTimeChange("startTime", value)}
+            value={formData.startTime}
+            disableClock={true} 
+            format="HH:mm"
+          />
+        </div>
+
+        <div className="form-group">
+          <label className="form-label">End Time</label>
+          <TimePicker
+            className="custom-time-picker"
+            onChange={(value) => handleTimeChange("endTime", value)}
+            value={formData.endTime}
+            disableClock={true} 
+            format="HH:mm" 
+          />
+        </div>
         <InputField
           variant="Text input"
           label="Participant Limit"
@@ -152,8 +204,8 @@ function CreateEvent() {
         <Button
           label={loading ? "Creating..." : "Submit"}
           variant="primary"
-          onClick={handleSubmit} 
-          disabled={loading} 
+          onClick={handleSubmit}
+          disabled={loading}
         />
       </section>
       <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />

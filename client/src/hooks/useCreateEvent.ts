@@ -9,6 +9,8 @@ interface CreateEventParams {
   location?: string;
   participantLimit?: number;
   coverImage?: string;
+  startTime?: number;
+  endTime?: number;
 }
 
 interface UseCreateEventReturn {
