@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 import DogInfo from "../components/DogInfo/DogInfo.tsx";
-import { useUser } from "../context/UserContext";
+import {useUser} from "../context/UserContext";
 import profileDefault from "./../assets/profileDefault.png";
 import "./Styling/StylingProfile.css";
 import Button from "../components/Button/Button.tsx";
@@ -9,7 +9,7 @@ import PreviewImage from "../components/PreviewImage/PreviewImage.tsx";
 import EventsAttended from "../components/EventsAttended/EventsAttended.tsx";
 
 function Profile() {
-  const { publicUser, dogs, loadingDogs } = useUser(); 
+  const {publicUser, dogs, loadingDogs} = useUser();
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
 
@@ -86,7 +86,7 @@ function Profile() {
           <div className="h2-title-div">
             <h2 className="">Recently attended events</h2>
           </div>
-          <EventsAttended />
+          <EventsAttended/>
         </section>
       </main>
     </>

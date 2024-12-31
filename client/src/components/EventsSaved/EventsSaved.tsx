@@ -1,8 +1,8 @@
 import EventCard from "../EventCard/EventCard.tsx";
-import IEvent from "../../interfaces.ts";
 import styles from "./EventsSaved.module.css";
+import {Event} from "../../Interface.ts";
 
-const testEvent: IEvent = {
+const testEvent: Event = {
   id: "evt123",
   name: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
@@ -13,7 +13,7 @@ const testEvent: IEvent = {
   price: 199.99,
   creator: "John Doe",
 };
-const events: IEvent[] = [testEvent];
+const events: Event[] = [testEvent];
 
 function EventsSaved() {
   return (
@@ -22,7 +22,7 @@ function EventsSaved() {
         <div className={styles.events}>
           {events.map((event, index) => (
             <div key={index}>
-              <EventCard event={event} />
+              <EventCard event={event}/>
             </div>
           ))}
         </div>

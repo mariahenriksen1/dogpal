@@ -1,9 +1,10 @@
 import styles from "./EventsUpcoming.module.css";
 import EventFeatured from "../EventFeatured/EventFeatured.tsx";
 import EventCard from "../EventCard/EventCard.tsx";
-import { IEvent } from "../../interfaces.ts";
 
-const testEvent: IEvent = {
+import {Event} from "../../Interface.ts";
+
+const testEvent: Event = {
   id: "evt1123",
   title: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
@@ -14,11 +15,11 @@ const testEvent: IEvent = {
   creator: "John Doe",
 };
 
-const events: IEvent[] = [
-  { ...testEvent, id: "evt1123-1" },
-  { ...testEvent, id: "evt1123-2" },
-  { ...testEvent, id: "evt1123-3" },
-  { ...testEvent, id: "evt1123-4" },
+const events: Event[] = [
+  {...testEvent, id: "evt1123-1"},
+  {...testEvent, id: "evt1123-2"},
+  {...testEvent, id: "evt1123-3"},
+  {...testEvent, id: "evt1123-4"},
 ];
 
 function EventsUpcoming() {
@@ -28,9 +29,9 @@ function EventsUpcoming() {
         <div className={styles.events}>
           {events.map((event, index) => {
             return index === 0 ? (
-              <EventFeatured key={event.id} event={event} />
+              <EventFeatured key={event.id} event={event}/>
             ) : (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event}/>
             );
           })}
         </div>

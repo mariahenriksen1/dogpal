@@ -1,0 +1,26 @@
+.comment-input {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-label {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333; /* Dark color for labels */
+}
+
+.comment-textarea {
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* Allow resizing only vertically */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.comment-textarea:focus {
+    border-color: #007bff; /* Highlight border when focused */
+}

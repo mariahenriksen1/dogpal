@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useFetchEvents } from "../hooks/useFetchEvents";
+import React, {useState, useEffect} from "react";
+import {useFetchEvents} from "../hooks/useFetchEvents";
 import EventCard from "../components/EventCard/EventCard";
 import "./Styling/StylingCalendar.css";
 
 const Calendar: React.FC = () => {
-  const { events, loading, error } = useFetchEvents();
+  const {events, loading, error} = useFetchEvents();
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [selectedLocation, setSelectedLocation] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
@@ -61,12 +61,15 @@ const Calendar: React.FC = () => {
       <header className="calendar-header">
         <h1 className="calendar-title">Calendar</h1>
       </header>
-      <div className="calendar-container">
+      <section>
         <p className="calendar-description">
-          Explore upcoming dog events such as training sessions, social meetups, and other exciting activities in your area. Use the filters to search for events in specific locations or to find a date that suits you.
-          <br />
+          Explore upcoming dog events such as training sessions, social meetups, and other exciting activities in your
+          area. Use the filters to search for events in specific locations or to find a date that suits you.
+          <br/>
           Don’t miss out on the next social event for you and your furry friend!
         </p>
+      </section>
+      <section>
         <div className="calendar-controls">
           <div className="calendar-sort">
             <span>Sort by:</span>
@@ -106,8 +109,9 @@ const Calendar: React.FC = () => {
               >
                 {selectedLocation || "Choose location"}
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 14 15" fill="none">
-  <path d="M11.0832 5.75L6.99984 9.83333L2.9165 5.75" stroke="#19191A" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                  <path d="M11.0832 5.75L6.99984 9.83333L2.9165 5.75" stroke="#19191A" stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
               </div>
               {isOpen && (
                 <ul className="dropdown-list">
@@ -148,7 +152,7 @@ const Calendar: React.FC = () => {
             </div>
           )}
         </main>
-      </div>
+      </section>
     </>
   );
 };

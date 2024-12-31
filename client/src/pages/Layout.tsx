@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import {Outlet, Link} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
 import Profile from "../assets/Profile.tsx";
 import Saved from "../assets/Saved.tsx";
 import Button from "../components/Button/Button.tsx";
 import Parse from "../env.Backend/env.parseConfig.ts";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import RequireUnauth from "../components/Auth/RequireUnauth.tsx";
 import RequireAuth from "../components/Auth/RequireAuth.tsx";
 
 const Layout: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(Parse.User.current() !== null);
 
   const handleLogout = async () => {
     try {
       await Parse.User.logOut();
-      setIsLoggedIn(false); // Updates the local state
       toast.success("Successfully logged out!");
     } catch (error) {
       if (error instanceof Error) {
@@ -29,7 +26,7 @@ const Layout: React.FC = () => {
       <div className="black-bg">
         <nav>
           <Link to="/" className="icon-fill">
-            <Logo color="white" type={true} />
+            <Logo color="white" type={true}/>
           </Link>
           <RequireAuth>
             <div className="links">
@@ -40,10 +37,10 @@ const Layout: React.FC = () => {
           <div className="links">
             <RequireAuth>
               <Link to="/saved" className="icon-stroke">
-                <Saved />
+                <Saved/>
               </Link>
               <Link to="/profile" className="icon-stroke">
-                <Profile />
+                <Profile/>
               </Link>
             </RequireAuth>
 
@@ -56,18 +53,18 @@ const Layout: React.FC = () => {
                 />
               </Link>
               <Link to="/login" className="icon-stroke">
-                <Button label="Login" variant="primary" className="shrink" />
+                <Button label="Login" variant="primary" className="shrink"/>
               </Link>
             </RequireUnauth>
 
             <RequireAuth>
-              <Button label="Logout" variant="secondary" onClick={handleLogout} />
+              <Button label="Logout" variant="secondary" onClick={handleLogout}/>
             </RequireAuth>
           </div>
         </nav>
       </div>
-      <Outlet /> {/* This renders the child routes */}
-      <footer style={{ height: "100px" }}></footer>
+      <Outlet/> {/* This renders the child routes */}
+      <footer style={{height: "100px"}}></footer>
     </>
   );
 };

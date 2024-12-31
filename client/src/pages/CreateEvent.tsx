@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import InputField from "../components/InputField/InputField.tsx";
 import "../App.css";
-import "./Styling/StylingEvent.css";
+import "./Styling/StylingCreateEvent.css";
 import Button from "../components/Button/Button";
-import { IoLocationOutline } from "react-icons/io5";
-import { GrGroup } from "react-icons/gr";
-import { MdEuroSymbol } from "react-icons/md";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import {IoLocationOutline} from "react-icons/io5";
+import {GrGroup} from "react-icons/gr";
+import {MdEuroSymbol} from "react-icons/md";
+import {toast, ToastContainer, Slide} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useCreateEvent } from "../hooks/useCreateEvent";
+import {useCreateEvent} from "../hooks/useCreateEvent";
 
 function CreateEvent() {
-  const { createEvent, loading, error, success } = useCreateEvent();
+  const {createEvent, loading, error, success} = useCreateEvent();
   const [formData, setFormData] = useState({
     coverImagePreview: "",
     title: "",
@@ -30,14 +30,14 @@ function CreateEvent() {
     reader.onload = () => {
       setFormData((prevData) => ({
         ...prevData,
-        coverImagePreview: reader.result as string, 
+        coverImagePreview: reader.result as string,
       }));
     };
     reader.readAsDataURL(file);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -46,7 +46,7 @@ function CreateEvent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
       await createEvent({
         title: formData.title,
@@ -65,7 +65,7 @@ function CreateEvent() {
       toast.error("Failed to create event. Please try again.");
     }
   };
-  
+
 
   return (
     <form className="flex-column gap-40" onSubmit={handleSubmit}>
@@ -122,7 +122,7 @@ function CreateEvent() {
           value={formData.location}
           onChange={handleChange}
           name="location"
-          icon={<IoLocationOutline />}
+          icon={<IoLocationOutline/>}
         />
         <InputField
           variant="Date"
@@ -138,7 +138,7 @@ function CreateEvent() {
           value={formData.participantLimit}
           onChange={handleChange}
           name="participantLimit"
-          icon={<GrGroup />}
+          icon={<GrGroup/>}
         />
         <InputField
           variant="Text input"
@@ -147,18 +147,18 @@ function CreateEvent() {
           value={formData.price}
           onChange={handleChange}
           name="price"
-          icon={<MdEuroSymbol />}
+          icon={<MdEuroSymbol/>}
         />
         <Button
           label={loading ? "Creating..." : "Submit"}
           variant="primary"
-          onClick={handleSubmit} 
-          disabled={loading} 
+          type="submit"
+          disabled={loading}
         />
       </section>
-      <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>Event created successfully!</p>}
+      <ToastContainer position="bottom-right" autoClose={3000} transition={Slide}/>
+      {error && <p style={{color: "red"}}>{error}</p>}
+      {success && <p style={{color: "green"}}>Event created successfully!</p>}
     </form>
   );
 }

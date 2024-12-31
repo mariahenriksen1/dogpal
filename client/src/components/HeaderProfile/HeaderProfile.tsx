@@ -36,7 +36,7 @@ function HeaderProfile() {
             />
           ))}
           {dogs.length === 0 ? (
-            <div className="color-white">No barks were found</div>
+            <div className="color-white">No furry friends were found</div>
           ) : null}
         </div>
       </div>

@@ -1,9 +1,9 @@
 import EventDetails from "../EventDetails/EventDetails.tsx";
-import { Link } from "react-router-dom";
-import { IEvent } from "../../interfaces.ts";
+import {Link} from "react-router-dom";
 import styles from "./Notification.module.css";
+import {Event} from "../../Interface.ts";
 
-const testEvent: IEvent = {
+const testEvent: Event = {
   id: "evt123",
   name: "Tech Conference 2023",
   description: "A conference showcasing the latest in tech innovations.",
@@ -22,7 +22,7 @@ function Notification() {
         <p>
           <b>You’ve been invited to an event!</b>
         </p>
-        <Link to={"/test"}>{<EventDetails event={testEvent} />}</Link>
+        <Link to={"/test"}>{<EventDetails event={testEvent}/>}</Link>
       </div>
     </section>
   );

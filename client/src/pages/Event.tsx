@@ -1,184 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import Parse from '../env.Backend/env.parseConfig'; // Ensure the correct path to your Parse config
-import pictureEvent from "/src/assets/PictureEvent.png";
+import useFetchEvent from "../hooks/useFetchEvent.ts";
+import {useParams} from "react-router-dom";
+import Button from "../components/Button/Button.tsx";
 import "./Styling/StylingEvent.css";
+import Information from "../components/Information/Information.tsx";
+import styles from "../components/EventDetails/EventDetails.module.css";
+import {FaEuroSign, FaMapMarkerAlt} from "react-icons/fa";
+import Comments from "../components/Comments/Comments.tsx";
 
-// Sample attendees
-const attendees = [
-  {
-    ID: 1,
-    Name: "Mogens Mogensen",
-    Dog: "Charlie",
-    Comments:
-      "Hej alle sammen. Jeg glæder mig til at se jer til hundetræning i morgen...",
-  },
-  {
-    ID: 2,
-    Name: "Julie Nielsen",
-    Dog: "Hannibal",
-    Comments:
-      "Mega fedt initiativ! Hannibal og jeg ser altid frem til den månedlige hundetræning...",
-  },
-  {
-    ID: 3,
-    Name: "Freja Sunesen",
-    Dog: "Konrad",
-    Comments:
-      "Hej alle sammen. Konrad og jeg glæder os til at se jer i morgen...",
-  },
-];
+export default function Event() {
+  const {id} = useParams(); // Get event ID from URL params
+  const {event, loading} = useFetchEvent(id); // Use the custom hook
 
-const Event = () => {
-  const [events, setEvents] = useState<Parse.Object[]>([]); // State for multiple events
-  const [loading, setLoading] = useState(true); // Loading state
+  if (loading) return (
+    <header>
+      <section>
+        <div className="flex-column space-between">
+          <div className="placeholder"/>
+          <h1 className="color-white">Loading...</h1>
+        </div>
+      </section>
+    </header>
+  );
 
-  useEffect(() => {
-    fetchEvents(); // Fetch events when the component mounts
-  }, []);
+  if (!event) return <p>Event not found or failed to load.</p>;
 
-  // Fetch all events from Parse
-  const fetchEvents = async () => {
-    try {
-      const query = new Parse.Query("Event");
-      const fetchedEvents = await query.find(); // Fetch all events
+  // Convert startTime and endTime into Date objects for formatting
+  const startTimeHours = event.startTime ? Math.floor(event.startTime / 100) : 0;
+  const startTimeMinutes = event.startTime ? event.startTime % 100 : 0;
 
-      if (fetchedEvents.length > 0) {
-        console.log("Fetched Events:", fetchedEvents); // Log fetched events
-        setEvents(fetchedEvents); // Update state with all events
-      } else {
-        console.log("No events found"); // Log if no events are found
-      }
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    } finally {
-      setLoading(false); // Set loading to false when done
-    }
-  };
+  const endTimeHours = event.endTime ? Math.floor(event.endTime / 100) : 0;
+  const endTimeMinutes = event.endTime ? event.endTime % 100 : 0;
 
-  // Add an event to the database
-  const addEvent = async () => {
-    try {
-      const newEvent = new Parse.Object("Event");
-      newEvent.set("title", "Hundetræning i hundeskoven");
-      newEvent.set("creatorId", 101); // Example creator ID
-      newEvent.set("description", "Glæd jer til månedens hundetræning...");
-      newEvent.set("date", Date.now());
-      newEvent.set("location", "Brøndby Hundeskov");
-      newEvent.set("price", 0);
+  // Format times into 24-hour format
+  const startTime = `${String(startTimeHours).padStart(2, "0")}:${String(
+    startTimeMinutes
+  ).padStart(2, "0")}`;
 
-      await newEvent.save();
-      alert("Event saved!");
-      fetchEvents(); // Refresh the event list
-    } catch (error) {
-      console.log("Error saving event:", error);
-      alert("Error saving event");
-    }
-  };
+  const endTime = `${String(endTimeHours).padStart(2, "0")}:${String(
+    endTimeMinutes
+  ).padStart(2, "0")}`;
 
-  const eventprice = (price: number) => (price === 0 ? "Free" : `${price} DKK`);
-
-  // Show loading message if events are still being fetched
-  if (loading) {
-    return <div>Loading events...</div>;
-  }
-
-  // Handle the comment change (this is a placeholder, needs implementation)
-  const handleCommentChange = (ID: number, value: string) => {
-    console.log(`Comment for attendee ${ID}: ${value}`);
-  };
+  // Format the date using the event.date field (assumed to be a timestamp in milliseconds)
+  const eventDate = new Date(event.date);
+  const dateMonth = eventDate
+    .toLocaleString("default", {month: "short"})
+    .toUpperCase();
+  const dateDay = eventDate.getDate();
 
   return (
     <>
-      {/* Event List Section */}
-      <div className="eventList">
-        <h2>Event List</h2>
-        {events.map((event) => (
-          <div key={event.id} className="eventItem">
-            <h3>{event.get("title")}</h3>
-            <p>{event.get("description")}</p>
-            <p>{new Date(event.get("date")).toLocaleString()}</p>
-            <p>{event.get("location")}</p>
-            <p>{eventprice(event.get("price"))}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Event Details */}
-
-      <div className="titleBar">
-        <img className="pictureEvent" src={pictureEvent} alt="Event" />
-
-        <div className="eventList">
-          {events.map((event) => (
-            <div key={event.id} className="eventDetails">
-              <div className="titleRow">
-                <div className="titleColumn">
-                  <h1 className="EventTitle">{event.get("title")}</h1>
-                </div>
-                <div className="spacerColumn"></div>
-                <div className="priceAndSignUp">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
-                    fill="none"
-                  >
-                    <path
-                      d="M15.2981 16.8302C14.0289 18.9455 11.9711 18.9455 10.7019 16.8302..."
-                      stroke="white"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                  <p className="eventPrice">{eventprice(event.get("price"))}</p>
-                  <button className="buttonSignUp">Sign Up</button>
-                </div>
+      <header>
+        <section>
+          <div className="flex-column space-between">
+            <img src={event.image} alt={event.title}/>
+            <div className="flex-row space-between align-center">
+              <h1 className="color-white">{event.title}</h1>
+              <div className="flex-row gap-20 align-center">
+                <Information color="white" icon={<FaEuroSign color={"white"}/>} text={String(event.price)}/>
+                <Button
+                  label="Join event"
+                  variant="primary"
+                />
               </div>
-
-              <div className="descriptionBar">
-                <div className="EventDate">
-                  <p className="EventMonth">
-                    {new Date(event.get("date")).toLocaleString("default", {
-                      month: "short",
-                    })}
-                  </p>
-                  <p className="EventDate">
-                    {new Date(event.get("date")).getDate()}
-                  </p>
-                </div>
-
-                <p className="EventTime">
-                  {new Date(event.get("date")).toLocaleTimeString()}
-                </p>
-                <p className="EventLocation">{event.get("location")}</p>
-                <p className="EventCreator">By {event.get("creatorId")}</p>
-              </div>
-
-              <div className="description">{event.get("description")}</div>
             </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="description"></div>
-
-      {/* Comments Section */}
-      <div className="comments">
-        <h3 className="commenttitle">Comments</h3>
-        {attendees.map((attendee) => (
-          <div key={attendee.ID}>
-            <p>{attendee.Name}</p>
-            <p>{attendee.Dog}</p>
-            <p>{attendee.Comments}</p>
-            <TextField
-              label="Add Comment"
-              variant="outlined"
-              onChange={(e) => handleCommentChange(attendee.ID, e.target.value)}
-            />
           </div>
-        ))}
-      </div>
+        </section>
+      </header>
+
+      <section>
+        <div className="flex-row gap-40">
+          <div className="flex-column">
+            <div className="flex-row gap-20">
+              <div className="date">
+                <div className={styles.date}>
+                  <span className={styles.dateMonth}>{dateMonth}</span>
+                  <span className={styles.dateDay}>{dateDay}</span>
+                </div>
+                <span>{startTime} - {endTime}</span>
+              </div>
+              <Information color="black" icon={<FaMapMarkerAlt/>} text={event.location}/>
+            </div>
+            <p className="subtitle">{event.description}</p>
+
+            <Comments eventId={event.id}/>
+
+
+            <div className="attendee">
+              <h2>Attendees</h2>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
-};
+}
+/*
+    <div className="description"></div>
 
-export default Event;
+    {/!* Comments Section *!/}
+    <div className="comments">
+      <h3 className="commenttitle">Comments</h3>
+      {attendees.map((attendee) => (
+        <div key={attendee.ID}>
+          <p>{attendee.Name}</p>
+          <p>{attendee.Dog}</p>
+          <p>{attendee.Comments}</p>
+          <Input
+            label="Add Comment"
+            variant="outlined"
+            onChange={(e) => handleCommentChange(attendee.ID, e.target.value)}
+          />
+        </div>
+      ))}
+    </div>
+  </>
+);*/
