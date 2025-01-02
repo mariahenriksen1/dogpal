@@ -1,27 +1,24 @@
-import styles from "./EventsUpcoming.module.css";
+import React from "react";
+import { useFetchEvents } from "../../hooks/useFetchEvents";
 import EventFeatured from "../EventFeatured/EventFeatured.tsx";
 import EventCard from "../EventCard/EventCard.tsx";
-import { IEvent } from "../../interfaces.ts";
-
-const testEvent: IEvent = {
-  id: "evt1123",
-  title: "Tech Conference 2023",
-  description: "A conference showcasing the latest in tech innovations.",
-  image: "",
-  location: "San Francisco, CA",
-  date: "2023-11-20",
-  price: 199.99,
-  creator: "John Doe",
-};
-
-const events: IEvent[] = [
-  { ...testEvent, id: "evt1123-1" },
-  { ...testEvent, id: "evt1123-2" },
-  { ...testEvent, id: "evt1123-3" },
-  { ...testEvent, id: "evt1123-4" },
-];
+import styles from "./EventsUpcoming.module.css";
 
 function EventsUpcoming() {
+  const { events, loading, error } = useFetchEvents();
+
+  if (loading) {
+    return <p>Loading upcoming events...</p>;
+  }
+
+  if (error) {
+    return <p className={styles.error}>Error loading events: {error}</p>;
+  }
+
+  if (events.length === 0) {
+    return <p className={styles.noEvents}>No upcoming events available.</p>;
+  }
+
   return (
     <section>
       <div className={styles.eventsUpcoming}>
