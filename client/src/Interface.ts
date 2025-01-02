@@ -16,7 +16,6 @@ export interface User {
     email: string;
     firstName?: string;
     lastName?: string;
-    profilePicture?: string; // Add this line
     userId: string;
     createdAt: string;
     updatedAt: string;
@@ -50,7 +49,15 @@ export interface User {
     creatorId: string;
     createdAt: string;
     updatedAt: string;
+
+  
+  
+  
+  
   }
+
+
+
   // Utility functions
   export const getFullName = (publicUser: PublicUser): string =>
     [publicUser.firstName, publicUser.lastName].filter(Boolean).join(" ") || "N/A";

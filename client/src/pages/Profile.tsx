@@ -84,7 +84,7 @@ function Profile() {
 
         <section className="flex-column align-center">
           <div className="h2-title-div">
-            <h2 className="">Recently attended events</h2>
+            <h2 className=""> Events you attend</h2>
           </div>
           <EventsAttended />
         </section>

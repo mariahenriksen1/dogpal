@@ -1,0 +1,52 @@
+.signupContainer {
+  margin-top: 800px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.signupContainer1 {
+  margin-top: 200px;
+
+}
+
+
+.signupTitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formSection {
+  margin-bottom: 20px;
+}
+
+.fileUpload {
+  display: block;
+  margin: 10px 0;
+}
+
+.dogSection {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+}

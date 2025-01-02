@@ -4,11 +4,12 @@ export interface IEvent {
   title: string; 
   date: number; 
   image: string
+  
   description: string; 
   price?: number; 
   location?: string; 
   participantLimit?: number;
-  coverImage?: string; 
+  coverImagecoverImage?: string; 
   startTime?: string; 
   endTime?: string; 
   creator?: string;
