@@ -27,7 +27,7 @@ const Calendar: React.FC = () => {
   const handleBlur = () => {
     setTimeout(() => {
       setIsOpen(false);
-    }, 100); // Allow click to register
+    }, 100); 
   };
 
   const uniqueLocations = events.length > 0
