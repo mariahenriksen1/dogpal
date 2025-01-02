@@ -24,7 +24,7 @@ function Home() {
       <main>
         <section>
           <div className="sectionHeader">
-            <h2>Upcoming events near you</h2>
+            <h2>Upcoming events</h2>
             <Link to="/calendar">View all</Link>
           </div>
           <EventsUpcoming/>

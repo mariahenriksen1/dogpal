@@ -33,6 +33,24 @@ export interface User {
     updatedAt: string;
   }
   
+  export interface Event {
+    objectId: string;
+    id:string;
+    image: string;
+    
+    title: string;
+    date: string | Date;
+    description: string;
+    price?: number;
+    location?: string;
+    participantLimit?: number;
+    coverImage?: string;
+    startTime?: string;
+    endTime?: string;
+    creatorId: string;
+    createdAt: string;
+    updatedAt: string;
+  }
   // Utility functions
   export const getFullName = (publicUser: PublicUser): string =>
     [publicUser.firstName, publicUser.lastName].filter(Boolean).join(" ") || "N/A";
