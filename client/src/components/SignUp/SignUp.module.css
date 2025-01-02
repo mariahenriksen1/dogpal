@@ -1,7 +1,7 @@
 .signupContainer {
   margin-top: 800px;
   margin-bottom: 20px;
-  max-width: 600px;
+  max-width: 800px;
   margin: 20px auto;
   padding: 20px;
   border-radius: 10px;
@@ -13,6 +13,12 @@
 
 }
 
+.inputFields {
+  flex: 1; /* Allow input fields to expand */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between input fields */
+}
 
 .signupTitle {
   text-align: center;
@@ -21,11 +27,21 @@
 
 .formSection {
   margin-bottom: 20px;
+  
 }
 
 .fileUpload {
-  display: block;
-  margin: 10px 0;
+  display: inline-block; /* Inline-block for better alignment */
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+.fileUpload input[type="file"] {
+  display: none; /* Hide the default file input */
 }
 
 .dogSection {
