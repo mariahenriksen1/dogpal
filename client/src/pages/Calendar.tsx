@@ -141,11 +141,13 @@ const Calendar: React.FC = () => {
                   key={event.id}
                   event={{
                     ...event,
+                    objectId: event.id, 
                     date: new Date(event.date).getTime(),
+                    creatorId: event.creator,
                   }}
                 />
               ))}
-            </div>
+            </div>  
           )}
         </main>
       </div>

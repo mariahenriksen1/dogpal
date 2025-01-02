@@ -34,11 +34,7 @@ function App() {
     <UserProvider>
       <Router>
         <Routes>
-          <Route path="saved" element={
-           
-              <SavedEvents />
-          
-          } />
+       
           <Route path="Test" element={
             <TestJoinEventShowAttendes />
           } />
@@ -56,6 +52,12 @@ function App() {
             <Route path="editProfile" element={
               <ProtectRoute>
                 <EditProfile />
+              </ProtectRoute>
+            } />
+
+            <Route path="saved" element={
+              <ProtectRoute>
+                <SavedEvents />
               </ProtectRoute>
             } />
             

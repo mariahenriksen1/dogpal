@@ -219,8 +219,7 @@ function CreateEvent() {
         <Button
           label={loading ? "Creating..." : "Submit"}
           variant="primary"
-          onClick={handleSubmit}
-          disabled={loading}
+          onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
         />
       </section>
       <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />
