@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputField from "../components/InputField/InputField.tsx";
 import "../App.css";
-import "./Styling/StylingEvent.css";
+import "./Styling/StylingCreateEvent.css";
 import Button from "../components/Button/Button";
 import { IoLocationOutline } from "react-icons/io5";
 import { GrGroup } from "react-icons/gr";
@@ -81,7 +81,7 @@ function CreateEvent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
       const startTime = formData.startTime ? parseInt(formData.startTime.replace(":", ""), 10) : undefined;
       const endTime = formData.endTime ? parseInt(formData.endTime.replace(":", ""), 10) : undefined;
@@ -106,7 +106,7 @@ function CreateEvent() {
       });
 
       toast.success("Event created!");
-      resetForm(); 
+      resetForm();
     } catch (err) {
       console.error(err);
       toast.error("Failed to create event. Please try again.");
@@ -219,6 +219,8 @@ function CreateEvent() {
         <Button
           label={loading ? "Creating..." : "Submit"}
           variant="primary"
+          type="submit"
+          disabled={loading}
           onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
         />
       </section>

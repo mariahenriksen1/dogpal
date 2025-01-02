@@ -1,52 +1,42 @@
-.upload-image {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 480px;
-    max-width: 1280px;
-    padding: 10px;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    align-self: stretch;
-    overflow: hidden;
-  }
-  
-  .upload-image-label {
-    position: absolute;
-    color: white;
-    text-align: center;
-    font-size: 1.5rem;
-    z-index: 2; /* Ensure it is above the image */
-    pointer-events: none; /* So it doesn't block clicks */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-  }
-  
-  .image-preview {
-    width: 100%;
-    height: 100%;
+.subtitle {
+    font-size: 24px;
+}
+
+.eventImage {
     object-fit: cover;
-    z-index: 1;
-  }
-  
-  .file-input {
-    position: absolute; /* File input covers the entire area */
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    opacity: 0; /* Make it invisible but still clickable */
-  }
-  
-  /* When image is uploaded, hide the label */
-  .upload-image img + .upload-image-label {
-    opacity: 0;
-  }
-  
+    aspect-ratio: 21 / 9;
+}
+
+.placeholder {
+    width: 1000px;
+    height: 1000px;
+    aspect-ratio: 16 / 9;
+    background-color: var(--black);
+}
+
+.attendee {
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 320px;
+    background-color: var(--bg-dark);
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+}
+
+.comments {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--bg-dark);
+}

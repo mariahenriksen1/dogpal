@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import {Outlet, Link} from "react-router-dom";
 import Logo from "../assets/Logo.tsx";
 import Profile from "../assets/Profile.tsx";
 import Saved from "../assets/Saved.tsx";
 import Button from "../components/Button/Button.tsx";
 import Calendar from "../assets/Calendar.tsx";
 import Parse from "../env.Backend/env.parseConfig.ts";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import RequireUnauth from "../components/Auth/RequireUnauth.tsx";
 import RequireAuth from "../components/Auth/RequireAuth.tsx";
 
 const Layout: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(Parse.User.current() !== null);
 
   const handleLogout = async () => {
     try {
       await Parse.User.logOut();
-      setIsLoggedIn(false); // Updates the local state
       toast.success("Successfully logged out!");
     } catch (error) {
       if (error instanceof Error) {
@@ -30,7 +27,7 @@ const Layout: React.FC = () => {
       <div className="black-bg">
         <nav>
           <Link to="/" className="icon-fill">
-            <Logo color="white" type={true} />
+            <Logo color="white" type={true}/>
           </Link>
           <RequireAuth>
             <div className="links">
@@ -39,10 +36,10 @@ const Layout: React.FC = () => {
           </RequireAuth>
 
           <div className="links">
+            <Link to="/calendar" className="icon-stroke">
+              <Calendar />
+            </Link>
             <RequireAuth>
-              <Link to="/calendar" className="icon-stroke">
-                <Calendar />
-              </Link>
               <Link to="/saved" className="icon-stroke">
                 <Saved />
               </Link>
@@ -70,7 +67,7 @@ const Layout: React.FC = () => {
           </div>
         </nav>
       </div>
-      <Outlet /> 
+      <Outlet />
       <footer style={{ height: "100px" }}></footer>
     </>
   );

@@ -117,7 +117,7 @@ const SignUp: React.FC = () => {
   return (
  <div className={styles.signupContainer1}>
     <section></section>
-    
+
     <div className={styles.signupContainer}>
       <h2 className={styles.signupTitle}>Create or Update User</h2>
       <div className={styles.formSection}>

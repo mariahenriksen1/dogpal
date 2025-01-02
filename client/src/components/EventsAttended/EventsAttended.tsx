@@ -1,7 +1,7 @@
 import React from "react";
 import EventCard from "../EventCard/EventCard.tsx";
 import { IEvent } from "../../interfaces.ts";
-import { useJoinedEvents } from "../../hooks/useJoinedEvents"; 
+import { useJoinedEvents } from "../../hooks/useJoinedEvents";
 import styles from "./EventsAttended.module.css";
 
 function EventsAttended() {
