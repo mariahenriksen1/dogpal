@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Parse from "../env.Backend/env.parseConfig.ts";
 
 interface EventData {
+  createdAt: string;
+  updatedAt: string;
   name: string;
   image: string;
   creator: string;

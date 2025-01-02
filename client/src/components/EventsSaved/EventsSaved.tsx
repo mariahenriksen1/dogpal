@@ -1,27 +1,21 @@
+import React from "react";
 import EventCard from "../EventCard/EventCard.tsx";
-import IEvent from "../../interfaces.ts";
+import { useSavedEvents } from "../../hooks/useSavedEvents";
 import styles from "./EventsSaved.module.css";
-
-const testEvent: IEvent = {
-  id: "evt123",
-  name: "Tech Conference 2023",
-  description: "A conference showcasing the latest in tech innovations.",
-  image:
-    "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
-  location: "San Francisco, CA",
-  date: "2023-11-20",
-  price: 199.99,
-  creator: "John Doe",
-};
-const events: IEvent[] = [testEvent];
+import { Event } from "../../Interface.ts";
 
 function EventsSaved() {
+  const { savedEvents, loading, error } = useSavedEvents();
+
   return (
     <section>
       <div className={styles.eventsSaved}>
+        {loading && <p>Loading saved events...</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        {!loading && savedEvents.length === 0 && <p>No saved events found.</p>}
         <div className={styles.events}>
-          {events.map((event, index) => (
-            <div key={index}>
+          {savedEvents.map((event: Event) => (
+            <div key={event.objectId}>
               <EventCard event={event} />
             </div>
           ))}

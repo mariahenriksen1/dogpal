@@ -1,4 +1,5 @@
 export interface IEvent {
+  objectId: string;
   id: string;
   title: string; 
   date: number; 
@@ -8,11 +9,10 @@ export interface IEvent {
   location?: string; 
   participantLimit?: number;
   coverImage?: string; 
-  startTime?: number; 
-  endTime?: number; 
+  startTime?: string; 
+  endTime?: string; 
   creator?: string;
 }
-
 
 
 

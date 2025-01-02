@@ -28,9 +28,9 @@ function EventsUpcoming() {
         <div className={styles.events}>
           {limitedEvents.map((event, index) => {
             return index === 0 ? (
-              <EventFeatured key={event.id} event={event} />
+              <EventFeatured key={event.id} event={{ ...event, objectId: event.id, startTime: event.startTime.toString(), endTime: event.endTime.toString() }} />
             ) : (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={{ ...event, objectId: event.id, startTime: event.startTime.toString(), endTime: event.endTime.toString(), creatorId: event.creator, createdAt: event.createdAt, updatedAt: event.updatedAt }} />
             );
           })}
         </div>

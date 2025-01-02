@@ -39,14 +39,14 @@ export interface User {
     image: string;
     
     title: string;
-    date: string | Date;
+    date: any;
     description: string;
     price?: number;
     location?: string;
     participantLimit?: number;
     coverImage?: string;
-    startTime?: string;
-    endTime?: string;
+    startTime?: any;
+    endTime?: any;
     creatorId: string;
     createdAt: string;
     updatedAt: string;
