@@ -1,4 +1,6 @@
 import React from "react";
+import EventDetails from "../EventDetails/EventDetails.tsx";
+
 import EventCard from "../EventCard/EventCard.tsx";
 import { useSavedEvents } from "../../hooks/useSavedEvents";
 import styles from "./EventsSaved.module.css";
@@ -14,11 +16,12 @@ function EventsSaved() {
         {error && <p style={{ color: "red" }}>{error}</p>}
         {!loading && savedEvents.length === 0 && <p>No saved events found.</p>}
         <div className={styles.events}>
-          {savedEvents.map((event: Event) => (
-            <div key={event.objectId}>
-              <EventCard event={event} />
-            </div>
-          ))}
+        {savedEvents.map((event: Event) => (
+  <div key={event.objectId}>
+    <EventCard event={{ ...event, id: event.objectId }} />
+  </div>
+))}
+
         </div>
       </div>
     </section>
