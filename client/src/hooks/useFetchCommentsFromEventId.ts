@@ -1,21 +1,25 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import Parse from "../env.Backend/env.parseConfig.ts";
-import {Comment} from "../Interface.ts";
+import {IComment} from "../Interface.ts";
 
 interface useFetchCommentsFromEventIdReturn {
-  comments: Comment[];
+  comments: IComment[];
   loading: boolean;
   error: string | null;
+  reFetch: () => Promise<void>; // Expose the reFetch function
 }
 
-export const useFetchCommentsFromEventId = (
-  eventId: string | undefined
-): useFetchCommentsFromEventIdReturn => {
-  const [comments, setComments] = useState<Comment[]>([]);
+interface ParseComment {
+  id: string;
+  get: (key: string) => any;
+}
+
+export const useFetchCommentsFromEventId = (eventId: string | undefined): useFetchCommentsFromEventIdReturn => {
+  const [comments, setComments] = useState<IComment[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchComments = useCallback(async () => {
     if (!eventId) {
       setComments([]);
       setLoading(false);
@@ -23,35 +27,43 @@ export const useFetchCommentsFromEventId = (
       return;
     }
 
-    // Wrapping in an IIFE to avoid returning Promise directly
-    (async () => {
-      setLoading(true);
-      setError(null);
+    setLoading(true);
+    setError(null);
 
-      try {
-        const Comment = Parse.Object.extend("Comment");
-        const query = new Parse.Query(Comment);
-        query.equalTo("EventId", eventId);
-        const results = await query.find();
+    try {
+      const query = new Parse.Query("Comment");
+      const specificEvent = new Parse.Object("Event");
+      specificEvent.id = eventId;
+      query.equalTo("EventId", specificEvent);
+      const results = await query.find();
 
-        const fetchedComments = results.map((comment: Comment) => ({
-          objectId: comment.objectId,
-          UserId: comment.UserId,
-          Date: comment.Date,
-          EventId: comment.EventId,
-          Comment: comment.Comment,
-        }));
+      const fetchedComments = await Promise.all(
+        results.map(async (comment: ParseComment) => ({
+          objectId: comment.id,
+          PublicUser: comment.get("UserId").id,
+          Date: comment.get("Date"),
+          EventId: comment.get("EventId"),
+          Comment: comment.get("Comment"),
+          createdAt: comment.get("createdAt"),
+        }))
+      );
 
-        setComments(fetchedComments);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message || "An error occurred while fetching comments.");
-        } else {
-          setError("An unknown error occurred while fetching comments.");
-        }
+      setComments(fetchedComments);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "An error occurred while fetching comments.");
+      } else {
+        setError("An unknown error occurred while fetching comments.");
       }
-    })();
+    } finally {
+      setLoading(false);
+    }
   }, [eventId]);
 
-  return {comments, loading, error};
+  // Automatically fetch comments on mount or when eventId changes
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
+
+  return {comments, loading, error, reFetch: fetchComments};
 };

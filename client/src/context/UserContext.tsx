@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
+import React, {createContext, useState, useEffect, useContext, ReactNode} from "react";
 import Parse from "../env.Backend/env.parseConfig.ts";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
-import { useUserAndDogs } from "../hooks/useUserAndDogs";
+import {useCurrentUserAndDogs} from "../hooks/useCurrentUserAndDogs.ts";
 
 interface Dog {
   objectId: string;
@@ -31,9 +31,9 @@ interface UserProviderProps {
 }
 
 // Provider implementation
-export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
   const [publicUser, setPublicUser] = useState<Parse.Object | null>(null);
-  const { dogs, loading: loadingDogs } = useUserAndDogs(); // Fetch dogs using hook
+  const {dogs, loading: loadingDogs} = useCurrentUserAndDogs(); // Fetch dogs using hook
   const fetchedPublicUser = useCurrentPublicUser(); // Fetch public user
 
   // Sync public user state

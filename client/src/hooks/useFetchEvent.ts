@@ -23,7 +23,7 @@ export const useFetchEvent = (eventId: string | undefined): UseFetchEventReturn 
 
       try {
         const query = new Parse.Query("Event");
-        const result = await query.get(eventId); // Fetch a single event by ID
+        const result = await query.get(eventId);
 
         const formattedEvent: Event = {
           id: result.id,

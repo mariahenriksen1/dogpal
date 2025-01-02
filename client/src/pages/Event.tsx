@@ -52,7 +52,7 @@ export default function Event() {
       <header>
         <section>
           <div className="flex-column space-between">
-            <img src={event.image} alt={event.title}/>
+            <img className="eventImage" src={event.image} alt={event.title}/>
             <div className="flex-row space-between align-center">
               <h1 className="color-white">{event.title}</h1>
               <div className="flex-row gap-20 align-center">
@@ -69,7 +69,7 @@ export default function Event() {
 
       <section>
         <div className="flex-row gap-40">
-          <div className="flex-column">
+          <div className="description">
             <div className="flex-row gap-20">
               <div className="date">
                 <div className={styles.date}>
@@ -85,9 +85,9 @@ export default function Event() {
             <Comments eventId={event.id}/>
 
 
-            <div className="attendee">
-              <h2>Attendees</h2>
-            </div>
+          </div>
+          <div className="attendee">
+            <h2>Attendees</h2>
           </div>
         </div>
       </section>

@@ -1,8 +1,8 @@
 import React from "react";
-import { useUserAndDogs } from "../../hooks/useUserAndDogs";
+import {useCurrentUserAndDogs} from "../../hooks/useCurrentUserAndDogs.ts";
 
 const UserInfoWithDogs: React.FC = () => {
-  const { currentUser, dogs, loading } = useUserAndDogs();
+  const {currentUser, dogs, loading} = useCurrentUserAndDogs();
 
   if (loading) return <p>Loading user information...</p>;
 
@@ -12,7 +12,7 @@ const UserInfoWithDogs: React.FC = () => {
     <div>
       <h2>{`Hello, ${currentUser.username}!`}</h2>
       {currentUser.profilePicture && (
-        <img src={currentUser.profilePicture} alt="User Profile" />
+        <img src={currentUser.profilePicture} alt="User Profile"/>
       )}
       <p>{`Email: ${currentUser.email}`}</p>
       <p>{`First Name: ${currentUser.firstName || "N/A"}`}</p>
@@ -32,7 +32,7 @@ const UserInfoWithDogs: React.FC = () => {
             return (
               <li key={dog.objectId}>
                 <h4>{dog.name}</h4>
-                {dog.dogPicture && <img src={dog.dogPicture} alt={dog.name} />}
+                {dog.dogPicture && <img src={dog.dogPicture} alt={dog.name}/>}
                 <p>{`Breed: ${dog.race || "Unknown"}`}</p>
                 <p>{`Birth Date: ${birthDate}`}</p>
               </li>

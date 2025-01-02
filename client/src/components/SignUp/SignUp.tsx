@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { saveUserAndDogs } from "../../hooks/useUserAndDogs";
-import { Dog } from "../../Interface";
-import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
-import { toast } from "react-toastify";
+import React, {useState} from "react";
+import {saveUserAndDogs} from "../../hooks/useCurrentUserAndDogs.ts";
+import {Dog} from "../../Interface";
+import {AddNewDogButton} from "../AddNewDogButton/AddNewDogButton";
+import {toast} from "react-toastify";
 
 const SignUp: React.FC = () => {
   const [userData, setUserData] = useState({
@@ -29,8 +29,8 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
+    const {name, value} = e.target;
+    setUserData((prev) => ({...prev, [name]: value}));
   };
 
   const handleProfilePictureChange = (
@@ -53,9 +53,9 @@ const SignUp: React.FC = () => {
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setDogs((prevDogs) =>
-      prevDogs.map((dog, i) => (i === index ? { ...dog, [name]: value } : dog))
+      prevDogs.map((dog, i) => (i === index ? {...dog, [name]: value} : dog))
     );
   };
 
@@ -69,7 +69,7 @@ const SignUp: React.FC = () => {
       reader.onload = () => {
         setDogs((prevDogs) =>
           prevDogs.map((dog, i) =>
-            i === index ? { ...dog, dogPicture: reader.result as string } : dog
+            i === index ? {...dog, dogPicture: reader.result as string} : dog
           )
         );
       };
@@ -156,7 +156,7 @@ const SignUp: React.FC = () => {
         value={userData.lastName}
         onChange={handleInputChange}
       />
-      <input type="file" onChange={handleProfilePictureChange} />
+      <input type="file" onChange={handleProfilePictureChange}/>
 
       <h3>Add Dogs</h3>
       {dogs.map((dog, index) => (
@@ -201,7 +201,7 @@ const SignUp: React.FC = () => {
       ))}
 
       {/* Add Add Dog Button */}
-      <AddNewDogButton label="Add Another Dog" iconType="add" onClick={handleAddDog} />
+      <AddNewDogButton label="Add Another Dog" iconType="add" onClick={handleAddDog}/>
       <button onClick={handleSubmit} disabled={loading}>
         {loading ? "Saving..." : "Save"}
       </button>

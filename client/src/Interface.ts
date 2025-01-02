@@ -13,10 +13,9 @@ export interface User {
 export interface PublicUser {
   objectId: string;
   username: string;
-  email: string;
   firstName?: string;
   lastName?: string;
-  profilePicture?: string; // Add this line
+  profilePicture?: string;
   userId: string;
   createdAt: string;
   updatedAt: string;
@@ -48,12 +47,14 @@ export interface Dog {
   updatedAt: string;
 }
 
-export interface Comment {
+export interface IComment {
   objectId: string;
   UserId: string;
   Date: string;
+  createdAt: string;
   EventId: string;
   Comment: string;
+  PublicUser: string;
 }
 
 // Utility functions
