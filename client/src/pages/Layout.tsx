@@ -4,6 +4,7 @@ import Logo from "../assets/Logo.tsx";
 import Profile from "../assets/Profile.tsx";
 import Saved from "../assets/Saved.tsx";
 import Button from "../components/Button/Button.tsx";
+import Calendar from "../assets/Calendar.tsx";
 import Parse from "../env.Backend/env.parseConfig.ts";
 import { toast } from "react-toastify";
 import RequireUnauth from "../components/Auth/RequireUnauth.tsx";
@@ -39,6 +40,9 @@ const Layout: React.FC = () => {
 
           <div className="links">
             <RequireAuth>
+              <Link to="/calendar" className="icon-stroke">
+                <Calendar />
+              </Link>
               <Link to="/saved" className="icon-stroke">
                 <Saved />
               </Link>
@@ -66,7 +70,7 @@ const Layout: React.FC = () => {
           </div>
         </nav>
       </div>
-      <Outlet /> {/* This renders the child routes */}
+      <Outlet /> 
       <footer style={{ height: "100px" }}></footer>
     </>
   );

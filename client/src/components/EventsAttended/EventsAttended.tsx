@@ -1,39 +1,24 @@
+import React from "react";
 import EventCard from "../EventCard/EventCard.tsx";
 import { IEvent } from "../../interfaces.ts";
+import { useJoinedEvents } from "../../hooks/useJoinedEvents"; 
 import styles from "./EventsAttended.module.css";
 
-const testEvent: IEvent = {
-  id: "evt1234",
-  name: "Tech Conference 2023",
-  description: "A conference showcasing the latest in tech innovations.",
-  image:
-    "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
-  location: "San Francisco, CA",
-  date: "2023-11-20",
-  price: 199.99,
-  creator: "John Doe",
-};
-
-const testEvent2: IEvent = {
-  id: "evt12345",
-  name: "Dog Playdate Week 51 2024",
-  description: "The weekly dog playdate event for all dog lovers",
-  image:
-    "https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg",
-  location: "Copehagen, Denmark",
-  date: "2024-12-20",
-  price: 55.99,
-  creator: "Freja Sunesen",
-};
-const events: IEvent[] = [testEvent, testEvent2];
-
 function EventsAttended() {
+  const { joinedEvents, loading, error } = useJoinedEvents();
+
   return (
     <section>
+
       <div className={styles.eventsAttended}>
+        {loading && <p>Loading joined events...</p>}
+        {error && <p style={{ color: "red" }}>Error: {error}</p>}
+        {!loading && !error && joinedEvents.length === 0 && (
+          <p>No events joined yet. Go join some amazing events!</p>
+        )}
         <div className={styles.events}>
-          {events.map((event, index) => (
-            <div key={index}>
+          {joinedEvents.map((event) => (
+            <div key={event.id}>
               <EventCard event={event} />
             </div>
           ))}

@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useCurrentPublicUser from "../../hooks/useCurrentPublicUser";
 import { useNavigate } from "react-router-dom";
 
+
 export const UserLogin: FC<{}> = (): ReactElement => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,20 +17,19 @@ export const UserLogin: FC<{}> = (): ReactElement => {
     lastName: string;
   } | null>(null);
 
-  const publicUser = useCurrentPublicUser(); // Public user hook
+  const publicUser = useCurrentPublicUser();
   const navigate = useNavigate();
 
   const getCurrentUser = async function (): Promise<void> {
     const user = await Parse.User.current();
     if (user) {
       setCurrentUser(user);
-      // Fetch public user details from current user
       if (publicUser) {
         const firstName = publicUser.get("firstName") || "N/A";
         const lastName = publicUser.get("lastName") || "N/A";
         setUserDetails({ firstName, lastName });
       } else {
-        setUserDetails(null); // Set null if publicUser is not available
+        setUserDetails(null); 
       }
     } else {
       setCurrentUser(null);
@@ -38,27 +38,32 @@ export const UserLogin: FC<{}> = (): ReactElement => {
   };
 
   useEffect(() => {
-    getCurrentUser(); // Fetch user details when publicUser changes
-  }, [publicUser]); // Trigger effect when publicUser is available
-
+    if (currentUser) {
+      navigate("/profile");
+    }
+  }, [currentUser, navigate]);
+  
   const doUserLogIn = async function () {
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
+  
       toast.success(
-        `Success! User ${loggedInUser.get(
-          "username"
-        )} has successfully signed in!`
+        `Success! User ${loggedInUser.get("username")} has successfully signed in!`
       );
-      await getCurrentUser(); // Update user state
-      navigate("/profile"); // Navigate immediately
+  
+      navigate("/profile");
+  
       setUsername("");
       setPassword("");
+  
+      await getCurrentUser();
     } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error during login: ${error.message}`);
       }
     }
   };
+  
 
   const doUserLogOut = async function () {
     try {

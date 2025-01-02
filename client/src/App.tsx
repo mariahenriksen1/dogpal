@@ -20,10 +20,8 @@ import NoPage from "./pages/NoPage";
 import SavedEvents from "./pages/SavedEvents.tsx";
 import TestJoinEventShowAttendes from "./pages/TestShowAttendes.tsx";
 
-// Components
 import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
 
-// Stylesheets
 import "./App.css";
 
 function App() {
@@ -40,8 +38,8 @@ function App() {
           } />
           
           <Route path="login" element={<Login />} />
-          <Route path="createUser" element={<CreateUser />} />
           <Route path="/" element={<Layout />}>
+            <Route path="createUser" element={<CreateUser />} />
             <Route index element={<Home />} />
             <Route path="event" element={<Event />} />
             <Route path="profile" element={

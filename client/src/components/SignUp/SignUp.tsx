@@ -3,6 +3,9 @@ import { saveUserAndDogs } from "../../hooks/useUserAndDogs";
 import { Dog } from "../../Interface";
 import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton";
 import { toast } from "react-toastify";
+import InputField from "../InputField/InputField";
+import Button from "../Button/Button";
+import styles from "./SignUp.module.css";
 
 const SignUp: React.FC = () => {
   const [userData, setUserData] = useState({
@@ -103,108 +106,113 @@ const SignUp: React.FC = () => {
       await saveUserAndDogs(userData, dogs);
       toast.success("User and Dogs saved successfully!");
     } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error saving user and dogs:", error.message);
-      } else {
-        console.error("Error saving user and dogs:", error);
-      }
-      if (error instanceof Error) {
-        toast.error(`Error: ${error.message}`);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
+      toast.error(
+        error instanceof Error ? `Error: ${error.message}` : "An unknown error occurred."
+      );
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Create or Update User</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        name="username"
-        value={userData.username}
-        onChange={handleInputChange}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        name="email"
-        value={userData.email}
-        onChange={handleInputChange}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        name="password"
-        value={userData.password}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="First Name"
-        name="firstName"
-        value={userData.firstName}
-        onChange={handleInputChange}
-      />
-      <input
-        type="text"
-        placeholder="Last Name"
-        name="lastName"
-        value={userData.lastName}
-        onChange={handleInputChange}
-      />
-      <input type="file" onChange={handleProfilePictureChange} />
+ <div className={styles.signupContainer1}>
+    <section></section>
+    
+    <div className={styles.signupContainer}>
+      <h2 className={styles.signupTitle}>Create or Update User</h2>
+      <div className={styles.formSection}>
+        <h3>User Information</h3>
+        <InputField
+          variant="Text input"
+          label="Username"
+          name="username"
+          value={userData.username}
+          onChange={handleInputChange}
+        />
+        <InputField
+          variant="Email"
+          label="Email"
+          name="email"
+          value={userData.email}
+          onChange={handleInputChange}
+        />
+        <InputField
+          variant="Password"
+          label="Password"
+          name="password"
+          value={userData.password}
+          onChange={handleInputChange}
+        />
+        <InputField
+          variant="First name"
+          label="First Name"
+          name="firstName"
+          value={userData.firstName}
+          onChange={handleInputChange}
+        />
+        <InputField
+          variant="Last name"
+          label="Last Name"
+          name="lastName"
+          value={userData.lastName}
+          onChange={handleInputChange}
+        />
+        <label className={styles.fileUpload}>
+          Profile Picture:
+          <input type="file" onChange={handleProfilePictureChange} />
+        </label>
+      </div>
 
-      <h3>Add Dogs</h3>
-      {dogs.map((dog, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder="Dog Name"
-            name="name"
-            value={dog.name}
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <input
-            type="text"
-            placeholder="Race"
-            name="race"
-            value={dog.race}
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <input
-            type="date"
-            placeholder="Birth Date"
-            name="dogBirthDate"
-            value={
-              dog.dogBirthDate
-                ? new Date(dog.dogBirthDate).toISOString().split("T")[0]
-                : ""
-            }
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <input
-            type="file"
-            onChange={(e) => handleDogPictureChange(index, e)}
-          />
+      <div className={styles.formSection}>
+        <h3>Dogs</h3>
+        {dogs.map((dog, index) => (
+          <div key={index} className={styles.dogSection}>
+            <InputField
+              variant="Dog name"
+              label="Dog Name"
+              name="name"
+              value={dog.name}
+              onChange={(e) => handleDogChange(index, e)}
+            />
+            <InputField
+              variant="Text input"
+              label="Race"
+              name="race"
+              value={dog.race || ""}
+              onChange={(e) => handleDogChange(index, e)}
+            />
+            <InputField
+              variant="Date"
+              label="Birth Date"
+              name="dogBirthDate"
+              value={
+                dog.dogBirthDate
+                  ? new Date(dog.dogBirthDate).toISOString().split("T")[0]
+                  : ""
+              }
+              onChange={(e) => handleDogChange(index, e)}
+            />
+            <label className={styles.fileUpload}>
+              Dog Picture:
+              <input type="file" onChange={(e) => handleDogPictureChange(index, e)} />
+            </label>
+            <AddNewDogButton
+              label="Remove Dog"
+              iconType="remove"
+              onClick={() => handleRemoveDog(index)}
+            />
+          </div>
+        ))}
+        <AddNewDogButton label="Add Another Dog" iconType="add" onClick={handleAddDog} />
+      </div>
 
-          {/* Add Remove Dog Button */}
-          <AddNewDogButton
-            label="Remove Dog"
-            iconType="remove"
-            onClick={() => handleRemoveDog(index)}
-          />
-        </div>
-      ))}
-
-      {/* Add Add Dog Button */}
-      <AddNewDogButton label="Add Another Dog" iconType="add" onClick={handleAddDog} />
-      <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Saving..." : "Save"}
-      </button>
+      <Button
+        label={loading ? "Saving..." : "Save"}
+        variant="primary"
+        onClick={handleSubmit}
+        className={styles.submitButton}
+      />
+    </div>
     </div>
   );
 };
