@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import {useState} from "react";
 import PreviewImage from "../PreviewImage/PreviewImage";
 import styles from "./DogInfo.module.css";
-import { Dog, getDogAge } from "../../Interface";
+import {Dog, getDogAge} from "../../Interface";
 
 interface DogInfoProps {
   dog: Dog; // Accept a single dog as a prop
@@ -13,13 +13,13 @@ interface DogInfoProps {
 }
 
 export default function DogInfo({
-  dog,
-  variant,
-  textColor,
-  flexDirection,
-  pictureSize,
-  border,
-}: DogInfoProps) {
+                                  dog,
+                                  variant,
+                                  textColor,
+                                  flexDirection,
+                                  pictureSize,
+                                  border,
+                                }: DogInfoProps) {
   const dogDefault = "../../assets/dogDefault.png";
   const [imageError, setImageError] = useState(false);
 
@@ -29,7 +29,6 @@ export default function DogInfo({
   }
 
   const imageUrl = imageError ? dogDefault : dog.dogPicture || dogDefault;
-  console.log(`Image URL for ${dog.name}: ${imageUrl}`); // Log the image URL
 
   return (
     <div key={dog.objectId} className={styles.dogItem}>
@@ -45,22 +44,22 @@ export default function DogInfo({
       />
       <div
         className={styles.dogItem}
-        style={{ flexDirection: flexDirection || "row" }}
+        style={{flexDirection: flexDirection || "row"}}
       >
-        <p className={styles.dogName} style={{ color: textColor || "white" }}>
+        <p className={styles.dogName} style={{color: textColor || "white"}}>
           {dog.name}
         </p>
         {variant === "Detailed dog info" && (
           <>
             <p
               className={styles.dogAge}
-              style={{ color: textColor || "white" }}
+              style={{color: textColor || "white"}}
             >
               Age: {getDogAge(dog)}
             </p>
             <p
               className={styles.dogBreed}
-              style={{ color: textColor || "white" }}
+              style={{color: textColor || "white"}}
             >
               Breed: {dog.race}
             </p>

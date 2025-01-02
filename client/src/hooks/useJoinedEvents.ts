@@ -1,21 +1,10 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import Parse from "../env.Backend/env.parseConfig";
-import { useUser } from "../context/UserContext";
-
-interface Event {
-  id: string; 
-  title: string;
-  description: string; 
-  date: string; 
-  location: string; 
-  price: number;
-  coverImage: string; 
-  startTime: string; 
-  endTime: string;
-}
+import {useUser} from "../context/UserContext";
+import {Event} from "../Interface.ts";
 
 export const useJoinedEvents = () => {
-  const { publicUser } = useUser();
+  const {publicUser} = useUser();
   const [joinedEvents, setJoinedEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,6 +24,7 @@ export const useJoinedEvents = () => {
         const response: {
           success: boolean;
           events: {
+            objectId: string;
             id: string;
             title: string;
             description: string;
@@ -44,20 +34,29 @@ export const useJoinedEvents = () => {
             coverImage: string;
             startTime: string;
             endTime: string;
+            creatorId: string;
+            createdAt: string;
+            updatedAt: string;
           }[];
-        } = await Parse.Cloud.run("getJoinedEvents", { publicUserId: publicUser.id });
+        } = await Parse.Cloud.run("getJoinedEvents", {publicUserId: publicUser.id});
 
         if (response.success) {
-          const events = response.events.map((event) => ({
+          const events: Event[] = response.events.map((event) => ({
+            objectId: event.objectId || "",
             id: event.id || "",
+            image: event.coverImage || "https://via.placeholder.com/150",
             title: event.title || "Untitled Event",
+            date: event.date || new Date().toISOString(), // Fallback to current date
             description: event.description || "No description available.",
-            date: event.date || "Unknown date",
+            price: event.price,
             location: event.location || "Unknown location",
-            price: event.price || 0,
-            coverImage: event.coverImage || "https://via.placeholder.com/150", 
+            participantLimit: undefined, // Assuming not provided in response
+            coverImage: event.coverImage || "",
             startTime: event.startTime || "TBD",
             endTime: event.endTime || "TBD",
+            creatorId: event.creatorId || "",
+            createdAt: event.createdAt || new Date().toISOString(),
+            updatedAt: event.updatedAt || new Date().toISOString(),
           }));
 
           setJoinedEvents(events);
@@ -74,5 +73,5 @@ export const useJoinedEvents = () => {
     fetchJoinedEvents();
   }, [publicUser]);
 
-  return { joinedEvents, loading, error };
+  return {joinedEvents, loading, error};
 };

@@ -1,19 +1,21 @@
 function Calendar() {
-    return (
-      <>
-         <svg
+  return (
+    <>
+      <svg
         width="20"
         height="20"
         viewBox="2 2 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-<path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="#19191A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+        <path
+          d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z"
+          stroke="#19191A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
 
-      </>
-    );
-  }
-  
-  export default Calendar;
+    </>
+  );
+}
+
+export default Calendar;
   

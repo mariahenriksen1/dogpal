@@ -13,12 +13,10 @@ const Information: React.FC<InformationProps> = ({icon, text, color}) => {
   if (color === "white") colorInformation = "var(--white)";
   else colorInformation = color;
 
-  const displayText = text?.trim() || "Not assigned";
-
   return (
     <div className={styles.information}>
       {icon && <span>{icon}</span>}
-      <p style={{color: colorInformation}}>{displayText}</p>
+      <p style={{color: colorInformation}}>{text}</p>
     </div>
   );
 };

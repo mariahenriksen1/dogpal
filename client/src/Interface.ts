@@ -23,7 +23,7 @@ export interface PublicUser {
 
 export interface Event {
   objectId: string;
-  id:string;
+  id: string;
   image: string;
 
   title: string;

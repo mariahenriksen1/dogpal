@@ -11,11 +11,11 @@ interface EventFeaturedProps {
 
 function EventFeatured({event}: EventFeaturedProps) {
   return (
-    <Link to="/test" className={styles.featured}>
+    <Link to={`/event/${event.id}`} className={styles.featured}>
       <div className={styles.graphic}>
         <img src={event.image} alt="Event photo"/>
         <div className={styles.overlay}>
-          <h1 className="color-white">{event.name}</h1>
+          <h1 className="color-white">{event.creatorId}</h1>
           <div className={styles.information}>
             <Information
               icon={<FaLocationPin color={"white"}/>}
@@ -36,7 +36,7 @@ function EventFeatured({event}: EventFeaturedProps) {
             text={String(event.price)}
             color="black"
           />
-          <Information icon={<FaUser/>} text={event.creator} color="black"/>
+          <Information icon={<FaUser/>} text={event.creatorId} color="black"/>
         </div>
         <p>{event.description}</p>
       </div>

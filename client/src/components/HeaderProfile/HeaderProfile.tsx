@@ -6,7 +6,7 @@ import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 import {useUser} from "../../context/UserContext";
 
 function HeaderProfile() {
-  const {publicUser, dogs} = useUser(); // Access publicUser and dogs from context
+  const {publicUser, dogs} = useUser();
   const [imageError, setImageError] = useState(false);
 
   if (!publicUser) {
@@ -25,16 +25,18 @@ function HeaderProfile() {
       <div className={styles.profileDetails}>
         <h2 className="color-white">{`${firstName} ${lastName}`}</h2>
         <div className={styles.dogList}>
-          {dogs.map((dog) => (
-            <DogInfo
-              key={dog.objectId}
-              dog={dog}
-              variant="Dog info"
-              textColor="white"
-              flexDirection="column"
-              pictureSize="27px"
-            />
-          ))}
+          {dogs.map((dog) => {
+            return (
+              <DogInfo
+                key={dog.objectId}
+                dog={dog}
+                variant="Dog info"
+                textColor="white"
+                flexDirection="column"
+                pictureSize="27px"
+              />
+            );
+          })}
           {dogs.length === 0 ? (
             <div className="color-white">No furry friends were found</div>
           ) : null}
