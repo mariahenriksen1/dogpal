@@ -17,6 +17,8 @@ import Login from "./pages/LoginPage.tsx";
 import EditProfile from "./pages/EditProfile.tsx";
 import Calendar from "./pages/Calendar.tsx";
 import NoPage from "./pages/NoPage";
+import SavedEvents from "./pages/SavedEvents.tsx";
+import TestJoinEventShowAttendes from "./pages/TestShowAttendes.tsx";
 
 // Components
 import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
@@ -32,6 +34,15 @@ function App() {
     <UserProvider>
       <Router>
         <Routes>
+          <Route path="saved" element={
+           
+              <SavedEvents />
+          
+          } />
+          <Route path="Test" element={
+            <TestJoinEventShowAttendes />
+          } />
+          
           <Route path="login" element={<Login />} />
           <Route path="createUser" element={<CreateUser />} />
           <Route path="/" element={<Layout />}>
@@ -47,6 +58,7 @@ function App() {
                 <EditProfile />
               </ProtectRoute>
             } />
+            
             <Route path="createEvent" element={
               <ProtectRoute>
                 <CreateEvent />
