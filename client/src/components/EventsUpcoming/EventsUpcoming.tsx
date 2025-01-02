@@ -19,11 +19,14 @@ function EventsUpcoming() {
     return <p className={styles.noEvents}>No upcoming events available.</p>;
   }
 
+  // Limit events to a maximum of 7
+  const limitedEvents = events.slice(0, 7);
+
   return (
     <section>
       <div className={styles.eventsUpcoming}>
         <div className={styles.events}>
-          {events.map((event, index) => {
+          {limitedEvents.map((event, index) => {
             return index === 0 ? (
               <EventFeatured key={event.id} event={event} />
             ) : (
