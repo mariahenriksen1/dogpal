@@ -36,6 +36,20 @@ function CreateEvent() {
     endTime: undefined,
   });
 
+  const resetForm = () => {
+    setFormData({
+      coverImagePreview: "",
+      title: "",
+      description: "",
+      location: "",
+      date: "",
+      participantLimit: "",
+      price: "",
+      startTime: undefined,
+      endTime: undefined,
+    });
+  };
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -91,7 +105,8 @@ function CreateEvent() {
         coverImage: typeof formData.coverImagePreview === "string" ? formData.coverImagePreview : undefined,
       });
 
-      toast.success("Event created successfully!");
+      toast.success("Event created!");
+      resetForm(); 
     } catch (err) {
       console.error(err);
       toast.error("Failed to create event. Please try again.");
@@ -162,13 +177,13 @@ function CreateEvent() {
           onChange={handleChange}
           name="date"
         />
-         <div className="form-group">
+        <div className="form-group">
           <label className="form-label">Start Time</label>
           <TimePicker
             className="custom-time-picker"
             onChange={(value) => handleTimeChange("startTime", value)}
             value={formData.startTime}
-            disableClock={true} 
+            disableClock={true}
             format="HH:mm"
           />
         </div>
@@ -179,8 +194,8 @@ function CreateEvent() {
             className="custom-time-picker"
             onChange={(value) => handleTimeChange("endTime", value)}
             value={formData.endTime}
-            disableClock={true} 
-            format="HH:mm" 
+            disableClock={true}
+            format="HH:mm"
           />
         </div>
         <InputField
@@ -210,7 +225,7 @@ function CreateEvent() {
       </section>
       <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>Event created successfully!</p>}
+      {success && <p style={{ color: "green" }}></p>}
     </form>
   );
 }
