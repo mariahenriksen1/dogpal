@@ -9,17 +9,9 @@
 }
 
 .placeholder {
-    width: 1000px;
-    height: 1000px;
-    aspect-ratio: 16 / 9;
-    background-color: var(--black);
-}
-
-.attendee {
-    padding: 20px;
-    border-radius: 8px;
-    min-width: 320px;
-    background-color: var(--bg-dark);
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    background-color: var(--gray);
 }
 
 .date {
@@ -35,8 +27,22 @@
     min-width: 320px;
 }
 
+.test {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: flex-start;
+}
+
 .comments {
     margin-top: 40px;
     padding-top: 40px;
     border-top: 1px solid var(--bg-dark);
+}
+
+.joined {
+    padding: 8px 16px;
+    color: var(--white);
+    border: 1px solid var(--p-light);
+    border-radius: 6px;
 }

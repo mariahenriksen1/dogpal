@@ -1,18 +1,9 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import Parse from "../env.Backend/env.parseConfig";
-
-interface Attendee {
-  id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  profilePicture: string;
-  signUpDate: string | null;
-  dogAttendees: string[];
-}
+import {IAttendee} from "../Interface.ts"
 
 export const useGetAttendees = (eventId: string) => {
-  const [attendees, setAttendees] = useState<Attendee[]>([]);
+  const [attendees, setAttendees] = useState<IAttendee[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +14,10 @@ export const useGetAttendees = (eventId: string) => {
         setError(null);
 
         // Call the getEventAttendees cloud function
-        const response: { success: boolean; users: Attendee[] } = await Parse.Cloud.run("getEventAttendees", { eventId });
+        const response: {
+          success: boolean;
+          users: IAttendee[]
+        } = await Parse.Cloud.run("getEventAttendees", {eventId});
 
         if (response.success) {
           setAttendees(response.users);
@@ -42,5 +36,5 @@ export const useGetAttendees = (eventId: string) => {
     }
   }, [eventId]);
 
-  return { attendees, loading, error };
+  return {attendees, loading, error};
 };

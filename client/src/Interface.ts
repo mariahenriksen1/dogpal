@@ -61,6 +61,16 @@ export interface IComment {
   PublicUser: string;
 }
 
+export interface IAttendee {
+  id: string,
+  username: string,
+  firstName: string,
+  lastName: string,
+  profilePicture: string,
+  signUpDate: string | null,
+  dogAttendees: string[]
+}
+
 // Utility functions
 export const getFullName = (publicUser: PublicUser): string =>
   [publicUser.firstName, publicUser.lastName].filter(Boolean).join(" ") || "N/A";

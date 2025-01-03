@@ -1,0 +1,32 @@
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.user {
+
+}
+
+.profilePicture {
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user p {
+    margin: 0;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.dogs {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
