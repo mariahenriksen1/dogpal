@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import InputField from "../InputField/InputField";
 import PreviewImage from "../PreviewImage/PreviewImage";
 
@@ -37,10 +37,6 @@ export const DogProfileForm = () => {
     setBreed(event.target.value);
   };
 
-  const handleDogNameClick = () => {
-    console.log("Edit dog button clicked");
-  };
-
   return (
     <section>
       <div className="flex-row">
@@ -54,7 +50,7 @@ export const DogProfileForm = () => {
             onChange={handleDogProfilePictureChange}
           />
           {dogProfilePicture && (
-            <PreviewImage src={dogProfilePicture} alt="Dog Profile Picture" />
+            <PreviewImage src={dogProfilePicture} alt="Dog Profile Picture"/>
           )}
         </div>
         <div className="profile-form-inputs">

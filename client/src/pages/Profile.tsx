@@ -17,11 +17,11 @@ function Profile() {
     return <div>Loading...</div>;
   }
 
-  const firstName = publicUser.get("firstName") || "Unknown";
-  const lastName = publicUser.get("lastName") || "User";
+  const firstName = publicUser.firstName || "Unknown";
+  const lastName = publicUser.lastName || "User";
   const profilePicture = imageError
     ? profileDefault
-    : (publicUser.get("profilePicture") as string) || profileDefault;
+    : (publicUser.profilePicture as string) || profileDefault;
 
   const handleEditProfileClick = () => {
     navigate("/editProfile");

@@ -1,118 +1,121 @@
-import { useState, FC, ReactElement, useEffect } from "react";
+import {useState, FC, ReactElement, useEffect} from "react";
 import Parse from "../../env.Backend/env.parseConfig";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useCurrentPublicUser from "../../hooks/useCurrentPublicUser";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useUser} from "../../context/UserContext.tsx";
+import {fetchUserAndDogsFromCloud} from "../../hooks/useCurrentUserAndDogs.ts";
 
-
-export const UserLogin: FC<{}> = (): ReactElement => {
+export const UserLogin: FC = (): ReactElement => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [currentUser, setCurrentUser] = useState<Parse.Object | null>(null);
   const [userDetails, setUserDetails] = useState<{
     firstName: string;
     lastName: string;
   } | null>(null);
 
-  const publicUser = useCurrentPublicUser();
+  const {publicUser, setPublicUser} = useUser(); // Use context state
   const navigate = useNavigate();
 
-  const getCurrentUser = async function (): Promise<void> {
-    const user = await Parse.User.current();
-    if (user) {
-      setCurrentUser(user);
-      if (publicUser) {
-        const firstName = publicUser.get("firstName") || "N/A";
-        const lastName = publicUser.get("lastName") || "N/A";
-        setUserDetails({ firstName, lastName });
-      } else {
-        setUserDetails(null); 
-      }
+  /**
+   * Fetch user details based on publicUser.
+   */
+  const fetchUserDetails = () => {
+    if (publicUser) {
+      const firstName = publicUser.firstName || "N/A";
+      const lastName = publicUser.lastName || "N/A";
+      setUserDetails({firstName, lastName});
     } else {
-      setCurrentUser(null);
       setUserDetails(null);
     }
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      navigate("/profile");
+  /**
+   * Logs the user in with the provided credentials.
+   */
+  const handleLogin = async (): Promise<void> => {
+    if (!username || !password) {
+      toast.error("Please provide both username and password.");
+      return;
     }
-  }, [currentUser, navigate]);
-  
-  const doUserLogIn = async function () {
+
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
-  
+      const user = await Parse.User.current()
+      const response = await fetchUserAndDogsFromCloud(user.id);
+      console.log("what is loggedInUser?: " + response);
+      setPublicUser(response.publicUser);
       toast.success(
         `Success! User ${loggedInUser.get("username")} has successfully signed in!`
       );
-  
-      navigate("/profile");
-  
+
       setUsername("");
       setPassword("");
-  
-      await getCurrentUser();
+      navigate("/");
     } catch (error) {
+      console.error("Login failed:", error);
       if (error instanceof Error) {
         toast.error(`Error during login: ${error.message}`);
       }
     }
   };
-  
 
-  const doUserLogOut = async function () {
+  /**
+   * Logs the user out and clears the state.
+   */
+  const handleLogout = async (): Promise<void> => {
     try {
       await Parse.User.logOut();
       toast.success("Successfully logged out!");
-      setCurrentUser(null);
+      setPublicUser(null); // Clear context
       setUserDetails(null);
     } catch (error) {
+      console.error("Logout failed:", error);
       if (error instanceof Error) {
         toast.error(`Error during logout: ${error.message}`);
       }
     }
   };
 
+  /**
+   * Effect to update user details when publicUser changes.
+   */
+  useEffect(() => {
+    fetchUserDetails();
+  }, [publicUser]);
+
   return (
     <div>
-      {currentUser === null ? (
+      {publicUser === null ? (
         <div className="container">
           <h2>User Login</h2>
-
           <InputField
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             placeholder="Username"
-            variant={""}
+            variant=""
           />
           <InputField
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
             type="password"
-            variant={""}
+            variant=""
           />
-
           <div className="form_buttons">
-            <Button label="Log In" variant="primary" onClick={doUserLogIn} />
-            </div>
-            <Button
-              label="Sign Up"
-              variant="secondary"
-              onClick={() => navigate("/createUser")}
-            />
+            <Button label="Log In" variant="primary" onClick={handleLogin}/>
           </div>
-
+          <Button
+            label="Sign Up"
+            variant="secondary"
+            onClick={() => navigate("/createUser")}
+          />
+        </div>
       ) : (
         <div className="container">
-          <h2 className="heading">{`Hello, ${currentUser.get(
-            "username"
-          )}!`}</h2>
+          <h2 className="heading">{`Hello, ${publicUser.username}!`}</h2>
           {userDetails && (
             <div>
               <p>{`First Name: ${userDetails.firstName}`}</p>
@@ -120,11 +123,7 @@ export const UserLogin: FC<{}> = (): ReactElement => {
             </div>
           )}
           <div className="form_buttons">
-            <Button
-              label="Log Out"
-              variant="secondary"
-              onClick={doUserLogOut}
-            />
+            <Button label="Log Out" variant="secondary" onClick={handleLogout}/>
           </div>
         </div>
       )}

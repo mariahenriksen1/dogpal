@@ -1,43 +1,28 @@
 import React, {createContext, useState, useEffect, useContext, ReactNode} from "react";
-import Parse from "../env.Backend/env.parseConfig.ts";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser";
 import {useCurrentUserAndDogs} from "../hooks/useCurrentUserAndDogs.ts";
+import {PublicUser, Dog} from "../Interface.ts";
 
-interface Dog {
-  objectId: string;
-  name: string;
-  dogPicture?: string;
-  race?: string;
-  dogBirthDate?: string | Date;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-// Define the context type
 interface UserContextType {
-  publicUser: Parse.Object | null; // Public user object
-  dogs: Dog[]; // Dog data array
-  loadingDogs: boolean; // Loading state for dogs
-  setPublicUser: React.Dispatch<React.SetStateAction<Parse.Object | null>>;
+  publicUser: PublicUser | null;
+  dogs: Dog[];
+  loadingDogs: boolean;
+  setPublicUser: React.Dispatch<React.SetStateAction<PublicUser | null>>;
 }
 
-// Create context
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-// Provider props
 interface UserProviderProps {
   children: ReactNode;
 }
 
-// Provider implementation
 export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
-  const [publicUser, setPublicUser] = useState<Parse.Object | null>(null);
-  const {dogs, loading: loadingDogs} = useCurrentUserAndDogs(); // Fetch dogs using hook
-  const fetchedPublicUser = useCurrentPublicUser(); // Fetch public user
+  const [publicUser, setPublicUser] = useState<PublicUser | null>(null);
+  const {dogs, loading: loadingDogs} = useCurrentUserAndDogs();
+  const fetchedPublicUser = useCurrentPublicUser(); // Already typed as PublicUser | null
 
-  // Sync public user state
   useEffect(() => {
+    // Simply update the state since `fetchedPublicUser` already matches `PublicUser`
     setPublicUser(fetchedPublicUser);
   }, [fetchedPublicUser]);
 
@@ -55,7 +40,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
   );
 };
 
-// Custom hook to use the context
 export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
   if (!context) {

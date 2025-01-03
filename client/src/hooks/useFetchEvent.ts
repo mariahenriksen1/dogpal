@@ -36,7 +36,11 @@ export const useFetchEvent = (eventId: string | undefined): UseFetchEventReturn 
           coverImage: result.get("coverImage"),
           image: result.get("coverImage"),
           startTime: result.get("startTime"),
-          endTime: result.get("endTime")
+          endTime: result.get("endTime"),
+          createdAt: result.get("createdAt"),
+          creatorId: "",
+          objectId: result.id,
+          updatedAt: result.get("updatedAt"),
         };
 
         setEvent(formattedEvent); // Update state with the formatted event

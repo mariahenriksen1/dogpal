@@ -14,7 +14,6 @@ const UserInfoWithDogs: React.FC = () => {
       {currentUser.profilePicture && (
         <img src={currentUser.profilePicture} alt="User Profile"/>
       )}
-      <p>{`Email: ${currentUser.email}`}</p>
       <p>{`First Name: ${currentUser.firstName || "N/A"}`}</p>
       <p>{`Last Name: ${currentUser.lastName || "N/A"}`}</p>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import InputField from "../InputField/InputField";
 import PreviewImage from "../PreviewImage/PreviewImage";
 
@@ -25,18 +25,17 @@ interface UserFormProps {
   >;
 }
 
-const UserForm: React.FC<UserFormProps> = ({ userData, setUserData }) => {
-  const [loading, setLoading] = useState(false);
+const UserForm: React.FC<UserFormProps> = ({userData, setUserData}) => {
   const [emailError, setEmailError] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUserData((prevData) => ({ ...prevData, [name]: value }));
+    const {name, value} = event.target;
+    setUserData((prevData) => ({...prevData, [name]: value}));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
-    setUserData((prevData) => ({ ...prevData, email: emailValue }));
+    setUserData((prevData) => ({...prevData, email: emailValue}));
 
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

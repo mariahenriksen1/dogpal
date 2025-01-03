@@ -9,16 +9,18 @@ function HeaderProfile() {
   const {publicUser, dogs} = useUser();
   const [imageError, setImageError] = useState(false);
 
+  console.log("publicUser:", publicUser);
+
   if (!publicUser) {
     return null;
   }
 
-  const firstName = publicUser.get("firstName") || "Unknown";
-  const lastName = publicUser.get("lastName") || "User";
+  const firstName = publicUser.firstName || "Unknown";
+  const lastName = publicUser.lastName || "User";
 
   const profilePicture = imageError
     ? profileDefault
-    : (publicUser.get("profilePicture") as string) || profileDefault;
+    : (publicUser.profilePicture as string) || profileDefault;
 
   return (
     <div className={styles.headerProfile}>
