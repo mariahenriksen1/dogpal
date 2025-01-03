@@ -6,10 +6,14 @@ import Information from "../components/Information/Information.tsx";
 import styles from "../components/EventDetails/EventDetails.module.css";
 import {FaEuroSign, FaMapMarkerAlt} from "react-icons/fa";
 import Comments from "../components/Comments/Comments.tsx";
+import {useJoinEvent} from "../hooks/useJoinEvent.ts";
+import Attendees from "../components/Attendees/Attendees.tsx";
+
 
 export default function Event() {
   const {id} = useParams(); // Get event ID from URL params
   const {event, loading} = useFetchEvent(id); // Use the custom hook
+  const {joinEvent, loading: joinLoading, success: joinSuccess} = useJoinEvent();
 
   if (loading) return (
     <header>
@@ -47,6 +51,14 @@ export default function Event() {
     .toUpperCase();
   const dateDay = eventDate.getDate();
 
+  const handleJoinEvent = () => {
+    if (!event.id) {
+      alert("Please enter an event ID");
+      return;
+    }
+    joinEvent(event.id);
+  };
+
   return (
     <>
       <header>
@@ -56,11 +68,17 @@ export default function Event() {
             <div className="flex-row space-between align-center">
               <h1 className="color-white">{event.title}</h1>
               <div className="flex-row gap-20 align-center">
-                <Information color="white" icon={<FaEuroSign color={"white"}/>} text={String(event.price)}/>
-                <Button
-                  label="Join event"
-                  variant="primary"
-                />
+                <Information color="white" icon={<FaEuroSign color={"white"}/>}
+                             text={event.price ? String(event.price) : "Free"}/>
+                {joinSuccess ? (
+                  <span className="joined">Joined</span>
+                ) : (
+                  <Button
+                    label={joinLoading ? "Joining..." : "Join event"}
+                    variant="primary"
+                    onClick={handleJoinEvent}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -68,7 +86,7 @@ export default function Event() {
       </header>
 
       <section>
-        <div className="flex-row gap-40">
+        <div className="test">
           <div className="description">
             <div className="flex-row gap-20">
               <div className="date">
@@ -81,37 +99,11 @@ export default function Event() {
               <Information color="black" icon={<FaMapMarkerAlt/>} text={event.location}/>
             </div>
             <p className="subtitle">{event.description}</p>
-
             <Comments eventId={event.id}/>
-
-
           </div>
-          <div className="attendee">
-            <h2>Attendees</h2>
-          </div>
+          <Attendees eventId={event.id}/>
         </div>
       </section>
     </>
   );
 }
-/*
-    <div className="description"></div>
-
-    {/!* Comments Section *!/}
-    <div className="comments">
-      <h3 className="commenttitle">Comments</h3>
-      {attendees.map((attendee) => (
-        <div key={attendee.ID}>
-          <p>{attendee.Name}</p>
-          <p>{attendee.Dog}</p>
-          <p>{attendee.Comments}</p>
-          <Input
-            label="Add Comment"
-            variant="outlined"
-            onChange={(e) => handleCommentChange(attendee.ID, e.target.value)}
-          />
-        </div>
-      ))}
-    </div>
-  </>
-);*/

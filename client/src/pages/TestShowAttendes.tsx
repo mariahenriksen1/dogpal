@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { useJoinEvent } from "../hooks/useJoinEvent";
-import { useGetAttendees } from "../hooks/useGetAttendees";
+import {useState} from "react";
+import {useJoinEvent} from "../hooks/useJoinEvent";
+import {useGetAttendees} from "../hooks/useGetAttendees";
 
 const TestJoinEventShowAttendees = () => {
   const [eventId, setEventId] = useState<string>("");
-  const { joinEvent, loading: joinLoading, error: joinError, success: joinSuccess } = useJoinEvent();
-  const { attendees, loading: attendeesLoading, error: attendeesError } = useGetAttendees(eventId);
+  const {joinEvent, loading: joinLoading, error: joinError, success: joinSuccess} = useJoinEvent();
+  const {attendees, loading: attendeesLoading, error: attendeesError} = useGetAttendees(eventId);
 
   const handleJoinEvent = () => {
     if (!eventId) {
@@ -37,15 +37,15 @@ const TestJoinEventShowAttendees = () => {
         <button onClick={handleJoinEvent} disabled={joinLoading}>
           {joinLoading ? "Joining..." : "Join Event"}
         </button>
-        {joinError && <p style={{ color: "red" }}>{joinError}</p>}
-        {joinSuccess && <p style={{ color: "green" }}>{joinSuccess}</p>}
+        {joinError && <p style={{color: "red"}}>{joinError}</p>}
+        {joinSuccess && <p style={{color: "green"}}>{joinSuccess}</p>}
       </div>
 
       {/* Attendees Section */}
       <div>
         <h2>Event Attendees</h2>
         {attendeesLoading && <p>Loading attendees...</p>}
-        {attendeesError && <p style={{ color: "red" }}>{attendeesError}</p>}
+        {attendeesError && <p style={{color: "red"}}>{attendeesError}</p>}
         <ul>
           {!attendeesLoading &&
             attendees.map((attendee) => (
@@ -55,13 +55,13 @@ const TestJoinEventShowAttendees = () => {
                 </p>
                 <ul>
                   {attendee.dogAttendees.map((dog: any, index: number) => (
-                    <li key={index} style={{ marginBottom: "10px" }}>
+                    <li key={index} style={{marginBottom: "10px"}}>
                       <p><strong>Name:</strong> {dog.name || "Unknown"}</p>
                       <p><strong>Race:</strong> {dog.race || "Unknown"}</p>
                       <p>
                         <strong>Birth Date:</strong> {dog.dogBirthDate
-                          ? new Date(dog.dogBirthDate).toLocaleDateString()
-                          : "Unknown"}
+                        ? new Date(dog.dogBirthDate).toLocaleDateString()
+                        : "Unknown"}
                       </p>
                       {dog.dogPicture && dog.dogPicture !== "" ? (
                         <img

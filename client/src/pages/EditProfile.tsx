@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { ProfileForm } from "../components/CreateUser/ProfileForm";
-import { DogProfileForm } from "../components/CreateUser/DogProfileForm";
-import { AddNewDogButton } from "../components/AddNewDogButton/AddNewDogButton";
+import {useState} from "react";
+import {ProfileForm} from "../components/CreateUser/ProfileForm";
+import {DogProfileForm} from "../components/CreateUser/DogProfileForm";
+import {AddNewDogButton} from "../components/AddNewDogButton/AddNewDogButton";
 
 function EditProfile() {
   const [dogProfiles, setDogProfiles] = useState<number[]>([]);
@@ -23,23 +23,23 @@ function EditProfile() {
         </section>
       </header>
 
-      <ProfileForm />
+      <ProfileForm/>
       <section className="seperator-line"></section>
 
       <div className="h2-title-div">
         <h2 className="yourDogsTitle">Your dogs</h2>
       </div>
 
-      <DogProfileForm />
+      <DogProfileForm/>
 
       {dogProfiles.map((profile, index) => (
-        <DogProfileForm key={index} />
+        <DogProfileForm key={index}/>
       ))}
 
       <section className="seperator-line"></section>
 
-     {/* Add and Remove Dog Buttons */}
-     <section className="flex-column align-center">
+      {/* Add and Remove Dog Buttons */}
+      <section className="flex-column align-center">
         {/* Reuse AddNewDogButton for both actions */}
         <AddNewDogButton
           onClick={handleAddNewDogClick}

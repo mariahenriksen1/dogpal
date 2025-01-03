@@ -37,14 +37,14 @@ const Layout: React.FC = () => {
 
           <div className="links">
             <Link to="/calendar" className="icon-stroke">
-              <Calendar />
+              <Calendar/>
             </Link>
             <RequireAuth>
               <Link to="/saved" className="icon-stroke">
-                <Saved />
+                <Saved/>
               </Link>
               <Link to="/profile" className="icon-stroke">
-                <Profile />
+                <Profile/>
               </Link>
             </RequireAuth>
 
@@ -57,18 +57,20 @@ const Layout: React.FC = () => {
                 />
               </Link>
               <Link to="/login" className="icon-stroke">
-                <Button label="Login" variant="primary" className="shrink" />
+                <Button label="Login" variant="primary" className="shrink"/>
               </Link>
             </RequireUnauth>
 
             <RequireAuth>
-              <Button label="Logout" variant="secondary" onClick={handleLogout} />
+              <Button label="Logout" variant="secondary" onClick={handleLogout}/>
             </RequireAuth>
           </div>
         </nav>
       </div>
-      <Outlet />
-      <footer style={{ height: "100px" }}></footer>
+      <main>
+        <Outlet/>
+      </main>
+      <footer style={{height: "100px"}}></footer>
     </>
   );
 };
