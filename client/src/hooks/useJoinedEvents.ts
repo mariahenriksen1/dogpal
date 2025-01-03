@@ -20,6 +20,7 @@ export const useJoinedEvents = () => {
       try {
         setLoading(true);
         setError(null);
+        const publicUserId = publicUser.objectId;
 
         const response: {
           success: boolean;
@@ -38,7 +39,7 @@ export const useJoinedEvents = () => {
             createdAt: string;
             updatedAt: string;
           }[];
-        } = await Parse.Cloud.run("getJoinedEvents", {publicUserId: publicUser.objectId});
+        } = await Parse.Cloud.run("getJoinedEvents", {publicUserId: publicUserId});
 
         if (response.success) {
           const events: Event[] = response.events.map((event) => ({

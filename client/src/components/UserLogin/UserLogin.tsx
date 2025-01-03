@@ -53,7 +53,7 @@ export const UserLogin: FC = (): ReactElement => {
 
       setUsername("");
       setPassword("");
-      navigate("/");
+      navigate("/profile");
     } catch (error) {
       console.error("Login failed:", error);
       if (error instanceof Error) {
