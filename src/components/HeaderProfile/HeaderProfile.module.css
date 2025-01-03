@@ -1,0 +1,29 @@
+/* CSS file for the HeaderProfile component */
+
+.headerProfile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.dogList {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+
+.profilePicture {
+    object-fit: cover;
+    height: 64px;
+    width: 64px;
+    border-radius: 200px;
+}

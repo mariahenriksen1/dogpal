@@ -1,0 +1,19 @@
+import EventDetails from "../EventDetails/EventDetails.tsx";
+import styles from "./EventCard.module.css";
+import { Link } from "react-router-dom";
+import { Event } from "../../Interface.ts";
+
+interface EventPreviewProps {
+  event: Event;
+}
+
+function EventCard({ event }: EventPreviewProps) {
+  return (
+    <Link to={`/event/${event.id}`} className={styles.eventPreview}>
+      <img src={event.image} alt="Event image"/>
+      <EventDetails event={event}/>
+    </Link>
+  );
+}
+
+export default EventCard;
