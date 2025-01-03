@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import InputField from "../InputField/InputField";
-import { FiMail, FiLock } from "react-icons/fi";
 import Button from "../Button/Button";
-import { FaSave } from "react-icons/fa";
+import {FaSave} from "react-icons/fa";
 import PreviewImage from "../PreviewImage/PreviewImage";
 
 export const ProfileForm: React.FC = () => {
@@ -17,8 +16,8 @@ export const ProfileForm: React.FC = () => {
   const [emailError, setEmailError] = useState<string>("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setProfileData((prevData) => ({ ...prevData, [name]: value }));
+    const {name, value} = event.target;
+    setProfileData((prevData) => ({...prevData, [name]: value}));
   };
 
   const handleProfilePictureChange = (
@@ -36,7 +35,7 @@ export const ProfileForm: React.FC = () => {
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const emailValue = event.target.value;
-    setProfileData((prevData) => ({ ...prevData, email: emailValue }));
+    setProfileData((prevData) => ({...prevData, email: emailValue}));
 
     // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -60,7 +59,7 @@ export const ProfileForm: React.FC = () => {
             onChange={handleProfilePictureChange}
           />
           {profilePicture && (
-            <PreviewImage src={profilePicture} alt="Profile picture" />
+            <PreviewImage src={profilePicture} alt="Profile picture"/>
           )}
         </div>
 
@@ -96,7 +95,7 @@ export const ProfileForm: React.FC = () => {
             <Button
               label="Save changes"
               variant="secondary"
-              icon={<FaSave />}
+              icon={<FaSave/>}
               onClick={() => console.log("Save changes clicked")}
             />
           </div>

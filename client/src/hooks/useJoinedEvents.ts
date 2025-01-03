@@ -38,7 +38,7 @@ export const useJoinedEvents = () => {
             createdAt: string;
             updatedAt: string;
           }[];
-        } = await Parse.Cloud.run("getJoinedEvents", {publicUserId: publicUser.id});
+        } = await Parse.Cloud.run("getJoinedEvents", {publicUserId: publicUser.objectId});
 
         if (response.success) {
           const events: Event[] = response.events.map((event) => ({

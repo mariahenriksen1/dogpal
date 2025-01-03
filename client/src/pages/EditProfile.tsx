@@ -32,7 +32,7 @@ function EditProfile() {
 
       <DogProfileForm/>
 
-      {dogProfiles.map((profile, index) => (
+      {dogProfiles.map((index) => (
         <DogProfileForm key={index}/>
       ))}
 
