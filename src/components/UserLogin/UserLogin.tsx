@@ -45,15 +45,12 @@ export const UserLogin: FC = (): ReactElement => {
       const loggedInUser = await Parse.User.logIn(username, password);
       const user = await Parse.User.current()
       const response = await fetchUserAndDogsFromCloud(user.id);
-      console.log("what is loggedInUser?: " + response);
       setPublicUser(response.publicUser);
       toast.success(
         `Success! User ${loggedInUser.get("username")} has successfully signed in!`
       );
-
-      setUsername("");
-      setPassword("");
-      navigate("/profile");
+      setUsername(""); setPassword("");
+      navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
       if (error instanceof Error) {
