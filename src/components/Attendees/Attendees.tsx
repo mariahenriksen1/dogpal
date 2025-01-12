@@ -2,6 +2,7 @@ import styles from "./Attendees.module.css";
 import {useGetAttendees} from "../../hooks/useGetAttendees.ts";
 import Attendee from "../Attendee/Attendee.tsx";
 import {IAttendee} from "../../Interface.ts";
+import {Link} from "react-router-dom";
 
 
 export default function Attendees({eventId}: { eventId: string }) {
@@ -15,7 +16,9 @@ export default function Attendees({eventId}: { eventId: string }) {
         {attendeesError && <p style={{color: "red"}}>{attendeesError}</p>}
         {!attendeesLoading &&
           attendees.map((attendee: IAttendee) => (
-            <Attendee {...attendee} key={attendee.id}/>
+            <Link to={`/user/${attendee.id}`}>
+              <Attendee {...attendee} key={attendee.id}/>
+            </Link>
           ))}
       </div>
     </div>

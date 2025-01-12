@@ -1,9 +1,10 @@
 // External libraries and dependencies (third-party)
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer, Slide } from "react-toastify";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {Slide, ToastContainer} from "react-toastify";
 
 // Context and backend configuration
 import {UserProvider} from './context/UserContext.tsx';
+import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
 
 // Pages
 import Layout from "./pages/Layout.tsx";
@@ -18,10 +19,10 @@ import Calendar from "./pages/Calendar.tsx";
 import NoPage from "./pages/NoPage.tsx";
 import SavedEvents from "./pages/SavedEvents.tsx";
 import TestJoinEventShowAttendes from "./pages/TestShowAttendes.tsx";
-
-import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
+import User from "./pages/User.tsx";
 
 import "./App.css";
+
 
 function App() {
   return (
@@ -30,14 +31,15 @@ function App() {
         <Routes>
 
           <Route path="Test" element={
-            <TestJoinEventShowAttendes />
-          } />
+            <TestJoinEventShowAttendes/>
+          }/>
 
           <Route path="login" element={<Login/>}/>
           <Route path="createUser" element={<CreateUser/>}/>
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home/>}/>
             <Route path="event/:id" element={<Event/>}/>
+            <Route path={"user/:id"} element={<User/>}/>
             <Route path="profile" element={
               <ProtectRoute>
                 <Profile/>
@@ -50,7 +52,7 @@ function App() {
             }/>
             <Route path="saved" element={
               <ProtectRoute>
-                <SavedEvents />
+                <SavedEvents/>
               </ProtectRoute>
             }/>
             <Route path="createEvent" element={

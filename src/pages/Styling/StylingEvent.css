@@ -27,7 +27,7 @@
     min-width: 320px;
 }
 
-.test {
+.event {
     display: flex;
     flex-direction: row;
     gap: 40px;

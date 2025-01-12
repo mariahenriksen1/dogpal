@@ -86,7 +86,7 @@ export default function Event() {
       </header>
 
       <section>
-        <div className="test">
+        <div className="event">
           <div className="description">
             <div className="flex-row gap-20">
               <div className="date">
