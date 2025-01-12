@@ -2,9 +2,10 @@ import style from "./Comments.module.css";
 import {useFetchCommentsFromEventId} from "../../hooks/useFetchCommentsFromEventId.ts";
 import Comment from "../Comment/Comment.tsx";
 import Input from "../Input/Input.tsx";
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useCreateComment} from "../../hooks/useCreateComment.ts";
 import {IComment} from "../../Interface.ts";
+import RequireAuth from "../Auth/RequireAuth.tsx";
 
 export default function Comments({eventId}: { eventId: string }) {
   const {comments: fetchedComments, reFetch} = useFetchCommentsFromEventId(eventId);
@@ -60,12 +61,14 @@ export default function Comments({eventId}: { eventId: string }) {
             <p>Be the first to give a woof!</p>
           )}
         </div>
-        <Input
-          placeholder="Write a comment here"
-          value={newComment}
-          onChange={handleCommentChange}
-          onEnterPress={handleSubmit}
-        />
+        <RequireAuth>
+          <Input
+            placeholder="Write a comment here"
+            value={newComment}
+            onChange={handleCommentChange}
+            onEnterPress={handleSubmit}
+          />
+        </RequireAuth>
       </div>
     </>
   );

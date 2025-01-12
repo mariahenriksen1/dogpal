@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import Parse from "../env.Backend/env.parseConfig.ts";
 
 export const useSaveEvent = () => {
@@ -11,7 +11,8 @@ export const useSaveEvent = () => {
       setLoading(true);
       setError(null);
       setSuccess(null);
-      const response: { success: boolean; message: string } = await Parse.Cloud.run("useSaveEvent", { eventId });
+      const response: { success: boolean; message: string } = await Parse.Cloud.run("useSaveEvent", {eventId});
+      console.log(response);
       if (response.success) {
         setSuccess(response.message);
       } else {
@@ -28,5 +29,5 @@ export const useSaveEvent = () => {
     }
   };
 
-  return { saveEvent, loading, error, success };
+  return {saveEvent, loading, error, success};
 };

@@ -46,3 +46,10 @@
     border: 1px solid var(--p-light);
     border-radius: 6px;
 }
+
+.saved {
+    padding: 8px 16px;
+    color: var(--white);
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+}
