@@ -30,3 +30,17 @@
     gap: 10px;
 }
 
+.dog {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.dogImage {
+    object-fit: cover;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+}
+

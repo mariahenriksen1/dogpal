@@ -8,12 +8,15 @@ import {FaEuroSign, FaMapMarkerAlt} from "react-icons/fa";
 import Comments from "../components/Comments/Comments.tsx";
 import {useJoinEvent} from "../hooks/useJoinEvent.ts";
 import Attendees from "../components/Attendees/Attendees.tsx";
+import {useSaveEvent} from "../hooks/useSaveEvent.ts";
+import RequireAuth from "../components/Auth/RequireAuth.tsx";
 
 
 export default function Event() {
   const {id} = useParams(); // Get event ID from URL params
   const {event, loading} = useFetchEvent(id); // Use the custom hook
   const {joinEvent, loading: joinLoading, success: joinSuccess} = useJoinEvent();
+  const {saveEvent, success: saveSuccess} = useSaveEvent();
 
   if (loading) return (
     <header>
@@ -51,11 +54,11 @@ export default function Event() {
     .toUpperCase();
   const dateDay = eventDate.getDate();
 
+  const handleSaveEvent = () => {
+    saveEvent(event.id)
+  }
+
   const handleJoinEvent = () => {
-    if (!event.id) {
-      alert("Please enter an event ID");
-      return;
-    }
     joinEvent(event.id);
   };
 
@@ -67,26 +70,33 @@ export default function Event() {
             <img className="eventImage" src={event.image} alt={event.title}/>
             <div className="flex-row space-between align-center">
               <h1 className="color-white">{event.title}</h1>
-              <div className="flex-row gap-20 align-center">
-                <Information color="white" icon={<FaEuroSign color={"white"}/>}
-                             text={event.price ? String(event.price) : "Free"}/>
-                {joinSuccess ? (
-                  <span className="joined">Joined</span>
-                ) : (
-                  <Button
-                    label={joinLoading ? "Joining..." : "Join event"}
-                    variant="primary"
-                    onClick={handleJoinEvent}
-                  />
-                )}
-              </div>
+              <RequireAuth>
+                <div className="flex-row gap-20 align-center">
+                  <Information color="white" icon={<FaEuroSign color={"white"}/>}
+                               text={event.price ? String(event.price) : "Free"}/>
+                  {joinSuccess ? (
+                    <span className="joined">Joined</span>
+                  ) : (
+                    <Button
+                      label={joinLoading ? "Joining..." : "Join event"}
+                      variant="primary"
+                      onClick={handleJoinEvent}
+                    />
+                  )}
+                  {saveSuccess ? (
+                      <span className="saved">Saved</span>
+                    ) :
+                    <Button label={"Save"} variant={"secondary"} onClick={handleSaveEvent}/>
+                  }
+                </div>
+              </RequireAuth>
             </div>
           </div>
         </section>
       </header>
 
       <section>
-        <div className="test">
+        <div className="event">
           <div className="description">
             <div className="flex-row gap-20">
               <div className="date">
