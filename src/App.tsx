@@ -1,9 +1,9 @@
 // External libraries and dependencies (third-party)
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Slide, ToastContainer} from "react-toastify";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Slide, ToastContainer } from "react-toastify";
 
 // Context and backend configuration
-import {UserProvider} from './context/UserContext.tsx';
+import { UserProvider } from "./context/UserContext.tsx";
 import ProtectRoute from "./components/Auth/ProtectRoute.tsx";
 
 // Pages
@@ -23,45 +23,53 @@ import User from "./pages/User.tsx";
 
 import "./App.css";
 
-
 function App() {
   return (
     <UserProvider>
       <Router>
         <Routes>
+          <Route path="Test" element={<TestJoinEventShowAttendes />} />
 
-          <Route path="Test" element={
-            <TestJoinEventShowAttendes/>
-          }/>
-
-          <Route path="login" element={<Login/>}/>
-          <Route path="createUser" element={<CreateUser/>}/>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<Home/>}/>
-            <Route path="event/:id" element={<Event/>}/>
-            <Route path={"user/:id"} element={<User/>}/>
-            <Route path="profile" element={
-              <ProtectRoute>
-                <Profile/>
-              </ProtectRoute>
-            }/>
-            <Route path="editProfile" element={
-              <ProtectRoute>
-                <EditProfile/>
-              </ProtectRoute>
-            }/>
-            <Route path="saved" element={
-              <ProtectRoute>
-                <SavedEvents/>
-              </ProtectRoute>
-            }/>
-            <Route path="createEvent" element={
-              <ProtectRoute>
-                <CreateEvent/>
-              </ProtectRoute>
-            }/>
-            <Route path="calendar" element={<Calendar/>}/>
-            <Route path="*" element={<NoPage/>}/>
+          <Route path="login" element={<Login />} />
+          <Route path="createUser" element={<CreateUser />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="event/:id" element={<Event />} />
+            <Route path={"user/:id"} element={<User />} />
+            <Route
+              path="profile"
+              element={
+                <ProtectRoute>
+                  <Profile />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="editProfile"
+              element={
+                <ProtectRoute>
+                  <EditProfile />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="saved"
+              element={
+                <ProtectRoute>
+                  <SavedEvents />
+                </ProtectRoute>
+              }
+            />
+            <Route
+              path="createEvent"
+              element={
+                <ProtectRoute>
+                  <CreateEvent />
+                </ProtectRoute>
+              }
+            />
+            <Route path="calendar" element={<Calendar />} />
+            <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
 
@@ -77,6 +85,7 @@ function App() {
           pauseOnHover
           theme="light"
           transition={Slide}
+          closeButton={false}
         />
       </Router>
     </UserProvider>
