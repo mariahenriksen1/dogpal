@@ -1,5 +1,5 @@
 import React from "react";
-import "./PreviewImage.modules.css"; // Import the CSS file
+import "./PreviewImage.modules.css";
 
 interface PreviewImageProps {
   src: string;

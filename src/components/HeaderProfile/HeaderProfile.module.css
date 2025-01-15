@@ -19,11 +19,3 @@
     flex-direction: row;
     gap: 20px;
 }
-
-
-.profilePicture {
-    object-fit: cover;
-    height: 64px;
-    width: 64px;
-    border-radius: 200px;
-}

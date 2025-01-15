@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React, { ChangeEvent, KeyboardEvent } from "react";
 import style from "./Input.module.css";
 
 type CommentInputProps = {
@@ -11,19 +11,19 @@ type CommentInputProps = {
 };
 
 const CommentInput: React.FC<CommentInputProps> = ({
-                                                     label,
-                                                     value,
-                                                     onChange,
-                                                     onEnterPress,
-                                                     placeholder = 'Type here...',
-                                                     rows = 4,
-                                                   }) => {
+  label,
+  value,
+  onChange,
+  onEnterPress,
+  placeholder = "Type here...",
+  rows = 4,
+}) => {
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(event.target.value); // Pass updated value to parent
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       if (onEnterPress) {
         onEnterPress();
