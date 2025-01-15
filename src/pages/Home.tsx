@@ -23,7 +23,7 @@ function Home() {
 
       <main>
         <section>
-          <div className="sectionHeader">
+          <div className="section-header">
             <h2>Upcoming events</h2>
             <Link to="/calendar">View all</Link>
           </div>
@@ -31,7 +31,7 @@ function Home() {
         </section>
         <RequireAuth>
           <section>
-            <div className="sectionHeader">
+            <div className="section-header">
               <div className="flex-row gap-10 align-center">
                 <Saved/>
                 <h2>Saved</h2>

@@ -1,12 +1,12 @@
-import {useState, FC, ReactElement, useEffect} from "react";
+import { useState, FC, ReactElement, useEffect } from "react";
 import Parse from "../../env.Backend/env.parseConfig.ts";
 import Button from "../Button/Button.tsx";
 import InputField from "../InputField/InputField.tsx";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useNavigate} from "react-router-dom";
-import {useUser} from "../../context/UserContext.tsx";
-import {fetchUserAndDogsFromCloud} from "../../hooks/useCurrentUserAndDogs.ts";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext.tsx";
+import { fetchUserAndDogsFromCloud } from "../../hooks/useCurrentUserAndDogs.ts";
 
 export const UserLogin: FC = (): ReactElement => {
   const [username, setUsername] = useState("");
@@ -16,7 +16,7 @@ export const UserLogin: FC = (): ReactElement => {
     lastName: string;
   } | null>(null);
 
-  const {publicUser, setPublicUser} = useUser(); // Use context state
+  const { publicUser, setPublicUser } = useUser(); // Use context state
   const navigate = useNavigate();
 
   /**
@@ -26,7 +26,7 @@ export const UserLogin: FC = (): ReactElement => {
     if (publicUser) {
       const firstName = publicUser.firstName || "N/A";
       const lastName = publicUser.lastName || "N/A";
-      setUserDetails({firstName, lastName});
+      setUserDetails({ firstName, lastName });
     } else {
       setUserDetails(null);
     }
@@ -43,13 +43,16 @@ export const UserLogin: FC = (): ReactElement => {
 
     try {
       const loggedInUser = await Parse.User.logIn(username, password);
-      const user = await Parse.User.current()
+      const user = await Parse.User.current();
       const response = await fetchUserAndDogsFromCloud(user.id);
       setPublicUser(response.publicUser);
       toast.success(
-        `Success! User ${loggedInUser.get("username")} has successfully signed in!`
+        `Success! User ${loggedInUser.get(
+          "username"
+        )} has successfully signed in!`
       );
-      setUsername(""); setPassword("");
+      setUsername("");
+      setPassword("");
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
@@ -101,9 +104,9 @@ export const UserLogin: FC = (): ReactElement => {
             type="password"
             variant=""
           />
-          <div className="form_buttons">
-            <Button label="Log In" variant="primary" onClick={handleLogin}/>
-          </div>
+
+          <Button label="Log In" variant="primary" onClick={handleLogin} />
+
           <Button
             label="Sign Up"
             variant="secondary"
@@ -120,7 +123,11 @@ export const UserLogin: FC = (): ReactElement => {
             </div>
           )}
           <div className="form_buttons">
-            <Button label="Log Out" variant="secondary" onClick={handleLogout}/>
+            <Button
+              label="Log Out"
+              variant="secondary"
+              onClick={handleLogout}
+            />
           </div>
         </div>
       )}

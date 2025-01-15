@@ -18,8 +18,8 @@
     color: white;
     text-align: center;
     font-size: 1.5rem;
-    z-index: 2; /* Ensure it is above the image */
-    pointer-events: none; /* So it doesn't block clicks */
+    z-index: 2; 
+    pointer-events: none;
     width: 100%;
     height: 100%;
     display: flex;
@@ -37,15 +37,15 @@
   }
   
   .file-input {
-    position: absolute; /* File input covers the entire area */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0; /* Make it invisible but still clickable */
+    opacity: 0;
   }
   
-  /* When image is uploaded, hide the label */
+
   .upload-image img + .upload-image-label {
     opacity: 0;
   }
