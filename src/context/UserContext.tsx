@@ -1,12 +1,12 @@
-import React, {createContext, useState, useEffect, useContext, ReactNode} from "react";
+import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser.ts";
-import {useCurrentUserAndDogs} from "../hooks/useCurrentUserAndDogs.ts";
-import {PublicUser, Dog} from "../Interface.ts";
+import { useCurrentUserAndDogs } from "../hooks/useCurrentUserAndDogs.ts";
+import { PublicUser, Dog } from "../Interface.ts";
 
 interface UserContextType {
   publicUser: PublicUser | null;
   dogs: Dog[];
-  loadingDogs: boolean;
+  loading: boolean; // Unified loading state
   setPublicUser: React.Dispatch<React.SetStateAction<PublicUser | null>>;
 }
 
@@ -16,26 +16,42 @@ interface UserProviderProps {
   children: ReactNode;
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
+export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [publicUser, setPublicUser] = useState<PublicUser | null>(null);
-  const {dogs, loading: loadingDogs} = useCurrentUserAndDogs();
-  const fetchedPublicUser = useCurrentPublicUser(); // Already typed as PublicUser | null
+  const [loadingUser, setLoadingUser] = useState(true);
+  
+  const { dogs, loading: loadingDogs } = useCurrentUserAndDogs();
+  const fetchedPublicUser = useCurrentPublicUser();
 
+  // Fetch public user
   useEffect(() => {
-    // Simply update the state since `fetchedPublicUser` already matches `PublicUser`
-    setPublicUser(fetchedPublicUser);
+    console.log("Fetching public user...");
+    if (fetchedPublicUser !== undefined) {
+      setPublicUser(fetchedPublicUser);
+      setLoadingUser(false);
+    }
   }, [fetchedPublicUser]);
+
+  // Unified loading state
+  const loading = loadingUser || loadingDogs;
+
+  // Debugging logs
+  useEffect(() => {
+    console.log("Public User:", publicUser);
+    console.log("Dogs:", dogs);
+    console.log("Loading states - User:", loadingUser, "Dogs:", loadingDogs);
+  }, [publicUser, dogs, loadingUser, loadingDogs]);
 
   return (
     <UserContext.Provider
       value={{
         publicUser,
         dogs,
-        loadingDogs,
+        loading,
         setPublicUser,
       }}
     >
-      {children}
+      {loading ? <p>Loading...</p> : children}
     </UserContext.Provider>
   );
 };

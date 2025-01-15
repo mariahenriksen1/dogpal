@@ -1,7 +1,7 @@
 import React from "react";
 import { useSavedEvents } from "../hooks/useSavedEvents.ts";
-import EventCard from "../components/EventCard/EventCard.tsx";
 import "./Styling/StylingCalendar.css";
+import EventsSaved from "../components/EventsSaved/EventsSaved.tsx";
 
 const SavedEvents: React.FC = () => {
   const { savedEvents, loading, error } = useSavedEvents(); 
@@ -19,28 +19,9 @@ const SavedEvents: React.FC = () => {
       <header className="calendar-header">
         <h1 className="calendar-title">Saved Events</h1>
       </header>
-      <div className="calendar-container">
-        <p className="calendar-description">
-        </p>
-        <main className="calendar-events">
-          {savedEvents.length === 0 ? (
-            <p className="calendar-no-events">No saved events found.</p>
-          ) : (
-            <div className="events-grid">
-              {savedEvents.map((event) => (
-                <EventCard
-                  key={event.objectId}
-                  event={{
-                    ...event,
-                    date: new Date(event.date),
-                  }}
-                />
-              ))}
-            </div>
-          )}
-        </main>
-      </div>
+      <EventsSaved/>
     </>
+    
   );
 };
 
