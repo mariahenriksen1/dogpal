@@ -25,14 +25,6 @@
   padding-bottom: 50px;
 }
 
-/* .profile-picture {
-  object-fit: cover;
-  height: 100px;
-  width: 100px;
-  border-radius: 200px;
-  position: relative;
-} */
-
 .profile-section {
   display: flex;
   width: 1280px;
@@ -65,9 +57,7 @@ h2 {
   align-items: left;
   align-self: stretch;
   justify-content: space-around;
-  /* padding: 15px;
-  padding-left: 0px;
-  padding-right: 0px; */
+ 
 }
 
 .button-div {

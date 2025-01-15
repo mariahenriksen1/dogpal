@@ -48,7 +48,7 @@ function Profile() {
       <main>
         <div className="profile-button-container">
           <div className="h2-title-div">
-            <h2 className="yourDogsTitle">Your dogs</h2>
+            <h2>Your dogs</h2>
           </div>
           <div className="button-div">
             <Button

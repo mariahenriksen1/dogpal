@@ -27,7 +27,7 @@ function EditProfile() {
       <section className="seperator-line"></section>
 
       <div className="h2-title-div">
-        <h2 className="yourDogsTitle">Your dogs</h2>
+        <h2>Your dogs</h2>
       </div>
 
       <DogProfileForm/>
