@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useUser } from "../../context/UserContext.tsx";
 import InputField from "../InputField/InputField.tsx";
 import Button from "../Button/Button.tsx";
-import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 import { FaSave } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const ProfileForm: React.FC = () => {
-  const { publicUser, dogs, setPublicUser, setDogs } = useUser();
+  const { publicUser, setPublicUser } = useUser();
   const [imageError, setImageError] = useState(false);
   const navigate = useNavigate();
 
@@ -26,54 +25,6 @@ const ProfileForm: React.FC = () => {
       reader.onloadend = () => {
         setPublicUser((prev) =>
           prev ? { ...prev, profilePicture: reader.result as string } : null
-        );
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleAddNewDogClick = () => {
-    setDogs([
-      ...dogs,
-      {
-        objectId: "",
-        name: "",
-        dogPicture: "",
-        race: "",
-        dogBirthDate: "",
-        userId: "",
-        createdAt: "",
-        updatedAt: "",
-      },
-    ]);
-  };
-
-  const handleRemoveDog = (index: number) => {
-    setDogs(dogs.filter((_, i) => i !== index));
-  };
-
-  const handleDogChange = (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    setDogs((prevDogs) =>
-      prevDogs.map((dog, i) => (i === index ? { ...dog, [name]: value } : dog))
-    );
-  };
-
-  const handleDogPictureChange = (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setDogs((prevDogs) =>
-          prevDogs.map((dog, i) =>
-            i === index ? { ...dog, dogPicture: reader.result as string } : dog
-          )
         );
       };
       reader.readAsDataURL(file);
@@ -147,81 +98,6 @@ const ProfileForm: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <section className="seperator-line"></section>
-
-      <h3>Your Dogs</h3>
-      {dogs.map((dog, index) => (
-        <div key={index} className="flex-row">
-          <div className="dog-profile-picture">
-            <label htmlFor={`dog-profile-picture-input-${index}`}>
-              Dog Profile Picture
-            </label>
-            <input
-              type="file"
-              id={`dog-profile-picture-input-${index}`}
-              name={`dog-profile-picture-input-${index}`}
-              accept="image/*"
-              onChange={(e) => handleDogPictureChange(index, e)}
-            />
-            {dog.dogPicture && (
-              <PreviewImage
-                src={dog.dogPicture}
-                alt="Dog Profile Picture"
-                onError={() => setImageError(true)}
-                border="3px #f9c069 solid"
-              />
-            )}
-          </div>
-
-          <div className="profile-form-inputs">
-            <div className="row">
-              <InputField
-                variant="Dog name"
-                name="name"
-                value={dog.name}
-                placeholder={dog.name || "Dog Name"}
-                onChange={(e) => handleDogChange(index, e)}
-              />
-            </div>
-            <div className="row">
-              <InputField
-                variant="Breed"
-                name="breed"
-                value={dog.race || ""}
-                placeholder={dog.race || "Breed"}
-                onChange={(e) => handleDogChange(index, e)}
-              />
-            </div>
-            <div className="row">
-              <InputField
-                variant="Date"
-                name="birthDate"
-                value={dog.dogBirthDate ? dog.dogBirthDate.toString() : ""}
-                placeholder={
-                  dog.dogBirthDate ? dog.dogBirthDate.toString() : "Birth Date"
-                }
-                onChange={(e) => handleDogChange(index, e)}
-              />
-            </div>
-          </div>
-        </div>
-      ))}
-
-      <section className="flex-column align-center">
-        <AddNewDogButton
-          label="Add New Dog"
-          iconType="add"
-          onClick={handleAddNewDogClick}
-        />
-      </section>
-
-      <Button
-        label="Save Changes"
-        icon={<FaSave />}
-        onClick={handleSave}
-        variant={"primary"}
-      />
     </section>
   );
 };
