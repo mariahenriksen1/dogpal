@@ -32,7 +32,7 @@ const ProfileForm: React.FC = () => {
     }
   };
 
-  const handleAddDog = () => {
+  const handleAddNewDogClick = () => {
     setDogs([
       ...dogs,
       {
@@ -87,86 +87,134 @@ const ProfileForm: React.FC = () => {
   };
 
   return (
-    <div>
-      <h3>User Information</h3>
-      <InputField
-        variant="First name"
-        name="firstName"
-        value={publicUser?.firstName || ""}
-        placeholder={publicUser?.firstName || "First Name"}
-        onChange={handleInputChange}
-      />
-      <InputField
-        variant="Last name"
-        name="lastName"
-        value={publicUser?.lastName || ""}
-        placeholder={publicUser?.lastName || "Last Name"}
-        onChange={handleInputChange}
-      />
-      {/* <InputField
-        variant="Email"
-        name="email"
-        value={publicUser?.email || ""}
-        placeholder={publicUser?.email || "Email"}
-        onChange={handleInputChange}
-      /> */}
-      {/* <InputField
-        variant="Password"
-        name="password"
-        value={publicUser?.password || ""}
-        placeholder="Password"
-        onChange={handleInputChange}
-      /> */}
-      <input type="file" onChange={handleProfilePictureChange} />
-      {publicUser?.profilePicture && (
-        <PreviewImage src={publicUser.profilePicture} alt="Profile" />
-      )}
+    <section>
+      <div className="flex-row">
+        <div className="profile-picture">
+          <label htmlFor="profile-picture-label">Profile Picture</label>
+          <input
+            type="file"
+            id="profile-picture-input"
+            name="profile-picture-input"
+            accept="image/*"
+            onChange={handleProfilePictureChange}
+          />
+          {publicUser?.profilePicture && (
+            <PreviewImage
+              src={publicUser.profilePicture}
+              alt="Profile Picture"
+              onError={() => setImageError(true)}
+              border="3px #f9c069 solid"
+            />
+          )}
+        </div>
+
+        <div className="profile-form-inputs">
+          <div className="row">
+            <InputField
+              variant="First name"
+              name="firstName"
+              value={publicUser?.firstName || ""}
+              placeholder={publicUser?.firstName || "First Name"}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="row">
+            <InputField
+              variant="Last name"
+              name="lastName"
+              value={publicUser?.lastName || ""}
+              placeholder={publicUser?.lastName || "Last Name"}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="row">
+            <InputField
+              variant="Email"
+              name="email"
+              value={publicUser?.firstName || ""}
+              placeholder={publicUser?.firstName || "Email"}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="row">
+            <InputField
+              variant="Password"
+              name="password"
+              value={publicUser?.firstName || ""}
+              placeholder="Password"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+      </div>
 
       <section className="seperator-line"></section>
 
       <h3>Your Dogs</h3>
       {dogs.map((dog, index) => (
-        <div key={index}>
-          <InputField
-            variant="Dog name"
-            name="name"
-            value={dog.name}
-            placeholder={dog.name || "Dog Name"}
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <InputField
-            variant="Breed"
-            name="breed"
-            value={dog.race || ""}
-            placeholder={dog.race || "Breed"}
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <InputField
-            variant="Date"
-            name="birthDate"
-            value={dog.dogBirthDate ? dog.dogBirthDate.toString() : ""}
-            placeholder={
-              dog.dogBirthDate ? dog.dogBirthDate.toString() : "Birth Date"
-            }
-            onChange={(e) => handleDogChange(index, e)}
-          />
-          <input
-            type="file"
-            onChange={(e) => handleDogPictureChange(index, e)}
-          />
-          {dog.dogPicture && <PreviewImage src={dog.dogPicture} alt="Dog" />}
-          <AddNewDogButton
-            label="Remove Dog"
-            iconType="remove"
-            onClick={() => handleRemoveDog(index)}
-          />
+        <div key={index} className="flex-row">
+          <div className="dog-profile-picture">
+            <label htmlFor={`dog-profile-picture-input-${index}`}>
+              Dog Profile Picture
+            </label>
+            <input
+              type="file"
+              id={`dog-profile-picture-input-${index}`}
+              name={`dog-profile-picture-input-${index}`}
+              accept="image/*"
+              onChange={(e) => handleDogPictureChange(index, e)}
+            />
+            {dog.dogPicture && (
+              <PreviewImage
+                src={dog.dogPicture}
+                alt="Dog Profile Picture"
+                onError={() => setImageError(true)}
+                border="3px #f9c069 solid"
+              />
+            )}
+          </div>
+
+          <div className="profile-form-inputs">
+            <div className="row">
+              <InputField
+                variant="Dog name"
+                name="name"
+                value={dog.name}
+                placeholder={dog.name || "Dog Name"}
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+            <div className="row">
+              <InputField
+                variant="Breed"
+                name="breed"
+                value={dog.race || ""}
+                placeholder={dog.race || "Breed"}
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+            <div className="row">
+              <InputField
+                variant="Date"
+                name="birthDate"
+                value={dog.dogBirthDate ? dog.dogBirthDate.toString() : ""}
+                placeholder={
+                  dog.dogBirthDate ? dog.dogBirthDate.toString() : "Birth Date"
+                }
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+          </div>
         </div>
       ))}
-      <AddNewDogButton
-        label="Add Another Dog"
-        iconType="add"
-        onClick={handleAddDog}
-      />
+
+      <section className="flex-column align-center">
+        <AddNewDogButton
+          label="Add New Dog"
+          iconType="add"
+          onClick={handleAddNewDogClick}
+        />
+      </section>
 
       <Button
         label="Save Changes"
@@ -174,7 +222,7 @@ const ProfileForm: React.FC = () => {
         onClick={handleSave}
         variant={"primary"}
       />
-    </div>
+    </section>
   );
 };
 
