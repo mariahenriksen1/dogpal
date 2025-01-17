@@ -87,7 +87,7 @@ const DogProfileForm: React.FC<DogProfileFormProps> = ({
           <div className="row">
             <InputField
               variant="Breed"
-              name="breed"
+              name="race"
               value={dog.race || ""}
               placeholder={dog.race || "Breed"}
               onChange={(e) => handleDogChange(index, e)}
