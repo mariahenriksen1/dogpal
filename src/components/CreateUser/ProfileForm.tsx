@@ -161,6 +161,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
         <div className="profile-form-inputs">
           <div className="row">
             <InputField
+              label="Username"
               variant="Text input"
               name="username"
               value={formData.username}
@@ -194,9 +195,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
               placeholder="Email"
               onChange={handleInputChange}
             />
-            {emailError && (
-              <div className="error-message center">{emailError}</div>
-            )}
+            {emailError && <div className="error-message">{emailError}</div>}
           </div>
           <div className="row">
             <InputField
@@ -216,73 +215,74 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
       <section className="seperator-line"></section>
 
       {formData.dogs.map((dog, index) => (
-        <>
-          <div key={index} className="flex-row">
-            <div className="dog-profile-picture">
-              <label htmlFor={`dog-profile-picture-input-${index}`}>
-                Dog Profile Picture
-              </label>
-              <input
-                type="file"
-                id={`dog-profile-picture-input-${index}`}
-                name={`dog-profile-picture-input-${index}`}
-                accept="image/*"
-                onChange={(e) => handleDogPictureChange(index, e)}
+        <div key={index} className="flex-row">
+          <div className="dog-profile-picture">
+            <label htmlFor={`dog-profile-picture-input-${index}`}>
+              Dog Profile Picture
+            </label>
+            <input
+              type="file"
+              id={`dog-profile-picture-input-${index}`}
+              name={`dog-profile-picture-input-${index}`}
+              accept="image/*"
+              onChange={(e) => handleDogPictureChange(index, e)}
+            />
+            {dog.dogPicture && (
+              <PreviewImage
+                src={dog.dogPicture}
+                alt="Dog Profile Picture"
+                onError={() => setImageError(true)}
+                border="3px #f9c069 solid"
+                pictureSize="140px"
               />
-              {dog.dogPicture && (
-                <PreviewImage
-                  src={dog.dogPicture}
-                  alt="Dog Profile Picture"
-                  onError={() => setImageError(true)}
-                  border="3px #f9c069 solid"
-                  pictureSize="140px"
-                />
-              )}
-            </div>
+            )}
+          </div>
 
-            <div className="profile-form-inputs">
-              <div className="row">
-                <InputField
-                  variant="Dog name"
-                  name="name"
-                  value={dog.name}
-                  placeholder={dog.name || "Dog Name"}
-                  onChange={(e) => handleDogChange(index, e)}
-                />
-              </div>
-              <div className="row">
-                <InputField
-                  variant="Breed"
-                  name="race"
-                  value={dog.race || ""}
-                  placeholder={dog.race || "Breed"}
-                  onChange={(e) => handleDogChange(index, e)}
-                />
-              </div>
-              <div className="row">
-                <InputField
-                  variant="Date"
-                  name="birthDate"
-                  value={dog.dogBirthDate ? dog.dogBirthDate.toString() : ""}
-                  placeholder={
-                    dog.dogBirthDate
-                      ? dog.dogBirthDate.toString()
-                      : "Birth Date"
-                  }
-                  onChange={(e) => handleDogChange(index, e)}
-                />
-              </div>
-              <div className="flex-row align-center">
-                <AddNewDogButton
-                  label="Remove Dog"
-                  iconType="remove"
-                  onClick={() => handleRemoveDog(index)}
-                />
-              </div>
+          <div className="profile-form-inputs">
+            <div className="row">
+              <InputField
+                variant="Dog name"
+                name="name"
+                value={dog.name}
+                placeholder={dog.name || "Dog Name"}
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+            <div className="row">
+              <InputField
+                variant="Breed"
+                name="race"
+                value={dog.race || ""}
+                placeholder={dog.race || "Breed"}
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+            <div className="row">
+              <InputField
+                variant="Date"
+                name="dogBirthDate"
+                value={
+                  dog.dogBirthDate
+                    ? new Date(dog.dogBirthDate).toISOString().split("T")[0]
+                    : ""
+                }
+                placeholder={
+                  dog.dogBirthDate
+                    ? new Date(dog.dogBirthDate).toISOString().split("T")[0]
+                    : "Birth Date"
+                }
+                onChange={(e) => handleDogChange(index, e)}
+              />
+            </div>
+            <div className="flex-row align-center">
+              <AddNewDogButton
+                label="Remove Dog"
+                iconType="remove"
+                onClick={() => handleRemoveDog(index)}
+              />
             </div>
           </div>
-          <section className="seperator-line"></section>
-        </>
+        </div>
       ))}
 
       <section className="flex-row center">
