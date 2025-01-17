@@ -292,7 +292,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
           iconType={"add"}
         />
         <Button
-          label="Save Changes"
+          label="Save"
           icon={<FaSave />}
           onClick={handleSubmit}
           variant={"primary"}
