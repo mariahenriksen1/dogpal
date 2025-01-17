@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "../InputField/InputField.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
 import { AddNewDogButton } from "../AddNewDogButton/AddNewDogButton.tsx";
@@ -26,6 +26,28 @@ const DogProfileForm: React.FC<DogProfileFormProps> = ({
   handleRemoveDog,
 }) => {
   const [imageError, setImageError] = useState(false);
+  const [currentDogPicture, setCurrentDogPicture] = useState<string | null>(
+    dog.dogPicture || null
+  );
+
+  useEffect(() => {
+    setCurrentDogPicture(dog.dogPicture || null);
+  }, [dog.dogPicture]);
+
+  const handleLocalDogPictureChange = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCurrentDogPicture(reader.result as string);
+        handleDogPictureChange(index, event);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <section>
@@ -39,14 +61,15 @@ const DogProfileForm: React.FC<DogProfileFormProps> = ({
             id={`dog-profile-picture-input-${index}`}
             name={`dog-profile-picture-input-${index}`}
             accept="image/*"
-            onChange={(e) => handleDogPictureChange(index, e)}
+            onChange={(e) => handleLocalDogPictureChange(index, e)}
           />
-          {dog.dogPicture && (
+          {currentDogPicture && (
             <PreviewImage
-              src={dog.dogPicture}
+              src={currentDogPicture}
               alt="Dog Profile Picture"
               onError={() => setImageError(true)}
               border="3px #f9c069 solid"
+              pictureSize="140px"
             />
           )}
         </div>

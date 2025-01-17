@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { useUser } from "../../context/UserContext.tsx";
 import InputField from "../InputField/InputField.tsx";
-import Button from "../Button/Button.tsx";
 import PreviewImage from "../PreviewImage/PreviewImage.tsx";
-import { FaSave } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 const ProfileForm: React.FC = () => {
   const { publicUser, setPublicUser } = useUser();
   const [imageError, setImageError] = useState(false);
-  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -31,12 +27,6 @@ const ProfileForm: React.FC = () => {
     }
   };
 
-  const handleSave = async () => {
-    // Save changes logic
-    console.log("Save Changes");
-    navigate("/profile"); // Navigate to profile page after saving
-  };
-
   return (
     <section>
       <div className="flex-row">
@@ -55,6 +45,7 @@ const ProfileForm: React.FC = () => {
               alt="Profile Picture"
               onError={() => setImageError(true)}
               border="3px #f9c069 solid"
+              pictureSize="170px"
             />
           )}
         </div>

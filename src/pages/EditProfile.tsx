@@ -5,9 +5,11 @@ import DogProfileForm from "../components/CreateUser/DogProfileForm.tsx";
 import { AddNewDogButton } from "../components/AddNewDogButton/AddNewDogButton.tsx";
 import Button from "../components/Button/Button.tsx";
 import { FaSave } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const EditProfile: React.FC = () => {
   const { dogs, setDogs } = useUser();
+  const navigate = useNavigate();
 
   const handleDogChange = (
     index: number,
@@ -60,6 +62,7 @@ const EditProfile: React.FC = () => {
   const handleSave = async () => {
     // Save changes logic
     console.log("Save Changes");
+    navigate("/profile"); // Navigate to profile page after saving
   };
 
   return (
@@ -71,6 +74,12 @@ const EditProfile: React.FC = () => {
           </div>
         </section>
       </header>
+
+      <section>
+        <div className="flex-row space-between">
+          <h2>User info</h2>
+        </div>
+      </section>
 
       <ProfileForm />
       <section className="seperator-line"></section>
