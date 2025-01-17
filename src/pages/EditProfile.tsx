@@ -9,6 +9,7 @@ const EditProfile: React.FC = () => {
   const navigate = useNavigate();
 
   const handleProfileFormSubmit = (data: {
+    username: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -43,6 +44,7 @@ const EditProfile: React.FC = () => {
 
       <ProfileForm
         initialData={{
+          username: publicUser?.username || "",
           firstName: publicUser?.firstName || "",
           lastName: publicUser?.lastName || "",
           email: publicUser?.firstName + "@email.com" || "",

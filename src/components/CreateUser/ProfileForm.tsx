@@ -8,6 +8,7 @@ import { Dog } from "../../Interface.ts";
 
 interface ProfileFormProps {
   initialData: {
+    username: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -16,6 +17,7 @@ interface ProfileFormProps {
     dogs: Dog[];
   };
   onSubmit: (data: {
+    username: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -28,6 +30,7 @@ interface ProfileFormProps {
 const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
   const [formData, setFormData] = useState(initialData);
   const [imageError, setImageError] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     setFormData(initialData);
@@ -36,6 +39,16 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "email") {
+      // Email validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        setEmailError("Please enter a valid email address.");
+      } else {
+        setEmailError("");
+      }
+    }
   };
 
   const handleProfilePictureChange = (
@@ -113,7 +126,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    onSubmit(formData);
+    if (!emailError) {
+      onSubmit(formData);
+    }
   };
 
   return (
@@ -146,6 +161,15 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
         <div className="profile-form-inputs">
           <div className="row">
             <InputField
+              variant="Text input"
+              name="username"
+              value={formData.username}
+              placeholder="Username"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="row">
+            <InputField
               variant="First name"
               name="firstName"
               value={formData.firstName}
@@ -170,6 +194,9 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
               placeholder="Email"
               onChange={handleInputChange}
             />
+            {emailError && (
+              <div className="error-message center">{emailError}</div>
+            )}
           </div>
           <div className="row">
             <InputField
