@@ -9,6 +9,13 @@
     gap: 10px;
     align-items: center;
 }
+.dogName {
+    margin: 0;
+    padding: 0;
+    font-size: 12px; 
+    font-weight: bold; 
+    text-align: center;
+}
 
 .names {
     display: flex;

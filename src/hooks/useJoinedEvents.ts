@@ -31,7 +31,7 @@ export const useJoinedEvents = () => {
             description: string;
             date: string;
             location: string;
-            price: number;
+            price: number;  
             coverImage: string;
             startTime: string;
             endTime: string;

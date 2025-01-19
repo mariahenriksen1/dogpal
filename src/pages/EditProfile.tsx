@@ -1,16 +1,35 @@
-import {useState} from "react";
-import {ProfileForm} from "../components/CreateUser/ProfileForm.tsx";
-import {DogProfileForm} from "../components/CreateUser/DogProfileForm.tsx";
-import {AddNewDogButton} from "../components/AddNewDogButton/AddNewDogButton.tsx";
+import React from "react";
+import { useUser } from "../context/UserContext.tsx";
+import ProfileForm from "../components/CreateUser/ProfileForm.tsx";
+import { useNavigate } from "react-router-dom";
+import { Dog } from "../Interface.ts";
 
-function EditProfile() {
-  const [dogProfiles, setDogProfiles] = useState<number[]>([]);
+const EditProfile: React.FC = () => {
+  const { publicUser, setPublicUser, dogs, setDogs } = useUser();
+  const navigate = useNavigate();
 
-  const handleAddNewDogClick = () => {
-    setDogProfiles([...dogProfiles, dogProfiles.length]);
-  };
-  const handleRemoveLastDogClick = () => {
-    setDogProfiles(dogProfiles.slice(0, -1));
+  const handleProfileFormSubmit = (data: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    profilePicture: string | null;
+    dogs: Dog[];
+  }) => {
+    setPublicUser((prevUser) => ({
+      ...prevUser,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      profilePicture: data.profilePicture ?? prevUser?.profilePicture,
+      objectId: prevUser?.objectId || "",
+      username: prevUser?.username || "",
+      userId: prevUser?.userId || "",
+      createdAt: prevUser?.createdAt || "",
+      updatedAt: prevUser?.updatedAt || "",
+    }));
+    setDogs(data.dogs);
+    navigate("/profile"); // Navigate to profile page after saving
   };
 
   return (
@@ -23,39 +42,20 @@ function EditProfile() {
         </section>
       </header>
 
-      <ProfileForm/>
-      <section className="seperator-line"></section>
-
-      <div className="h2-title-div">
-        <h2>Your dogs</h2>
-      </div>
-
-      <DogProfileForm/>
-
-      {dogProfiles.map((index) => (
-        <DogProfileForm key={index}/>
-      ))}
-
-      <section className="seperator-line"></section>
-
-      {/* Add and Remove Dog Buttons */}
-      <section className="flex-column align-center">
-        {/* Reuse AddNewDogButton for both actions */}
-        <AddNewDogButton
-          onClick={handleAddNewDogClick}
-          label="Add New Dog"
-          iconType="add"
-        />
-        {dogProfiles.length > 0 && (
-          <AddNewDogButton
-            onClick={handleRemoveLastDogClick}
-            label="Remove Last Dog"
-            iconType="remove"
-          />
-        )}
-      </section>
+      <ProfileForm
+        initialData={{
+          username: publicUser?.username || "",
+          firstName: publicUser?.firstName || "",
+          lastName: publicUser?.lastName || "",
+          email: publicUser?.firstName + "@email.com" || "",
+          password: publicUser?.lastName || "",
+          profilePicture: publicUser?.profilePicture || null,
+          dogs: dogs || [],
+        }}
+        onSubmit={handleProfileFormSubmit}
+      />
     </>
   );
-}
+};
 
 export default EditProfile;

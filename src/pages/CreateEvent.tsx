@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputField from "../components/InputField/InputField.tsx";
 import "../App.css";
 import "./Styling/StylingCreateEvent.css";
@@ -35,6 +36,8 @@ function CreateEvent() {
     startTime: undefined,
     endTime: undefined,
   });
+
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setFormData({
@@ -79,12 +82,14 @@ function CreateEvent() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
+  const handleSubmitWithDelay = async () => {
     try {
-      const startTime = formData.startTime ? parseInt(formData.startTime.replace(":", ""), 10) : undefined;
-      const endTime = formData.endTime ? parseInt(formData.endTime.replace(":", ""), 10) : undefined;
+      const startTime = formData.startTime
+        ? parseInt(formData.startTime.replace(":", ""), 10)
+        : undefined;
+      const endTime = formData.endTime
+        ? parseInt(formData.endTime.replace(":", ""), 10)
+        : undefined;
 
       if (startTime && endTime && startTime >= endTime) {
         toast.error("Start time must be before end time.");
@@ -102,11 +107,19 @@ function CreateEvent() {
           ? parseInt(formData.participantLimit, 10)
           : undefined,
         price: formData.price ? parseFloat(formData.price) : undefined,
-        coverImage: typeof formData.coverImagePreview === "string" ? formData.coverImagePreview : undefined,
+        coverImage:
+          typeof formData.coverImagePreview === "string"
+            ? formData.coverImagePreview
+            : undefined,
       });
 
       toast.success("Event created!");
       resetForm();
+
+      // Wait for 2 seconds, then navigate to the calendar page
+      setTimeout(() => {
+        navigate("/calendar");
+      }, 2000);
     } catch (err) {
       console.error(err);
       toast.error("Failed to create event. Please try again.");
@@ -114,7 +127,7 @@ function CreateEvent() {
   };
 
   return (
-    <form className="flex-column gap-40" onSubmit={handleSubmit}>
+    <form className="flex-column gap-40" onSubmit={(e) => e.preventDefault()}>
       <header>
         <section>
           <div className="flex-column space-between gap-20">
@@ -132,7 +145,11 @@ function CreateEvent() {
               />
               {formData.coverImagePreview && (
                 <img
-                  src={typeof formData.coverImagePreview === "string" ? formData.coverImagePreview : undefined}
+                  src={
+                    typeof formData.coverImagePreview === "string"
+                      ? formData.coverImagePreview
+                      : undefined
+                  }
                   alt="Cover Preview"
                   className="image-preview"
                 />
@@ -219,14 +236,14 @@ function CreateEvent() {
         <Button
           label={loading ? "Creating..." : "Submit"}
           variant="primary"
-          type="submit"
+          type="button"
           disabled={loading}
-          onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
+          onClick={handleSubmitWithDelay}
         />
       </section>
       <ToastContainer position="bottom-right" autoClose={3000} transition={Slide} />
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}></p>}
+      {success && <p style={{ color: "green" }}>Event successfully created!</p>}
     </form>
   );
 }

@@ -25,7 +25,6 @@ export interface Event {
   objectId: string;
   id: string;
   image: string;
-
   title: string;
   date: any;
   description: string;
@@ -52,14 +51,22 @@ export interface Dog {
 }
 
 export interface IComment {
-  objectId: string;
-  UserId: string;
+  objectId: string; 
+  UserId: string; 
   Date: string;
-  createdAt: string;
-  EventId: string;
-  Comment: string;
-  PublicUser: string;
+  createdAt: string; 
+  EventId: string; 
+  Comment: string; 
+  PublicUser: string; 
+  dogs?: { 
+    id: string; 
+    name: string; 
+    dogPicture: string; 
+  }[];
 }
+
+
+
 
 export interface IAttendee {
   objectId: any;

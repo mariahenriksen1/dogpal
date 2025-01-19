@@ -45,6 +45,7 @@ export const useFetchCommentsFromEventId = (eventId: string | undefined): useFet
           EventId: comment.get("EventId"),
           Comment: comment.get("Comment"),
           createdAt: comment.get("createdAt"),
+          dogpicture: comment.get("dogpicture"),
         }))
       );
 

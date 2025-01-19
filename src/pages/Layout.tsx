@@ -10,11 +10,15 @@ import RequireUnauth from "../components/Auth/RequireUnauth.tsx";
 import RequireAuth from "../components/Auth/RequireAuth.tsx";
 
 const Layout: React.FC = () => {
+  const timeout = 2000; 
 
   const handleLogout = async () => {
     try {
       await Parse.User.logOut();
       toast.success("Successfully logged out!");
+      setTimeout(() => {
+        window.location.reload();
+      }, timeout);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(`Error during logout: ${error.message}`);

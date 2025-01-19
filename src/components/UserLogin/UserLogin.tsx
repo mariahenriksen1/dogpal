@@ -54,6 +54,7 @@ export const UserLogin: FC = (): ReactElement => {
       setUsername("");
       setPassword("");
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error("Login failed:", error);
       if (error instanceof Error) {
