@@ -1,13 +1,19 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  ReactNode,
+} from "react";
 import useCurrentPublicUser from "../hooks/useCurrentPublicUser.ts";
 import { useCurrentUserAndDogs } from "../hooks/useCurrentUserAndDogs.ts";
 import { PublicUser, Dog } from "../Interface.ts";
-
 interface UserContextType {
   publicUser: PublicUser | null;
-  dogs: Dog[];
-  loading: boolean; // Unified loading state
   setPublicUser: React.Dispatch<React.SetStateAction<PublicUser | null>>;
+  dogs: Dog[];
+  setDogs: React.Dispatch<React.SetStateAction<Dog[]>>;
+  loadingDogs: boolean;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -21,7 +27,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [loadingUser, setLoadingUser] = useState(true);
   
   const { dogs, loading: loadingDogs } = useCurrentUserAndDogs();
+  const [setDogs] = useState<React.Dispatch<React.SetStateAction<Dog[]>>>(() => () => {});
   const fetchedPublicUser = useCurrentPublicUser();
+
 
   // Fetch public user
   useEffect(() => {
@@ -46,9 +54,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     <UserContext.Provider
       value={{
         publicUser,
-        dogs,
-        loading,
         setPublicUser,
+        dogs,
+        setDogs,
+        loadingDogs,
       }}
     >
       {loading ? <p>Loading...</p> : children}
