@@ -241,6 +241,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
           <div className="profile-form-inputs">
             <div className="row">
               <InputField
+                label="Dog Name"
                 variant="Dog name"
                 name="name"
                 value={dog.name}
@@ -250,7 +251,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
             </div>
             <div className="row">
               <InputField
-                variant="Breed"
+                label="Dog Breed"
+                variant="Text input"
                 name="race"
                 value={dog.race || ""}
                 placeholder={dog.race || "Breed"}
@@ -259,6 +261,7 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ initialData, onSubmit }) => {
             </div>
             <div className="row">
               <InputField
+                label="Dog Birth Date"
                 variant="Date"
                 name="dogBirthDate"
                 value={
