@@ -14,11 +14,11 @@ export default function Attendees({ eventId, reload }: { eventId: string; reload
   // Update local attendees whenever fetchAttendees is called
   useEffect(() => {
     if (reload > 0) {
-      fetchAttendees().then(() => setLocalAttendees(attendees));
+      fetchAttendees();
     }
-  }, [reload, fetchAttendees, attendees]);
+  }, [reload, fetchAttendees]);
 
-  // Initial sync with fetched attendees
+  // Sync local attendees with the fetched attendees
   useEffect(() => {
     setLocalAttendees(attendees);
   }, [attendees]);
@@ -31,7 +31,7 @@ export default function Attendees({ eventId, reload }: { eventId: string; reload
         {attendeesError && <p style={{ color: "red" }}>{attendeesError}</p>}
         {!attendeesLoading &&
           localAttendees.map((attendee: IAttendee) => (
-            <Link to={`/user/${attendee.id}`} key={attendee.id}>
+            <Link to={`/user/${attendee.objectId}`} key={attendee.objectId}>
               <Attendee {...attendee} />
             </Link>
           ))}
