@@ -16,47 +16,51 @@ import { useJoinedEvents } from "../hooks/useJoinedEvents.ts";
 
 export default function Event() {
   const { id: eventId } = useParams();
-  const { savedEvents, setSavedEvents } = useSavedEvents(); // Include setter for saved events
-  const { joinedEvents } = useJoinedEvents();
+  const { savedEvents, setSavedEvents } = useSavedEvents();
+  const { joinedEvents, setJoinedEvents } = useJoinedEvents();
 
   const { event, loading } = useFetchEvent(eventId);
-  const { joinEvent, loading: joinLoading, success: joinSuccess } = useJoinEvent();
-  const { saveEvent, loading: saveLoading, success: saveSuccess } = useSaveEvent();
+  const { joinEvent, loading: joinLoading } = useJoinEvent();
+  const { saveEvent, loading: saveLoading } = useSaveEvent();
 
   const [isSaved, setIsSaved] = useState(false);
   const [isJoined, setIsJoined] = useState(false);
   const [reloadAttendees, setReloadAttendees] = useState(0);
 
   useEffect(() => {
-    console.log("Saved Events:", savedEvents);
-    console.log("Event ID:", eventId);
+    // Sync with saved/joined events in the context
     setIsSaved(savedEvents.some((savedEvent) => savedEvent.objectId === eventId));
     setIsJoined(joinedEvents.some((joinedEvent) => joinedEvent.id === eventId));
   }, [savedEvents, joinedEvents, eventId]);
 
   const handleSaveEvent = async () => {
+    if (!eventId) return;
+
+    setIsSaved(true); // Optimistic update
     const response = await saveEvent(eventId);
     if (response.success) {
-      setIsSaved(true);
-      setSavedEvents((prev) => [...prev, { objectId: eventId }]); // Update saved events
+      setSavedEvents((prev) => [...prev, { objectId: eventId }]);
     } else {
       console.error("Failed to save event.");
     }
   };
 
   const handleJoinEvent = async () => {
-    if (eventId) {
-      const response = await joinEvent(eventId);
-      if (response.success) {
-        setIsJoined(true);
-        setReloadAttendees((prev) => prev + 1);
-      } else {
-        console.error("Failed to join event.");
-      }
+    if (!eventId) return;
+
+    setIsJoined(true); // Optimistic update
+    setReloadAttendees((prev) => prev + 1); // Immediately reload attendees
+
+    const response = await joinEvent(eventId);
+    if (response.success) {
+      setJoinedEvents((prev) => [...prev, { id: eventId }]);
+    } else {
+      console.error("Failed to join event.");
+      setIsJoined(false); // Revert optimistic update
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
       <header>
         <section>
@@ -67,13 +71,13 @@ export default function Event() {
         </section>
       </header>
     );
+  }
 
   if (!event) return <p>Event not found or failed to load.</p>;
 
   const startTime = `${String(Math.floor(event.startTime / 100)).padStart(2, "0")}:${String(
     event.startTime % 100
   ).padStart(2, "0")}`;
-
   const endTime = `${String(Math.floor(event.endTime / 100)).padStart(2, "0")}:${String(
     event.endTime % 100
   ).padStart(2, "0")}`;
@@ -98,7 +102,7 @@ export default function Event() {
                     text={event.price ? String(event.price) : "Free"}
                   />
                   {isJoined ? (
-                    <span className="joined">You have already joined this event</span>
+                    <Button label="Joined" variant="primary" disabled />
                   ) : (
                     <Button
                       label={joinLoading ? "Joining..." : "Join Event"}
@@ -107,7 +111,7 @@ export default function Event() {
                     />
                   )}
                   {isSaved ? (
-                    <span className="saved">You have already saved this event</span>
+                    <Button label="Saved" variant="secondary" disabled />
                   ) : (
                     <Button
                       label={saveLoading ? "Saving..." : "Save Event"}
@@ -144,7 +148,7 @@ export default function Event() {
             <p className="subtitle">{event.description}</p>
             <Comments eventId={event.id} />
           </div>
-          <Attendees key={reloadAttendees} eventId={event.id} />
+          <Attendees eventId={event.id} reload={reloadAttendees} />
         </div>
       </section>
     </>
