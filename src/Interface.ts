@@ -69,6 +69,7 @@ export interface IComment {
 
 
 export interface IAttendee {
+  objectId: string,
   id: string,
   username: string,
   firstName: string,
